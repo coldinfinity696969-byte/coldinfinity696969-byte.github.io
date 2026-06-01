@@ -10,3 +10,6 @@ desktop.ini
 # Temp
 *.tmp
 *.log
+
+# Local dev tooling (not part of the published site)
+.claude/
