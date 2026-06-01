@@ -370,11 +370,11 @@ body {
 /* bg decor top-right */
 .svc-bg-decor {
   position: absolute;
-  top: 0; right: 0;
-  width: 40%; height: 50%;
-  pointer-events: none; z-index: 0; opacity: .12;
+  top: 18px; right: var(--gutter);
+  width: min(46%, 560px); height: 300px;
+  pointer-events: none; z-index: 0; opacity: .5;
 }
-.svc-bg-decor img { width:100%; height:100%; object-fit:cover; object-position: left center; }
+.svc-bg-decor svg { width:100%; height:100%; }
 .svc-section .sec-head { position: relative; z-index: 1; }
 .sec-title-green { color: var(--green-dark); }
 .sec-subtitle {
@@ -389,7 +389,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   grid-template-rows: auto auto;
-  gap: 12px;
+  gap: 30px 34px;
   position: relative;
 }
 /* Grid placement */
@@ -403,8 +403,9 @@ body {
 .svc-svg-connectors {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  pointer-events: none; z-index: 10;
+  pointer-events: none; z-index: 1;
   overflow: visible;
+  filter: drop-shadow(0 0 4px rgba(120,230,0,.5));
 }
 
 /* Card base */
@@ -414,14 +415,15 @@ body {
   border-radius: 12px;
   padding: 20px;
   position: relative;
+  z-index: 2;
   overflow: hidden;
   transition: border-color .35s, box-shadow .35s, transform .35s;
   display: flex; flex-direction: column; gap: 10px;
 }
 .svc-card:hover {
-  border-color: rgba(60,160,0,.6);
-  box-shadow: 0 8px 36px rgba(60,160,0,.12);
-  transform: translateY(-3px);
+  border-color: rgba(90,205,0,.85);
+  box-shadow: 0 12px 46px rgba(80,190,0,.22), inset 0 0 0 1px rgba(120,225,0,.22);
+  transform: translateY(-4px);
 }
 /* Green shimmer bottom bar */
 .svc-card::after {
@@ -519,14 +521,22 @@ body {
 .svc-half { flex: 1; min-width: 0; }
 .svc-half--text { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
 .svc-half--img {
-  width: 44%; flex-shrink: 0;
+  width: 46%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
   overflow: hidden; border-radius: 0 11px 11px 0;
+  background: #fff;
 }
 .svc-half--img img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .6s;
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  mix-blend-mode: multiply;           /* white background drops out on the white card */
+  transform: scale(1.1);
+  transition: transform .5s var(--ease), filter .5s;
 }
-.svc-card:hover .svc-half--img img { transform: scale(1.04); }
+.svc-card:hover .svc-half--img img {
+  transform: scale(1.16);
+  filter: saturate(1.18) drop-shadow(0 0 20px rgba(110,205,0,.5));
+}
 
 /* Stats grid */
 .svc-stats {
@@ -1246,15 +1256,37 @@ body {
 <!-- ============ SERVICES ============ -->
 <section class="section svc-section" id="services">
 
-  <!-- Decorative bg top-right -->
+  <!-- Decorative HUD top-right -->
   <div class="svc-bg-decor" aria-hidden="true">
-    <img src="assets/img-decor.webp" alt="" loading="lazy" decoding="async"/>
+    <svg viewBox="0 0 620 300" fill="none" preserveAspectRatio="xMaxYMin meet">
+      <g stroke="#9aa39a" stroke-width="1">
+        <!-- circuit trace with elbow + node -->
+        <path d="M620 40 H470 a8 8 0 0 1-8 8 V70 a8 8 0 0 1-8 8 H360"/>
+        <path d="M620 96 H540 l-14 14 H470"/>
+        <circle cx="360" cy="78" r="3.5" fill="#8fce2e" stroke="none"/>
+        <circle cx="470" cy="124" r="3" fill="#8fce2e" stroke="none"/>
+      </g>
+      <!-- chevrons -->
+      <g fill="none" stroke="#8fce2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+        <path d="M398 150 l10 9 -10 9"/>
+        <path d="M414 150 l10 9 -10 9"/>
+        <path d="M430 150 l10 9 -10 9"/>
+        <path d="M446 150 l10 9 -10 9"/>
+      </g>
+      <!-- dot matrix -->
+      <defs><pattern id="svcDots" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#aab0aa"/></pattern></defs>
+      <rect x="300" y="206" width="150" height="78" fill="url(#svcDots)" opacity=".85"/>
+      <g stroke="#9aa39a" stroke-width="1">
+        <rect x="500" y="150" width="110" height="58" rx="4"/>
+        <path d="M500 168 H610 M500 186 H610 M536 150 V208 M572 150 V208"/>
+      </g>
+    </svg>
   </div>
 
   <div class="sec-head">
     <div>
       <div class="sec-label">01 / УСЛУГИ</div>
-      <h2 class="sec-title" style="color:#2e6b00">ЧТО Я ДЕЛАЮ</h2>
+      <h2 class="sec-title" style="color:#111">ЧТО <span style="color:var(--green-dark)">Я</span> ДЕЛАЮ</h2>
       <div class="sec-subtitle">AI-POWERED GROWTH SYSTEM</div>
     </div>
     <div>
@@ -1267,7 +1299,7 @@ body {
   <svg class="svc-svg-connectors" id="svcSvg" aria-hidden="true"></svg>
 
   <article class="svc-card svc-card--sm" id="svcCard1">
-    
+    <div class="svc-top"><span class="svc-mod">MODULE_01</span></div>
     <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="21"/><line x1="3" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="21" y2="12"/></svg></div>
     <h3 class="svc-name">AI-СТРАТЕГИЯ</h3>
     <span class="svc-sub">STRATEGY CORE</span>
@@ -1276,7 +1308,7 @@ body {
   </article>
 
   <article class="svc-card svc-card--sm" id="svcCard2">
-    
+    <div class="svc-top"><span class="svc-mod">MODULE_02</span></div>
     <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10.5l6-3.5v10l-6-3.5z" stroke-linejoin="round"/></svg></div>
     <h3 class="svc-name">AI-КОНТЕНТ</h3>
     <span class="svc-sub">CONTENT ENGINE</span>
@@ -1286,7 +1318,7 @@ body {
 
   <article class="svc-card svc-card--big" id="svcCard4">
     <div class="svc-half svc-half--text">
-      <div class="svc-top"><span class="svc-priority">PRIORITY: MAX <span>▓▓▓▓▓▓▓</span></span>
+      <div class="svc-top"><span class="svc-mod">MODULE_04</span><span class="svc-priority">PRIORITY: MAX <span>▓▓▓▓▓▓▓</span></span>
       </div>
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
       <h3 class="svc-name">AI-АВТОМАТИЗАЦИЯ</h3>
@@ -1301,12 +1333,13 @@ body {
       <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
-      <img src="assets/img-06.webp" alt="AI автоматизация" loading="lazy" decoding="async"/>
+      <img src="assets/svc-automation.webp" alt="AI-автоматизация — нейросеть и шестерёнки" loading="lazy" decoding="async"/>
     </div>
   </article>
 
   <article class="svc-card svc-card--wide" id="svcCard3">
     <div class="svc-half svc-half--text">
+      <div class="svc-top"><span class="svc-mod">MODULE_03</span></div>
       <div class="svc-wide-row">
         <div class="svc-icon svc-icon--sm"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14l2.5 2.5L8 19" stroke-linecap="round"/></svg></div>
         <div><h3 class="svc-name">AI-САЙТЫ</h3><span class="svc-sub">WEB ENGINE</span></div>
@@ -1315,12 +1348,13 @@ body {
       <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
-      <img src="assets/img-07.webp" alt="AI сайты" loading="lazy" decoding="async"/>
+      <img src="assets/svc-sites.webp" alt="AI-сайты — браузерный интерфейс" loading="lazy" decoding="async"/>
     </div>
   </article>
 
   <article class="svc-card svc-card--wide" id="svcCard5">
     <div class="svc-half svc-half--text">
+      <div class="svc-top"><span class="svc-mod">MODULE_05</span></div>
       <div class="svc-wide-row">
         <div class="svc-icon svc-icon--sm"><svg viewBox="0 0 24 24"><path d="M3 19V9l5-5 5 5V5l5 4v10H3z" stroke-linejoin="round"/><rect x="9" y="14" width="3" height="5"/></svg></div>
         <div><h3 class="svc-name">КОНТЕНТ ЗАВОД</h3><span class="svc-sub">CONTENT FACTORY</span></div>
@@ -1329,7 +1363,7 @@ body {
       <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
-      <img src="assets/img-08.webp" alt="Контент завод" loading="lazy" decoding="async"/>
+      <img src="assets/svc-factory.webp" alt="Контент-завод — конвейер контента" loading="lazy" decoding="async"/>
     </div>
   </article>
 
@@ -1582,36 +1616,94 @@ body {
   } catch(e) { console.warn('reveal:', e); }
 })();
 
-/* ============ SERVICE CARD CONNECTORS ============ */
+/* ============ SERVICE CONNECTORS (animated) ============ */
 (function() {
   try {
-    function drawConnectors() {
-      const grid = document.getElementById('svcGrid');
-      if (!grid) return;
-      const cards = Array.from(grid.querySelectorAll(':scope > .svc-card'));
-      if (cards.length < 3) return;
-      const old = grid.querySelector('.svc-connectors');
-      if (old) old.remove();
-      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-      svg.classList.add('svc-connectors');
-      svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible;';
+    const grid = document.getElementById('svcGrid');
+    const svg  = document.getElementById('svcSvg');
+    if (!grid || !svg) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const GREEN = '#5fb800', PULSE = '#b6f000';
+
+    function iconC(card) {
       const gr = grid.getBoundingClientRect();
-      const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
-      defs.innerHTML = '<filter id="gdot"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
-      svg.appendChild(defs);
-      function dot(x,y){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r','4.5');c.setAttribute('fill','#5aac00');c.setAttribute('filter','url(#gdot)');svg.appendChild(c);}
-      function ln(x1,y1,x2,y2){const l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('stroke','rgba(90,172,0,.6)');l.setAttribute('stroke-width','1.5');l.setAttribute('stroke-dasharray','5 3');svg.appendChild(l);}
-      const r = cards.map(c => {const b=c.getBoundingClientRect();return{left:b.left-gr.left,right:b.right-gr.left,top:b.top-gr.top,bottom:b.bottom-gr.top};});
-      const iy = r[0].top + 82;
-      if(r[1]){ln(r[0].right,iy,r[1].left,iy);dot((r[0].right+r[1].left)/2,iy);}
-      if(r[2]){ln(r[1].right,iy,r[2].left,iy);dot((r[1].right+r[2].left)/2,iy);}
-      if(r[3]){const x=r[0].left+44;ln(x,r[0].bottom,x,r[3].top);dot(x,(r[0].bottom+r[3].top)/2);}
-      grid.style.position='relative';
-      grid.appendChild(svg);
+      const ic = card.querySelector('.svc-icon');
+      const b = (ic || card).getBoundingClientRect();
+      if (ic) return { x: b.left - gr.left + b.width/2, y: b.top - gr.top + b.height/2 };
+      return { x: b.left - gr.left + 30, y: b.top - gr.top + 50 };
     }
-    window.addEventListener('load', drawConnectors);
-    window.addEventListener('resize', drawConnectors);
-  } catch(e){console.warn('connectors:',e);}
+    function edges(card) {
+      const gr = grid.getBoundingClientRect(), b = card.getBoundingClientRect();
+      return { l: b.left-gr.left, r: b.right-gr.left, t: b.top-gr.top, b: b.bottom-gr.top };
+    }
+
+    function build() {
+      const c1=document.getElementById('svcCard1'), c2=document.getElementById('svcCard2'),
+            c4=document.getElementById('svcCard4'), c3=document.getElementById('svcCard3'),
+            c5=document.getElementById('svcCard5');
+      if (!c1||!c2||!c4||!c3||!c5) return;
+      const gr = grid.getBoundingClientRect();
+      const e1=edges(c1), e2=edges(c2), e4=edges(c4), e3=edges(c3), e5=edges(c5);
+      // only draw in the 3-column desktop layout (c4 sits top-right, same row as c1/c2)
+      if (Math.abs(e1.t - e4.t) > 24 || e4.l < e2.r) { svg.innerHTML=''; return; }
+
+      const y1=iconC(c1).y, y4=iconC(c4).y, y3=iconC(c3).y, y5=iconC(c5).y;
+      const gx = (e1.r + e2.l)/2;          // gutter between card1 & card2 (branch point)
+
+      // path definitions [id, d]
+      const segs = [
+        ['pA', `M ${e1.r} ${y1} L ${e2.l} ${y1}`],                         // c1 -> c2
+        ['pB', `M ${e2.r} ${y1} L ${e4.l} ${y4}`],                         // c2 -> c4
+        ['pC', `M ${gx} ${y1} L ${gx} ${e3.t-2}`],                         // branch down -> c3
+        ['pD', `M ${e3.r} ${y3} L ${e5.l} ${y5}`]                          // c3 -> c5
+      ];
+      const nodes = [ [e1.r,y1], [e2.r,y1], [gx,y1], [e3.r,y3] ];
+      const arrowsDown = [ [gx, e3.t-2] ];
+
+      let h = `<defs>
+        <marker id="svcArrow" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0,0 L6,3 L0,6" fill="none" stroke="${GREEN}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker></defs>`;
+      // rail (faint dashed under-line)
+      segs.forEach(([id,d]) => {
+        h += `<path d="${d}" fill="none" stroke="${GREEN}" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 4"/>`;
+      });
+      // bright lines with arrow ends
+      segs.forEach(([id,d]) => {
+        h += `<path id="${id}" d="${d}" fill="none" stroke="${GREEN}" stroke-opacity=".85" stroke-width="1.9" stroke-linecap="round" marker-end="url(#svcArrow)"/>`;
+      });
+      // junction nodes
+      nodes.forEach(([x,y]) => {
+        h += `<circle cx="${x}" cy="${y}" r="8.5" fill="none" stroke="${GREEN}" stroke-opacity=".3" stroke-width="1"/>`;
+        h += `<circle cx="${x}" cy="${y}" r="4.2" fill="${GREEN}"/>`;
+        h += `<circle cx="${x}" cy="${y}" r="1.8" fill="#eaffb0"/>`;
+      });
+      // travelling pulses
+      if (!reduce) {
+        segs.forEach(([id], i) => {
+          h += `<circle r="3.4" fill="${PULSE}">
+            <animateMotion dur="${2.2 + i*0.25}s" begin="${i*0.4}s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#${id}" xlink:href="#${id}"/>
+            </animateMotion>
+          </circle>`;
+        });
+      }
+      svg.innerHTML = h;
+    }
+
+    let raf;
+    function schedule(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(build); }
+    window.addEventListener('load', () => setTimeout(build, 300));
+    window.addEventListener('resize', schedule, {passive:true});
+    setTimeout(build, 700);
+    // rebuild once the section settles after its entrance animation
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { setTimeout(build, 200); setTimeout(build, 1100); }
+      }), {threshold: .15});
+      io.observe(grid);
+    }
+  } catch(e){ console.warn('connectors:', e); }
 })();
 
 /* ============ CASES CAROUSEL ============ */
@@ -1627,38 +1719,6 @@ body {
   } catch(e) { console.warn('cases carousel:', e); }
 })();
 
-/* ============ SERVICE CONNECTOR LINES ============ */
-(function() {
-  try {
-    function drawConnectors() {
-      const svg = document.getElementById('svcSvg');
-      const grid = document.getElementById('svcGrid');
-      if (!svg || !grid) return;
-      const c1 = document.getElementById('svcCard1');
-      const c2 = document.getElementById('svcCard2');
-      const c4 = document.getElementById('svcCard4');
-      if (!c1||!c2||!c4) return;
-      const gr = grid.getBoundingClientRect();
-      const r1 = c1.getBoundingClientRect();
-      const r2 = c2.getBoundingClientRect();
-      const r4 = c4.getBoundingClientRect();
-      const ox = x => x - gr.left, oy = y => y - gr.top;
-      // align with icon center; icon is first element now (~20px padding + 26px half-icon)
-      const icon = c1.querySelector('.svc-icon');
-      const iconY = icon ? icon.getBoundingClientRect().top + 26 : r1.top + 50;
-      const y = oy(iconY);
-      const pts = [ox(r1.right), ox(r2.left), ox(r2.right), ox(r4.left)];
-      const R = 5;
-      svg.innerHTML =
-        `<line x1="${pts[0]}" y1="${y}" x2="${pts[1]}" y2="${y}" stroke="rgba(60,160,0,.55)" stroke-width="1.5" stroke-dasharray="5 4"/>` +
-        `<line x1="${pts[2]}" y1="${y}" x2="${pts[3]}" y2="${y}" stroke="rgba(60,160,0,.55)" stroke-width="1.5" stroke-dasharray="5 4"/>` +
-        [pts[0],pts[1],pts[2],pts[3]].map(x => `<circle cx="${x}" cy="${y}" r="${R}" fill="#4a9000" opacity=".85"/>`).join('');
-    }
-    window.addEventListener('load', () => setTimeout(drawConnectors, 400));
-    window.addEventListener('resize', drawConnectors);
-    setTimeout(drawConnectors, 1000);
-  } catch(e) { console.warn('connectors:', e); }
-})();
 
 /* ============ PROCESS RUNNING LIGHT ============ */
 (function() {

@@ -13,3 +13,10 @@ desktop.ini
 
 # Local dev tooling (not part of the published site)
 .claude/
+
+# Node / image tooling (dev only)
+node_modules/
+package-lock.json
+
+# Source art (not part of the site)
+картинки для блока/
