@@ -20,3 +20,6 @@ package-lock.json
 
 # Source art (not part of the site)
 картинки для блока/
+
+# Portfolio source material (heavy — processed into assets/, not committed raw)
+портфолио/

@@ -659,13 +659,31 @@ body {
   transform:translateY(24px) scale(.98); transition:transform .4s var(--ease);
 }
 .case-modal.open .case-modal__box{ transform:translateY(0) scale(1); }
-.case-modal__img{ width:100%; aspect-ratio:16/9; object-fit:cover; background:#1a1a1a; border-radius:14px 14px 0 0; }
-.case-modal__body{ padding:28px clamp(22px,4vw,40px) 36px; }
+.case-modal__stage{ width:100%; aspect-ratio:16/9; background:#0d0d0d; border-radius:14px 14px 0 0; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.case-modal__stage img, .case-modal__stage video{ width:100%; height:100%; object-fit:cover; display:block; }
+.case-modal__stage img.contain, .case-modal__stage video.contain{ object-fit:contain; }
+.case-modal__thumbs{ display:flex; gap:8px; padding:12px clamp(14px,3vw,20px); overflow-x:auto; background:#0d0d0d; }
+.case-modal__thumbs::-webkit-scrollbar{ height:0; }
+.case-modal__thumb{ flex:0 0 auto; width:74px; height:46px; border-radius:6px; overflow:hidden; cursor:pointer; border:1px solid var(--line-2); opacity:.5; transition:opacity .2s, border-color .2s; position:relative; }
+.case-modal__thumb.active{ opacity:1; border-color:var(--green); }
+.case-modal__thumb img{ width:100%; height:100%; object-fit:cover; }
+.case-modal__thumb .vidmark{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; text-shadow:0 0 6px #000; }
+.case-modal__body{ padding:24px clamp(22px,4vw,40px) 36px; }
 .case-modal__num{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--green); }
-.case-modal__title{ font-family:var(--display); font-weight:800; font-size:clamp(22px,3.4vw,34px); text-transform:uppercase; letter-spacing:-.01em; color:var(--hi); margin:10px 0 16px; line-height:1.05; }
-.case-modal__desc{ font-size:15px; line-height:1.65; color:var(--ink-2); max-width:60ch; }
-.case-modal__tag{ display:inline-flex; align-items:center; gap:7px; margin-top:22px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--green); }
-.case-modal__tag::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--green); }
+.case-modal__title{ font-family:var(--display); font-weight:800; font-size:clamp(22px,3.4vw,32px); text-transform:uppercase; letter-spacing:-.01em; color:var(--hi); margin:8px 0 4px; line-height:1.05; }
+.case-modal__sub{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:14px; }
+.case-modal__desc{ font-size:15px; line-height:1.65; color:var(--ink-2); max-width:62ch; }
+.case-modal__results{ display:flex; flex-wrap:wrap; gap:24px; margin-top:22px; }
+.case-modal__results:empty{ display:none; }
+.case-modal__results div{ display:flex; flex-direction:column; gap:3px; }
+.case-modal__results strong{ font-family:var(--display); font-weight:800; font-size:24px; color:var(--green); letter-spacing:-.02em; }
+.case-modal__results small{ font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+.case-modal__tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+.case-modal__tags span{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--green); border:1px solid rgba(192,255,51,.3); border-radius:100px; padding:5px 12px; }
+.case-modal__link{ display:inline-flex; align-items:center; gap:8px; margin-top:24px; font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#000; background:var(--green); padding:11px 20px; border-radius:6px; transition:background .25s, transform .25s; }
+.case-modal__link::after{ content:'→'; }
+.case-modal__link:hover{ background:var(--green-dark); transform:translateY(-2px); }
+.case-modal__link.hidden{ display:none; }
 .case-modal__close{
   position:absolute; top:14px; right:14px; z-index:3;
   width:40px; height:40px; border-radius:50%;
@@ -1375,65 +1393,51 @@ body {
   </div>
 
   <div class="cases-wrap" id="casesWrap">
-    <div class="case-card">
+    <div class="case-card" data-case="timur">
       <div class="case-card__thumb">
         <div class="case-card__num">01</div>
-        <img src="assets/img-09.webp" alt="AI Avatar System" style="object-position:center 20%" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/timur-portrait.webp" alt="bad.timur — AI-инфлюенсер" style="object-position:center 15%" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">AI AVATAR SYSTEM</h3>
-        <p class="case-card__desc">AI-аватары для экспертов и брендов. Видео, говорящие головы, UGC-контент на потоке.</p>
-        <span class="case-card__tag">AI-АВАТАРЫ</span>
+        <h3 class="case-card__title">BAD.TIMUR</h3>
+        <p class="case-card__desc">AI-инфлюенсер «под ключ»: лицо, голос, контент. 680К просмотров за месяц.</p>
+        <span class="case-card__tag">AI-АВАТАР</span>
       </div>
     </div>
 
-    <div class="case-card">
+    <div class="case-card" data-case="video">
       <div class="case-card__thumb">
         <div class="case-card__num">02</div>
-        <img src="assets/img-10.webp" alt="Cold Infinity Brand" style="object-position:center center" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/vid-tractor-cover.webp" alt="Видео-продакшн" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">PERSONAL BRAND</h3>
-        <p class="case-card__desc">AI-постеры, обложки, выставочные плакаты — персональный визуальный язык от нейросети.</p>
-        <span class="case-card__tag">ДИЗАЙН + БРЕНД</span>
+        <h3 class="case-card__title">ВИДЕО-ПРОДАКШН</h3>
+        <p class="case-card__desc">Нейровидео и промо-ролики: спорт, техника, рекламные кампании.</p>
+        <span class="case-card__tag">НЕЙРОВИДЕО</span>
       </div>
     </div>
 
-    <div class="case-card">
+    <div class="case-card" data-case="sos">
       <div class="case-card__thumb">
         <div class="case-card__num">03</div>
-        <img src="assets/img-11.webp" alt="Sports Cluster" style="object-position:center center" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/sos-cover.webp" alt="SOS — pitch deck" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">SPORTS CLUSTER</h3>
-        <p class="case-card__desc">AI-контент система для спортивного бренда. 120+ единиц контента в месяц.</p>
-        <span class="case-card__tag">AI-ВИДЕО</span>
+        <h3 class="case-card__title">SOS — PITCH DECK</h3>
+        <p class="case-card__desc">Инвест-презентация для школы зимних видов спорта: дизайн, 3D, анимация.</p>
+        <span class="case-card__tag">ПРЕЗЕНТАЦИЯ</span>
       </div>
     </div>
 
-    <div class="case-card">
+    <div class="case-card" data-case="am">
       <div class="case-card__thumb">
         <div class="case-card__num">04</div>
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;background:#1a1a1a;">
-          <span style="font-family:var(--display);font-weight:800;font-size:72px;letter-spacing:-.04em;color:var(--green);">5K</span>
-        </div>
+        <img src="assets/portfolio/am-billboard-jacto.webp" alt="Агро-Мастер — реклама" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">PITCH DECK FOR FUND</h3>
-        <p class="case-card__desc">AI-дизайн инвест-презентаций для инвесторов. Сделано более 50 pitch deck'ов.</p>
-        <span class="case-card__tag">ПРЕЗЕНТАЦИИ</span>
-      </div>
-    </div>
-
-    <div class="case-card">
-      <div class="case-card__thumb">
-        <div class="case-card__num">05</div>
-        <img src="assets/img-12.webp" alt="Cold Infinity — выставочный постер" loading="lazy"/>
-      </div>
-      <div class="case-card__body">
-        <h3 class="case-card__title">COLD INFINITY / OMSK</h3>
-        <p class="case-card__desc">Выставочный плакат + брендинг события. AI-постер серия, ограниченный тираж.</p>
-        <span class="case-card__tag">ПОСТЕР + ПРИНТЫ</span>
+        <h3 class="case-card__title">АГРО-МАСТЕР</h3>
+        <p class="case-card__desc">Бренд и реклама дистрибьютора сельхозтехники: наружка, упаковка, полиграфия.</p>
+        <span class="case-card__tag">ДИЗАЙН + БРЕНД</span>
       </div>
     </div>
   </div>
@@ -1533,12 +1537,16 @@ body {
 <div class="case-modal" id="caseModal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="case-modal__box">
     <button class="case-modal__close" id="caseModalClose" aria-label="закрыть">×</button>
-    <img class="case-modal__img" id="caseModalImg" alt="" />
+    <div class="case-modal__stage" id="caseStage"></div>
+    <div class="case-modal__thumbs" id="caseThumbs"></div>
     <div class="case-modal__body">
       <div class="case-modal__num" id="caseModalNum"></div>
       <h3 class="case-modal__title" id="caseModalTitle"></h3>
+      <div class="case-modal__sub" id="caseModalSub"></div>
       <p class="case-modal__desc" id="caseModalDesc"></p>
-      <span class="case-modal__tag" id="caseModalTag"></span>
+      <div class="case-modal__results" id="caseModalResults"></div>
+      <div class="case-modal__tags" id="caseModalTags"></div>
+      <a class="case-modal__link hidden" id="caseModalLink" target="_blank" rel="noopener"></a>
     </div>
   </div>
 </div>
@@ -1979,32 +1987,117 @@ body {
   } catch(e) { console.warn('scroll entrance:', e); }
 })();
 
-/* ============ CASE MODAL ============ */
+/* ============ CASE MODAL (gallery) ============ */
 (function() {
   try {
     const modal = document.getElementById('caseModal');
+    if (!modal) return;
     const cards = document.querySelectorAll('.case-card');
-    if (!modal || !cards.length) return;
-    const elImg = document.getElementById('caseModalImg');
+    const stage = document.getElementById('caseStage');
+    const thumbs = document.getElementById('caseThumbs');
     const elNum = document.getElementById('caseModalNum');
     const elTitle = document.getElementById('caseModalTitle');
+    const elSub = document.getElementById('caseModalSub');
     const elDesc = document.getElementById('caseModalDesc');
-    const elTag = document.getElementById('caseModalTag');
+    const elResults = document.getElementById('caseModalResults');
+    const elTags = document.getElementById('caseModalTags');
+    const elLink = document.getElementById('caseModalLink');
     const btnClose = document.getElementById('caseModalClose');
+    const P = 'assets/portfolio/';
     let lastFocus = null;
 
-    function open(card) {
-      const img = card.querySelector('.case-card__thumb img');
-      const num = card.querySelector('.case-card__num');
-      const title = card.querySelector('.case-card__title');
-      const desc = card.querySelector('.case-card__desc');
-      const tag = card.querySelector('.case-card__tag');
-      if (img && img.src) { elImg.src = img.src; elImg.style.display = ''; }
-      else { elImg.style.display = 'none'; }
-      elNum.textContent = num ? ('CASE ' + num.textContent.trim()) : '';
-      elTitle.textContent = title ? title.textContent : '';
-      elDesc.textContent = desc ? desc.textContent : '';
-      elTag.textContent = tag ? tag.textContent : '';
+    const DATA = {
+      timur: {
+        num: '01', title: 'BAD.TIMUR', sub: 'AI-аватар · UGC-инфлюенсер',
+        desc: 'Полностью AI-инфлюенсер: внешность, голос и контент сгенерированы нейросетями. Веду как настоящий блог — рилсы, сторис, реакции на тренды.',
+        results: [['5 310','подписчиков'],['680К','просмотров / 30 дней'],['1М','топ-ролик']],
+        tags: ['AI-аватар','нейровидео','UGC'],
+        link: { url: 'https://t.me/bad_timur69', text: 'Профиль в Telegram' },
+        media: [
+          { t:'video', src:'timur-loop.mp4', poster:'timur-cover.webp' },
+          { t:'img', src:'timur-portrait.webp', fit:'contain' },
+          { t:'img', src:'timur-profile.webp', fit:'contain' },
+          { t:'img', src:'timur-1.webp', fit:'contain' },
+          { t:'img', src:'timur-2.webp', fit:'contain' }
+        ]
+      },
+      video: {
+        num: '02', title: 'Видео-продакшн', sub: 'Нейровидео · промо',
+        desc: 'Промо-ролики и нейровидео под задачи бренда: спортивные события, техника, рекламные кампании. От идеи и сценария до финального монтажа.',
+        results: [], tags: ['нейровидео','промо','motion'],
+        media: [
+          { t:'video', src:'vid-tractor.mp4', poster:'vid-tractor-cover.webp' },
+          { t:'video', src:'vid-cosmonaut.mp4', poster:'vid-cosmonaut-cover.webp' },
+          { t:'video', src:'vid-hockey.mp4', poster:'vid-hockey-cover.webp' },
+          { t:'video', src:'vid-testdrive.mp4', poster:'vid-testdrive-cover.webp' }
+        ]
+      },
+      sos: {
+        num: '03', title: 'SOS — Pitch Deck', sub: 'Презентация · дизайн · 3D',
+        desc: 'Инвестиционная презентация для «Школы зимних видов спорта»: концепция, фирменный стиль, 3D-визуализация пространств и анимация.',
+        results: [], tags: ['pitch deck','дизайн','3D'],
+        media: [
+          { t:'video', src:'sos-loop.mp4', poster:'sos-cover.webp' },
+          { t:'img', src:'sos-cover.webp' }
+        ]
+      },
+      am: {
+        num: '04', title: 'Агро-Мастер', sub: 'Бренд · наружка · полиграфия',
+        desc: 'Визуальные коммуникации для дистрибьютора сельхозтехники: наружная реклама, упаковка, каталоги и элементы фирменного стиля.',
+        results: [], tags: ['брендинг','наружка','полиграфия'],
+        media: [
+          { t:'img', src:'am-billboard-jacto.webp' },
+          { t:'img', src:'am-billboard-yto.webp' },
+          { t:'img', src:'am-coffee.webp' },
+          { t:'img', src:'am-catalog.webp' },
+          { t:'img', src:'am-class.webp' },
+          { t:'img', src:'am-card.webp' }
+        ]
+      }
+    };
+
+    function showMedia(m) {
+      stage.innerHTML = '';
+      if (m.t === 'video') {
+        const v = document.createElement('video');
+        v.src = P + m.src; if (m.poster) v.poster = P + m.poster;
+        v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+        v.setAttribute('playsinline',''); v.setAttribute('muted','');
+        if (m.fit === 'contain') v.className = 'contain';
+        stage.appendChild(v); v.play().catch(()=>{});
+      } else {
+        const img = document.createElement('img');
+        img.src = P + m.src; img.alt = '';
+        if (m.fit === 'contain') img.className = 'contain';
+        stage.appendChild(img);
+      }
+    }
+
+    function open(id) {
+      const d = DATA[id]; if (!d) return;
+      elNum.textContent = 'CASE ' + d.num;
+      elTitle.textContent = d.title;
+      elSub.textContent = d.sub || '';
+      elDesc.textContent = d.desc || '';
+      elResults.innerHTML = (d.results||[]).map(r => '<div><strong>'+r[0]+'</strong><small>'+r[1]+'</small></div>').join('');
+      elTags.innerHTML = (d.tags||[]).map(t => '<span>'+t+'</span>').join('');
+      if (d.link) { elLink.href = d.link.url; elLink.textContent = d.link.text; elLink.classList.remove('hidden'); }
+      else elLink.classList.add('hidden');
+      thumbs.innerHTML = '';
+      d.media.forEach((m, i) => {
+        const th = document.createElement('div');
+        th.className = 'case-modal__thumb' + (i === 0 ? ' active' : '');
+        const im = document.createElement('img'); im.src = P + (m.poster || m.src); im.alt = '';
+        th.appendChild(im);
+        if (m.t === 'video') { const vm = document.createElement('span'); vm.className = 'vidmark'; vm.textContent = '▶'; th.appendChild(vm); }
+        th.addEventListener('click', () => {
+          thumbs.querySelectorAll('.case-modal__thumb').forEach(x => x.classList.remove('active'));
+          th.classList.add('active'); showMedia(m);
+        });
+        thumbs.appendChild(th);
+      });
+      thumbs.style.display = d.media.length > 1 ? '' : 'none';
+      showMedia(d.media[0]);
       lastFocus = document.activeElement;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -2015,16 +2108,15 @@ body {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      stage.innerHTML = '';
       if (lastFocus) lastFocus.focus();
     }
     cards.forEach(card => {
-      // hover badge
       const badge = document.createElement('div');
-      badge.className = 'case-card__expand';
-      badge.innerHTML = '⤢';
+      badge.className = 'case-card__expand'; badge.innerHTML = '⤢';
       const thumb = card.querySelector('.case-card__thumb');
       if (thumb) thumb.appendChild(badge);
-      card.addEventListener('click', () => open(card));
+      card.addEventListener('click', () => open(card.dataset.case));
     });
     btnClose.addEventListener('click', close);
     modal.addEventListener('click', e => { if (e.target === modal) close(); });
