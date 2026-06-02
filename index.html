@@ -156,13 +156,6 @@ body {
   .bar__cta { display:none; }
   .bar__burger { display:flex; }
 }
-@media(max-width:600px){
-  .hero__bg { background-position: 70% 20%; }
-  .hero { padding: 88px var(--gutter) 48px; }
-  .section { padding: 64px var(--gutter); }
-  .contact { padding: 64px var(--gutter); }
-  .tools { padding: 56px var(--gutter); }
-}
 
 /* ============ HERO ============ */
 .hero {
@@ -571,21 +564,21 @@ body {
 
 /* Stats grid */
 .svc-stats {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 6px;
-  padding: 10px 0 8px;
+  display: grid; grid-template-columns: repeat(2,1fr);
+  gap: 16px 22px;
+  padding: 16px 0;
   border-top: 1px solid rgba(0,100,0,.12);
   border-bottom: 1px solid rgba(0,100,0,.12);
   margin-top: auto;
 }
-.svc-stats div { display: flex; flex-direction: column; gap: 2px; }
+.svc-stats div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .svc-stats small {
-  font-family: var(--mono); font-size: 8px;
-  letter-spacing: .1em; text-transform: uppercase; color: #888;
+  font-family: var(--mono); font-size: 9px; line-height: 1.3;
+  letter-spacing: .08em; text-transform: uppercase; color: #888;
 }
 .svc-stats strong {
   font-family: var(--display); font-weight: 700;
-  font-size: 17px; color: var(--green-dark); letter-spacing: -.02em;
+  font-size: 22px; color: var(--green-dark); letter-spacing: -.02em; line-height: 1;
 }
 
 /* WIDE cards (sites, factory) */
@@ -1194,6 +1187,19 @@ body {
   animation: statPulse 1.8s ease-out forwards;
 }
 
+/* ============ MOBILE OVERRIDES (placed last to win the cascade) ============ */
+@media(max-width:600px){
+  .hero__bg { background-image: url('assets/nikita-mobile.webp'); background-position: 72% 28%; }
+  .hero__bg::after { background: linear-gradient(180deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.28) 40%, rgba(0,0,0,.5) 64%, rgba(0,0,0,.96) 100%); }
+  .hero { padding: 88px var(--gutter) 44px; }
+  .section { padding: 64px var(--gutter); }
+  .contact { padding: 64px var(--gutter); }
+  .tools { padding: 56px var(--gutter); }
+  .process-grid { grid-template-columns: 1fr; }
+  .process-step { border-right: none; border-top: 1px solid var(--line); }
+  .process-step:first-child { border-top: none; }
+  .svc-stats { gap: 14px 18px; }
+}
 </style>
 </head>
 <body>
