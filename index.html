@@ -1208,6 +1208,34 @@ body {
 .faq-a p { padding: 0 0 26px; max-width: 70ch; color: var(--ink-2); font-size: 15px; line-height: 1.65; }
 .faq-item.open .faq-a { max-height: 320px; }
 
+/* ============ FORMATS ============ */
+.formats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.format-card {
+  position: relative; background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: border-color .35s, box-shadow .35s, transform .35s;
+}
+.format-card:hover { border-color: rgba(192,255,51,.5); box-shadow: 0 12px 40px rgba(120,200,0,.12); transform: translateY(-4px); }
+.format-card--feat { border-color: rgba(192,255,51,.45); background: linear-gradient(180deg, rgba(192,255,51,.06), var(--card) 42%); }
+.format-card__num { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--green); }
+.format-card__badge { position: absolute; top: 22px; right: 22px; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #000; background: var(--green); padding: 4px 9px; border-radius: 100px; }
+.format-card__title { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -.01em; color: var(--hi); line-height: 1.05; }
+.format-card__sub { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-top: -8px; }
+.format-card__list { list-style: none; display: flex; flex-direction: column; gap: 11px; margin: 6px 0 4px; flex: 1; }
+.format-card__list li { position: relative; padding-left: 24px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.format-card__list li::before { content: ''; position: absolute; left: 0; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(192,255,51,.6); }
+.format-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); margin-top: auto; }
+.format-card__price { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--green); }
+.format-card__arr {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line-2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; color: var(--ink-2);
+  font-size: 16px; transition: background .25s, color .25s, border-color .25s, transform .25s;
+}
+.format-card:hover .format-card__arr { border-color: var(--green); color: var(--green); }
+.format-card__arr:hover { background: var(--green); color: #000; }
+@media(max-width:900px){ .formats-grid { grid-template-columns: 1fr; } }
+
 /* ============ MOBILE OVERRIDES (placed last to win the cascade) ============ */
 @media(max-width:600px){
   .hero__bg { background-image: url('assets/nikita-mobile.webp?v=3'); background-position: 70% 18%; }
@@ -1642,11 +1670,67 @@ body {
   </div>
 </div>
 
+<!-- ============ FORMATS ============ -->
+<section class="section formats" id="formats">
+  <div class="sec-head">
+    <div>
+      <div class="sec-label">05 / ФОРМАТЫ</div>
+      <h2 class="sec-title">КАК СО МНОЙ<br>РАБОТАЮТ</h2>
+    </div>
+    <div>
+      <p class="sec-desc">Три формата под разные задачи. Точную стоимость рассчитываю индивидуально после короткого брифа — без шаблонных прайсов.</p>
+      <a href="#contact" class="sec-all">ОБСУДИТЬ ЗАДАЧУ</a>
+    </div>
+  </div>
+
+  <div class="formats-grid">
+    <article class="format-card">
+      <div class="format-card__num">01</div>
+      <h3 class="format-card__title">Разовый проект</h3>
+      <p class="format-card__sub">Конкретная задача под ключ</p>
+      <ul class="format-card__list">
+        <li>Лендинг, презентация, серия видео или брендинг</li>
+        <li>Бриф, концепция и полная реализация</li>
+        <li>30 дней на правки включено</li>
+        <li>Исходники передаю вам</li>
+      </ul>
+      <div class="format-card__foot"><span class="format-card__price">Расчёт после брифа</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+    </article>
+
+    <article class="format-card format-card--feat">
+      <div class="format-card__num">02</div>
+      <span class="format-card__badge">ПОПУЛЯРНОЕ</span>
+      <h3 class="format-card__title">Контент на потоке</h3>
+      <p class="format-card__sub">Ежемесячное производство</p>
+      <ul class="format-card__list">
+        <li>Контент-план под цели бренда</li>
+        <li>Видео, посты и графика на регулярной основе</li>
+        <li>Ведение, апдейты и отчётность</li>
+        <li>Приоритетная поддержка</li>
+      </ul>
+      <div class="format-card__foot"><span class="format-card__price">По запросу · помесячно</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+    </article>
+
+    <article class="format-card">
+      <div class="format-card__num">03</div>
+      <h3 class="format-card__title">AI-стратегия и консалтинг</h3>
+      <p class="format-card__sub">Система и обучение</p>
+      <ul class="format-card__list">
+        <li>Аудит процессов и точек роста</li>
+        <li>Подбор AI-инструментов под задачи</li>
+        <li>Настройка автоматизаций и воронок</li>
+        <li>Обучение команды работе с AI</li>
+      </ul>
+      <div class="format-card__foot"><span class="format-card__price">Индивидуально</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+    </article>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="section faq" id="faq">
   <div class="sec-head">
     <div>
-      <div class="sec-label">05 / ВОПРОСЫ</div>
+      <div class="sec-label">06 / ВОПРОСЫ</div>
       <h2 class="sec-title">ЧАСТЫЕ<br>ВОПРОСЫ</h2>
     </div>
     <div>
@@ -1694,7 +1778,7 @@ body {
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="contact__left reveal">
-    <div class="contact__label">06 / ДАВАЙТЕ РАБОТАТЬ</div>
+    <div class="contact__label">07 / ДАВАЙТЕ РАБОТАТЬ</div>
     <h2 class="contact__title">
       ДАВАЙТЕ СОЗДАДИМ<br>
       ВАШ <span class="green">СЛЕДУЮЩИЙ<br>ПРОЕКТ</span>
