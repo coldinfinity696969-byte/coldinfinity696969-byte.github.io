@@ -1188,6 +1188,26 @@ body {
   animation: statPulse 1.8s ease-out forwards;
 }
 
+/* ============ FAQ ============ */
+.faq-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 26px 0; text-align: left;
+  font-family: var(--display); font-weight: 600; font-size: clamp(16px,2vw,21px);
+  letter-spacing: -.01em; color: var(--ink); transition: color .25s; cursor: pointer;
+}
+.faq-q:hover { color: var(--hi); }
+.faq-item.open .faq-q { color: var(--green); }
+.faq-ic { position: relative; width: 18px; height: 18px; flex-shrink: 0; }
+.faq-ic::before, .faq-ic::after { content: ''; position: absolute; background: var(--green); transition: transform .3s var(--ease); }
+.faq-ic::before { top: 8px; left: 0; width: 18px; height: 2px; }
+.faq-ic::after  { left: 8px; top: 0; width: 2px; height: 18px; }
+.faq-item.open .faq-ic::after { transform: scaleY(0); }
+.faq-a { overflow: hidden; max-height: 0; transition: max-height .4s var(--ease); }
+.faq-a p { padding: 0 0 26px; max-width: 70ch; color: var(--ink-2); font-size: 15px; line-height: 1.65; }
+.faq-item.open .faq-a { max-height: 320px; }
+
 /* ============ MOBILE OVERRIDES (placed last to win the cascade) ============ */
 @media(max-width:600px){
   .hero__bg { background-image: url('assets/nikita-mobile.webp?v=3'); background-position: 70% 18%; }
@@ -1622,10 +1642,59 @@ body {
   </div>
 </div>
 
+<!-- ============ FAQ ============ -->
+<section class="section faq" id="faq">
+  <div class="sec-head">
+    <div>
+      <div class="sec-label">05 / ВОПРОСЫ</div>
+      <h2 class="sec-title">ЧАСТЫЕ<br>ВОПРОСЫ</h2>
+    </div>
+    <div>
+      <p class="sec-desc">Коротко о том, как я работаю, о сроках и оплате. Не нашли ответ — напишите в Telegram, отвечу лично.</p>
+      <a href="#contact" class="sec-all">ЗАДАТЬ ВОПРОС</a>
+    </div>
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q"><span>Сколько стоит работа?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Зависит от задачи и объёма. После короткого брифа в течение одного дня даю оценку и вилку по цене — бесплатно и без обязательств.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Сколько времени занимает проект?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>От нескольких дней до пары недель — зависит от объёма. Точные сроки фиксирую письменно до старта, чтобы всё было прозрачно.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Как строится работа?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Бриф (30 минут, бесплатно) → стратегия и оценка → реализация с регулярными апдейтами в TG-чате → результат и поддержка.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Вы правда работаете один?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Да. Закрываю маркетинг, дизайн, видео и сайты на современных AI-инструментах — один человек вместо целой команды и без потери качества.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>А если понадобятся правки?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>30 дней на правки уже включено. Работаю итерациями и согласовываю каждый этап — финальный результат без неприятных сюрпризов.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>С какими задачами ко мне приходят?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>AI-контент и нейровидео, аватары, презентации (pitch decks), лендинги и сайты, брендинг и автоматизация процессов.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Как происходит оплата?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>По договорённости — обычно предоплата или поэтапная оплата по ходу проекта. Все условия проговариваем до начала работы.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Как начать?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Напишите в Telegram <a href="https://t.me/Cold_69" target="_blank" rel="noopener" style="color:var(--green)">@Cold_69</a> — за 30 минут разберём задачу, и я предложу решение.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="contact__left reveal">
-    <div class="contact__label">05 / ДАВАЙТЕ РАБОТАТЬ</div>
+    <div class="contact__label">06 / ДАВАЙТЕ РАБОТАТЬ</div>
     <h2 class="contact__title">
       ДАВАЙТЕ СОЗДАДИМ<br>
       ВАШ <span class="green">СЛЕДУЮЩИЙ<br>ПРОЕКТ</span>
@@ -2113,6 +2182,16 @@ body {
 
     ScrollTrigger.refresh();
   } catch(e) { console.warn('scroll entrance:', e); }
+})();
+
+/* ============ FAQ ACCORDION ============ */
+(function() {
+  try {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      if (q) q.addEventListener('click', () => item.classList.toggle('open'));
+    });
+  } catch(e) { console.warn('faq:', e); }
 })();
 
 /* ============ CASE MODAL (gallery) ============ */
