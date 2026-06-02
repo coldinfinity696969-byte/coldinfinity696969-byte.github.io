@@ -141,9 +141,9 @@ body {
 }
 .hero__bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('assets/img-01.webp');
+  background-image: url('assets/nikita.webp');
   background-size: cover;
-  background-position: center 25%;
+  background-position: center 18%;
   background-repeat: no-repeat;
   will-change: transform;
 }
@@ -1440,6 +1440,54 @@ body {
         <span class="case-card__tag">ДИЗАЙН + БРЕНД</span>
       </div>
     </div>
+
+    <div class="case-card" data-case="sites">
+      <div class="case-card__thumb">
+        <div class="case-card__num">05</div>
+        <img src="assets/portfolio/cover-sites.webp" alt="AI-сайты и лендинги" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">AI-САЙТЫ</h3>
+        <p class="case-card__desc">Лендинги, портфолио и веб-приложения. Сайт, который вы смотрите, — тоже моя работа.</p>
+        <span class="case-card__tag">ВЕБ</span>
+      </div>
+    </div>
+
+    <div class="case-card" data-case="automation">
+      <div class="case-card__thumb">
+        <div class="case-card__num">06</div>
+        <img src="assets/portfolio/cover-automation.webp" alt="AI-автоматизация" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">AI-АВТОМАТИЗАЦИЯ</h3>
+        <p class="case-card__desc">Контент-конвейеры, воронки и автопостинг — бизнес-процессы на автопилоте.</p>
+        <span class="case-card__tag">СИСТЕМЫ</span>
+      </div>
+    </div>
+
+    <div class="case-card" data-case="photo">
+      <div class="case-card__thumb">
+        <div class="case-card__num">07</div>
+        <img src="assets/portfolio/cover-photo.webp" alt="AI-фото и товарка" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">AI-ФОТО / ТОВАРКА</h3>
+        <p class="case-card__desc">Предметная и каталожная съёмка через нейросети — без студии и фотографа.</p>
+        <span class="case-card__tag">ФОТО</span>
+      </div>
+    </div>
+
+    <div class="case-card" data-case="brand">
+      <div class="case-card__thumb">
+        <div class="case-card__num">08</div>
+        <img src="assets/portfolio/cover-brand.webp" alt="Брендинг" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">БРЕНДИНГ</h3>
+        <p class="case-card__desc">Логотип, фирменный стиль и носители — целостная айдентика с нуля.</p>
+        <span class="case-card__tag">ДИЗАЙН</span>
+      </div>
+    </div>
   </div>
 
   <div class="cases-nav">
@@ -2053,6 +2101,30 @@ body {
           { t:'img', src:'am-class.webp' },
           { t:'img', src:'am-card.webp' }
         ]
+      },
+      sites: {
+        num: '05', title: 'AI-сайты', sub: 'Веб · лендинги · приложения',
+        desc: 'Лендинги, сайты-портфолио и веб-приложения на современных стеках — от идеи до публикации. Сайт, который вы смотрите прямо сейчас, тоже сделан мной.',
+        results: [], tags: ['веб','лендинги','дизайн'],
+        media: [ { t:'img', src:'cover-sites.webp' } ]
+      },
+      automation: {
+        num: '06', title: 'AI-автоматизация', sub: 'Воронки · процессы',
+        desc: 'Контент-конвейеры, автопостинг, воронки и интеграции: рутина уходит на автопилот, а вы — масштабируетесь.',
+        results: [], tags: ['автоматизация','воронки','интеграции'],
+        media: [ { t:'img', src:'cover-automation.webp' } ]
+      },
+      photo: {
+        num: '07', title: 'AI-фото / товарка', sub: 'Предметка · каталог',
+        desc: 'Предметная и каталожная съёмка через нейросети: товар в любом окружении и свете — без студии, фотографа и логистики.',
+        results: [], tags: ['AI-фото','предметка','e-com'],
+        media: [ { t:'img', src:'cover-photo.webp' } ]
+      },
+      brand: {
+        num: '08', title: 'Брендинг', sub: 'Лого · фирстиль · носители',
+        desc: 'Целостная айдентика с нуля: логотип, фирменный стиль, носители и гайдлайны — узнаваемый визуальный язык бренда.',
+        results: [], tags: ['брендинг','логотип','айдентика'],
+        media: [ { t:'img', src:'cover-brand.webp' } ]
       }
     };
 

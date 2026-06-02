@@ -23,3 +23,6 @@ package-lock.json
 
 # Portfolio source material (heavy — processed into assets/, not committed raw)
 портфолио/
+
+# Generated source images (processed into assets/)
+генерация/
