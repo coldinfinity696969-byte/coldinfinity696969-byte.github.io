@@ -127,8 +127,41 @@ body {
 }
 .bar__cta:hover { background: var(--green-dark); transform: translateY(-1px); }
 .bar__cta::after { content: '→'; }
+
+/* ---- Burger + mobile menu ---- */
+.bar__burger{ display:none; width:42px; height:42px; flex-direction:column; gap:5px; align-items:center; justify-content:center; cursor:pointer; }
+.bar__burger span{ width:22px; height:2px; background:var(--hi); border-radius:2px; transition:transform .3s, opacity .3s; }
+.bar__burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.bar__burger.open span:nth-child(2){ opacity:0; }
+.bar__burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu{
+  position:fixed; inset:0; z-index:99;
+  background:rgba(8,8,8,.98); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  opacity:0; visibility:hidden; transform:translateY(-8px);
+  transition:opacity .35s var(--ease), visibility .35s, transform .35s var(--ease);
+}
+.mobile-menu.open{ opacity:1; visibility:visible; transform:translateY(0); }
+.mobile-menu__nav{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.mobile-menu__nav a{
+  font-family:var(--display); font-weight:700; font-size:clamp(26px,8vw,34px); letter-spacing:.02em;
+  text-transform:uppercase; color:var(--hi); padding:10px 0; transition:color .2s;
+}
+.mobile-menu__nav a:active, .mobile-menu__nav a:hover{ color:var(--green); }
+.mobile-menu__cta{ margin-top:30px; }
+.mobile-menu__foot{ position:absolute; bottom:34px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--ink-3); }
+
 @media(max-width:900px){
-  .bar__nav {display:none;}
+  .bar__nav { display:none; }
+  .bar__cta { display:none; }
+  .bar__burger { display:flex; }
+}
+@media(max-width:600px){
+  .hero__bg { background-position: 70% 20%; }
+  .hero { padding: 88px var(--gutter) 48px; }
+  .section { padding: 64px var(--gutter); }
+  .contact { padding: 64px var(--gutter); }
+  .tools { padding: 56px var(--gutter); }
 }
 
 /* ============ HERO ============ */
@@ -1181,7 +1214,23 @@ body {
     <a href="#contact">КОНТАКТЫ</a>
   </div>
   <a href="#contact" class="bar__cta">ОБСУДИТЬ ПРОЕКТ</a>
+  <button class="bar__burger" id="barBurger" aria-label="меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav class="mobile-menu__nav">
+    <a href="#about">ОБО МНЕ</a>
+    <a href="#services">УСЛУГИ</a>
+    <a href="#cases">ПРОЕКТЫ</a>
+    <a href="#process">ПРОЦЕСС</a>
+    <a href="#contact">КОНТАКТЫ</a>
+  </nav>
+  <a href="#contact" class="btn-green mobile-menu__cta">ОБСУДИТЬ ПРОЕКТ →</a>
+  <div class="mobile-menu__foot">@Cold_69 · AI-специалист</div>
+</div>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="home">
@@ -1618,6 +1667,25 @@ body {
       bar.classList.toggle('scrolled', window.scrollY > 40);
     }, {passive: true});
   } catch(e) { console.warn('bar scroll:', e); }
+})();
+
+/* ============ MOBILE MENU ============ */
+(function() {
+  try {
+    const burger = document.getElementById('barBurger');
+    const menu = document.getElementById('mobileMenu');
+    if (!burger || !menu) return;
+    function setOpen(open) {
+      burger.classList.toggle('open', open);
+      menu.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    burger.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  } catch(e) { console.warn('mobile menu:', e); }
 })();
 
 /* ============ NAV ACTIVE ============ */
