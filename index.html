@@ -532,6 +532,8 @@ body {
   mix-blend-mode: multiply;           /* white background drops out on the white card */
   transform: scale(1.28);             /* enlarge art so it fills the block */
 }
+/* Big automation card is tall: let the brain fill the area instead of being letterboxed */
+.svc-card--big .svc-half--img img { object-fit: cover; object-position: center; transform: scale(1.04); }
 /* hover highlights the whole card only — the inner illustration does not react */
 
 /* Stats grid */
@@ -1312,17 +1314,15 @@ body {
 
   <article class="svc-card svc-card--big" id="svcCard4">
     <div class="svc-half svc-half--text">
-      <div class="svc-top"><span class="svc-priority">PRIORITY: MAX <span>▓▓▓▓▓▓▓</span></span>
-      </div>
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
       <h3 class="svc-name">AI-АВТОМАТИЗАЦИЯ</h3>
       <span class="svc-sub">AUTOMATION CORE</span>
       <p class="svc-desc">Автоматизация контента, воронки, публикации и бизнес-процессов.</p>
       <div class="svc-stats">
-        <div><small>EFFICIENCY</small><strong>+300%</strong></div>
-        <div><small>TIME SAVED</small><strong>-80%</strong></div>
-        <div><small>ERROR RATE</small><strong>-95%</strong></div>
-        <div><small>SCALABILITY</small><strong>∞</strong></div>
+        <div><small>ЭФФЕКТИВНОСТЬ</small><strong>+300%</strong></div>
+        <div><small>ЭКОНОМИЯ ВРЕМЕНИ</small><strong>-80%</strong></div>
+        <div><small>МЕНЬШЕ ОШИБОК</small><strong>-95%</strong></div>
+        <div><small>МАСШТАБ</small><strong>∞</strong></div>
       </div>
       <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
