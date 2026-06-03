@@ -265,7 +265,6 @@ body {
 @keyframes heroFloat1{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-34px)} }
 @keyframes heroFloat2{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(-32px,42px)} }
 
-.hero__particles{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.55; }
 
 @media (prefers-reduced-motion: reduce){
   .hero__grid, .hero__glow{ animation:none; }
@@ -1312,7 +1311,6 @@ body {
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
   <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
-  <canvas class="hero__particles" id="heroParticles" aria-hidden="true"></canvas>
 
   <div class="hero__tag">AI CONTENT CREATOR &amp; DIGITAL OPERATOR</div>
 
@@ -2177,67 +2175,6 @@ body {
     window.addEventListener('load', () => setTimeout(checkVisible, 400));
     setTimeout(checkVisible, 1200);
   } catch(e) { console.warn('count-up:', e); }
-})();
-
-/* ============ HERO PARTICLES (canvas) ============ */
-(function() {
-  try {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const canvas = document.getElementById('heroParticles');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w, h, dpr, parts = [], raf;
-    const COUNT = window.innerWidth < 700 ? 26 : 52;
-
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    function seed() {
-      parts = Array.from({length: COUNT}, () => ({
-        x: Math.random()*w, y: Math.random()*h,
-        vx: (Math.random()-.5)*.25, vy: (Math.random()-.5)*.25,
-        r: Math.random()*1.6 + .6, a: Math.random()*.5 + .2
-      }));
-    }
-    function draw() {
-      ctx.clearRect(0,0,w,h);
-      for (const p of parts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fillStyle = 'rgba(192,255,51,' + p.a + ')';
-        ctx.fill();
-      }
-      // link nearby particles
-      for (let i=0;i<parts.length;i++){
-        for (let j=i+1;j<parts.length;j++){
-          const dx=parts[i].x-parts[j].x, dy=parts[i].y-parts[j].y;
-          const d=dx*dx+dy*dy;
-          if (d < 13000){
-            ctx.strokeStyle='rgba(192,255,51,'+(.10*(1-d/13000))+')';
-            ctx.lineWidth=.6;
-            ctx.beginPath(); ctx.moveTo(parts[i].x,parts[i].y); ctx.lineTo(parts[j].x,parts[j].y); ctx.stroke();
-          }
-        }
-      }
-      raf = requestAnimationFrame(draw);
-    }
-    resize(); seed(); draw();
-    window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); seed(); draw(); }, {passive:true});
-    // pause when hero off-screen (save battery)
-    const hero = document.getElementById('home');
-    if (hero && 'IntersectionObserver' in window) {
-      new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { if (!raf) draw(); }
-        else { cancelAnimationFrame(raf); raf = null; }
-      }), {threshold: 0}).observe(hero);
-    }
-  } catch(e) { console.warn('hero particles:', e); }
 })();
 
 /* ============ SCROLL ENTRANCE (GSAP) ============ */
