@@ -281,25 +281,19 @@ body {
 }
 .hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-/* ---- Hero AI terminal ---- */
-.hero-term{
-  position:absolute; right:var(--gutter); bottom:56px; z-index:2;
-  width:340px; max-width:34vw;
-  background:rgba(9,11,8,.66); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-  border:1px solid rgba(192,255,51,.22); border-radius:10px; overflow:hidden;
-  box-shadow:0 24px 60px rgba(0,0,0,.55);
+/* ---- Hero Matrix code rain ---- */
+.hero-matrix{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  width:100%; height:100%;
+  opacity:.72; mix-blend-mode:screen;
+  -webkit-mask-image:linear-gradient(95deg, #000 0%, #000 34%, transparent 64%);
+          mask-image:linear-gradient(95deg, #000 0%, #000 34%, transparent 64%);
 }
-.hero-term__bar{ display:flex; align-items:center; gap:6px; padding:9px 13px; background:rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.07); }
-.hero-term__bar .d{ width:9px; height:9px; border-radius:50%; background:#2a2a2a; }
-.hero-term__bar .d:nth-child(3){ background:rgba(192,255,51,.7); }
-.hero-term__bar em{ margin-left:8px; font-family:var(--mono); font-style:normal; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
-.hero-term__body{ padding:14px; min-height:128px; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:var(--ink-2); }
-.hero-term__body .ln{ white-space:pre-wrap; word-break:break-word; }
-.hero-term__body .p{ color:#fff; }
-.hero-term__body .dim{ color:var(--ink-2); opacity:.85; }
-.hero-term__body .g{ color:var(--green); }
-.hero-term__body .cur{ display:inline-block; width:7px; height:13px; background:var(--green); margin-left:3px; vertical-align:middle; animation:heroCaret 1s steps(2) infinite; }
-@media(max-width:1100px){ .hero-term{ display:none; } }
+@media(max-width:600px){
+  .hero-matrix{ opacity:.38;
+    -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 32%, transparent 68%);
+            mask-image:linear-gradient(180deg, #000 0%, #000 32%, transparent 68%); }
+}
 .btn-green {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 17px 28px;
@@ -1346,13 +1340,7 @@ body {
     </div>
   </div>
 
-  <div class="hero-term" id="heroTerm" aria-hidden="true">
-    <div class="hero-term__bar">
-      <span class="d"></span><span class="d"></span><span class="d"></span>
-      <em>ulyanov@ai — system</em>
-    </div>
-    <div class="hero-term__body" id="heroTermBody"></div>
-  </div>
+  <canvas class="hero-matrix" id="heroMatrix" aria-hidden="true"></canvas>
 </section>
 
 <!-- ============ MARQUEE ============ -->
@@ -2296,53 +2284,59 @@ body {
   } catch(e) { console.warn('scroll entrance:', e); }
 })();
 
-/* ============ HERO AI TERMINAL ============ */
+/* ============ HERO MATRIX CODE RAIN ============ */
 (function() {
   try {
-    const body = document.getElementById('heroTermBody');
-    if (!body) return;
-    if (window.matchMedia('(max-width:1100px)').matches) return;
+    const c = document.getElementById('heroMatrix');
+    if (!c) return;
+    const ctx = c.getContext('2d');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const tasks = [
-      { p:'сгенерировать нейровидео', out:['рендер кадров…','монтаж и звук…','✓ готово · 1080p'] },
-      { p:'собрать лендинг',          out:['дизайн секций…','адаптив + анимации…','✓ опубликовано'] },
-      { p:'оживить AI-аватара',       out:['синтез лица и голоса…','липсинк…','✓ дубль готов'] },
-      { p:'сверстать pitch deck',     out:['структура и нарратив…','3D-визуал…','✓ 14 слайдов'] },
-      { p:'запустить контент-завод',  out:['контент-план…','пачка из 30 единиц…','✓ на потоке'] }
-    ];
-    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
-    const wait = ms => new Promise(r => setTimeout(r, ms));
-    let lines = [];
-    function render(typing){ body.innerHTML = lines.join('') + (typing || ''); }
-    async function type(text){
-      let cur = '';
-      for (const ch of text){ cur += ch; render('<div class="ln"><span class="p">&gt; '+esc(cur)+'</span><span class="cur"></span></div>'); await wait(42 + Math.random()*45); }
-      lines.push('<div class="ln"><span class="p">&gt; '+esc(text)+'</span></div>'); render('');
-    }
-    function out(text){ lines.push('<div class="ln"><span class="'+(text[0]==='✓'?'g':'dim')+'">'+esc(text)+'</span></div>'); render(''); }
+    // katakana + digits + code symbols + brand letters → "programmer / matrix" feel
+    const charset = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789{}[]()<>/\\=;:+*$#&|!?ULYANOVAI'.split('');
+    let w, h, dpr, fontSize, cols, drops, raf = null, last = 0;
 
-    if (reduce) {
-      const t = tasks[0];
-      lines.push('<div class="ln"><span class="p">&gt; '+esc(t.p)+'</span></div>');
-      t.out.forEach(out); render(''); return;
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.clientWidth; h = c.clientHeight;
+      c.width = w * dpr; c.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      fontSize = 16;
+      cols = Math.ceil(w / fontSize);
+      drops = Array.from({length: cols}, () => Math.random() * -60);
+      ctx.clearRect(0, 0, w, h);
     }
-
-    let i = 0, active = false, visible = true;
-    async function loop(){
-      if (active) return; active = true;
-      while (visible){
-        await type(tasks[i % tasks.length].p);
-        for (const o of tasks[i % tasks.length].out){ await wait(430); out(o); }
-        i++; await wait(1700);
-        lines = []; render(''); await wait(320);
+    function frame(t){
+      raf = requestAnimationFrame(frame);
+      if (t - last < 50) return;   // ~20fps, cinematic
+      last = t;
+      ctx.fillStyle = 'rgba(8,10,8,0.075)';     // trailing fade (lower = longer streaks)
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = '600 ' + fontSize + 'px monospace';
+      for (let i = 0; i < cols; i++){
+        const ch = charset[(Math.random() * charset.length) | 0];
+        const x = i * fontSize, y = drops[i] * fontSize;
+        ctx.fillStyle = Math.random() > 0.82 ? '#ccff66' : 'rgba(150,220,40,0.92)';  // bright heads + green
+        ctx.fillText(ch, x, y);
+        if (y > h && Math.random() > 0.975) drops[i] = Math.random() * -18;
+        drops[i] += 1;
       }
-      active = false;
     }
+    function start(){ if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
+    function stop(){ if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+    resize();
+    if (reduce){ // static sparse frame, no animation
+      ctx.font = '600 16px monospace'; ctx.fillStyle = 'rgba(150,220,40,0.5)';
+      for (let i = 0; i < cols; i++) ctx.fillText(charset[(Math.random()*charset.length)|0], i*16, (Math.random()*h)|0);
+      return;
+    }
+    window.addEventListener('resize', () => { stop(); resize(); start(); }, {passive:true});
+    start();
     const hero = document.getElementById('home');
     if (hero && 'IntersectionObserver' in window){
-      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; if (visible) loop(); }), {threshold:0}).observe(hero);
-    } else { loop(); }
-  } catch(e){ console.warn('hero terminal:', e); }
+      new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), {threshold:0}).observe(hero);
+    }
+  } catch(e){ console.warn('hero matrix:', e); }
 })();
 
 /* ============ FAQ ACCORDION ============ */
