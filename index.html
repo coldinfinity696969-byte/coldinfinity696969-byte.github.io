@@ -265,8 +265,22 @@ body {
 @keyframes heroFloat1{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-34px)} }
 @keyframes heroFloat2{ 0%,100%{transform:translate(0,0)} 50%{transform:translate(-32px,42px)} }
 
+/* interactive neon contour: cutout overlaid exactly on the bg photo, glows on hover */
+.hero__cutout{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  width:100%; height:100%; object-fit:cover; object-position:center;
+  filter: drop-shadow(0 0 4px rgba(192,255,51,0)) drop-shadow(0 0 13px rgba(192,255,51,0)) drop-shadow(0 0 32px rgba(192,255,51,0));
+  transition: filter .55s var(--ease);
+  will-change: filter;
+}
+.hero__cutout.lit{
+  filter: drop-shadow(0 0 4px rgba(192,255,51,.95)) drop-shadow(0 0 13px rgba(192,255,51,.72)) drop-shadow(0 0 32px rgba(192,255,51,.45));
+}
+@media(max-width:1100px){ .hero__cutout{ display:none; } }
+
 @media (prefers-reduced-motion: reduce){
   .hero__grid, .hero__glow{ animation:none; }
+  .hero__cutout{ transition:none; }
 }
 
 
@@ -1310,6 +1324,7 @@ body {
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
   <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
+  <img class="hero__cutout" id="heroCutout" src="assets/nikita-cutout.webp?v=1" alt="" aria-hidden="true">
 
   <div class="hero__tag">AI CONTENT CREATOR &amp; DIGITAL OPERATOR</div>
 
@@ -2218,6 +2233,39 @@ body {
 
     ScrollTrigger.refresh();
   } catch(e) { console.warn('scroll entrance:', e); }
+})();
+
+/* ============ HERO HOVER CONTOUR ============ */
+(function() {
+  try {
+    const img = document.getElementById('heroCutout');
+    const hero = document.getElementById('home');
+    if (!img || !hero) return;
+    if (window.matchMedia('(hover: none)').matches) return; // touch: no hover
+    let cv, cx, iw, ih, ready = false;
+    function build(){
+      iw = img.naturalWidth; ih = img.naturalHeight; if (!iw) return;
+      cv = document.createElement('canvas'); cv.width = iw; cv.height = ih;
+      cx = cv.getContext('2d', { willReadFrequently: true });
+      cx.drawImage(img, 0, 0); ready = true;
+    }
+    if (img.complete && img.naturalWidth) build(); else img.addEventListener('load', build);
+    function alphaAt(clientX, clientY){
+      if (!ready) return 0;
+      const r = img.getBoundingClientRect();
+      const s = Math.max(r.width / iw, r.height / ih);      // object-fit: cover
+      const ox = (r.width - iw * s) / 2, oy = (r.height - ih * s) / 2; // centered
+      const px = (clientX - r.left - ox) / s, py = (clientY - r.top - oy) / s;
+      if (px < 0 || py < 0 || px >= iw || py >= ih) return 0;
+      try { return cx.getImageData(px|0, py|0, 1, 1).data[3]; } catch(e){ return 0; }
+    }
+    let lit = false;
+    hero.addEventListener('mousemove', e => {
+      const over = alphaAt(e.clientX, e.clientY) > 50;
+      if (over !== lit){ lit = over; img.classList.toggle('lit', over); }
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => { if (lit){ lit = false; img.classList.remove('lit'); } });
+  } catch(e){ console.warn('hero contour:', e); }
 })();
 
 /* ============ HERO MATRIX CODE RAIN ============ */
