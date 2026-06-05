@@ -269,12 +269,15 @@ body {
 .hero__cutout{
   position:absolute; inset:0; z-index:0; pointer-events:none;
   width:100%; height:100%; object-fit:cover; object-position:center;
-  filter: drop-shadow(0 0 4px rgba(192,255,51,0)) drop-shadow(0 0 13px rgba(192,255,51,0)) drop-shadow(0 0 32px rgba(192,255,51,0));
-  transition: filter .55s var(--ease);
-  will-change: filter;
+  opacity:0;                                   /* hidden at rest → no duplicate, no perf cost */
+  filter: brightness(.84) saturate(1.18)
+          drop-shadow(0 0 5px rgba(192,255,51,0)) drop-shadow(0 0 20px rgba(192,255,51,0));
+  transition: opacity .5s var(--ease), filter .5s var(--ease);
 }
 .hero__cutout.lit{
-  filter: drop-shadow(0 0 4px rgba(192,255,51,.95)) drop-shadow(0 0 13px rgba(192,255,51,.72)) drop-shadow(0 0 32px rgba(192,255,51,.45));
+  opacity:1;
+  filter: brightness(.84) saturate(1.18)
+          drop-shadow(0 0 5px rgba(192,255,51,.95)) drop-shadow(0 0 20px rgba(192,255,51,.5));
 }
 @media(max-width:1100px){ .hero__cutout{ display:none; } }
 
@@ -2284,14 +2287,14 @@ body {
       w = c.clientWidth; h = c.clientHeight;
       c.width = w * dpr; c.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      fontSize = 16;
+      fontSize = 19;
       cols = Math.ceil(w / fontSize);
       drops = Array.from({length: cols}, () => Math.random() * -60);
       ctx.clearRect(0, 0, w, h);
     }
     function frame(t){
       raf = requestAnimationFrame(frame);
-      if (t - last < 50) return;   // ~20fps, cinematic
+      if (t - last < 70) return;   // ~14fps, lighter on CPU
       last = t;
       ctx.fillStyle = 'rgba(8,10,8,0.075)';     // trailing fade (lower = longer streaks)
       ctx.fillRect(0, 0, w, h);
