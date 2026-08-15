@@ -1283,9 +1283,70 @@ body {
   .process-step:first-child { border-top: none; }
   .svc-stats { gap: 14px 18px; }
 }
+
+/* ============ PRELOADER ============ */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 26px;
+  transition: opacity .6s var(--ease), visibility .6s var(--ease);
+}
+#preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.pl-logo {
+  font-family: var(--display); font-weight: 800;
+  font-size: 15px; letter-spacing: .32em; text-transform: uppercase;
+  color: var(--hi);
+  display: flex; align-items: center; gap: 10px;
+}
+.pl-logo-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 14px var(--green);
+  animation: plPulse 1.1s ease-in-out infinite;
+}
+@keyframes plPulse { 0%,100%{ transform: scale(1); opacity: 1; } 50%{ transform: scale(1.5); opacity: .5; } }
+.pl-bar {
+  width: min(220px, 52vw); height: 2px;
+  background: var(--line-2); border-radius: 2px; overflow: hidden;
+}
+.pl-bar__fill {
+  width: 0%; height: 100%;
+  background: linear-gradient(90deg, var(--green-dark), var(--green));
+  box-shadow: 0 0 12px var(--green-glow);
+  transition: width .3s var(--ease);
+}
+.pl-pct {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .2em; color: var(--ink-2);
+}
+
+/* ============ CURSOR SPOTLIGHT on cards ============ */
+.svc-card::before, .case-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  pointer-events: none; opacity: 0;
+  transition: opacity .35s var(--ease);
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(192,255,51,.16), transparent 62%);
+}
+.case-card::before { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(192,255,51,.20), transparent 60%); }
+.svc-card:hover::before, .case-card:hover::before { opacity: 1; }
+.svc-card > *, .case-card > * { position: relative; z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-logo-dot { animation: none; }
+  .svc-card::before, .case-card::before { display: none; }
+}
 </style>
 </head>
 <body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" role="status" aria-label="Загрузка">
+  <div class="pl-logo"><span class="pl-logo-dot"></span>ULYANOV</div>
+  <div class="pl-bar"><div class="pl-bar__fill" id="plFill"></div></div>
+  <div class="pl-pct" id="plPct">0%</div>
+</div>
 
 <div class="grain"></div>
 
@@ -1548,18 +1609,30 @@ body {
     <div class="case-card" data-case="video">
       <div class="case-card__thumb">
         <div class="case-card__num">02</div>
-        <img src="assets/portfolio/vid-tractor-cover.webp" alt="Видео-продакшн" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/coldinfinity-cover.webp" alt="Cold Infinity — AI-музыкальный клип" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">ВИДЕО-ПРОДАКШН</h3>
-        <p class="case-card__desc">Нейровидео и промо-ролики: спорт, техника, рекламные кампании.</p>
+        <p class="case-card__desc">AI-клип «Cold Infinity» со звуком + нейровидео и промо: спорт, техника, реклама.</p>
         <span class="case-card__tag">НЕЙРОВИДЕО</span>
+      </div>
+    </div>
+
+    <div class="case-card" data-case="singer">
+      <div class="case-card__thumb">
+        <div class="case-card__num">03</div>
+        <img src="assets/portfolio/singer-clip-cover.webp" alt="AI-клип для артиста — поющий аватар" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">1213 — AI-КЛИП</h3>
+        <p class="case-card__desc">Артист не хотел сниматься — сделал клип полностью на нейросетях: поющий аватар с липсинком, разработка образа, стилизация.</p>
+        <span class="case-card__tag">AI ВМЕСТО СЪЁМКИ</span>
       </div>
     </div>
 
     <div class="case-card" data-case="sos">
       <div class="case-card__thumb">
-        <div class="case-card__num">03</div>
+        <div class="case-card__num">04</div>
         <img src="assets/portfolio/sos-cover.webp" alt="SOS — pitch deck" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1571,7 +1644,7 @@ body {
 
     <div class="case-card" data-case="am">
       <div class="case-card__thumb">
-        <div class="case-card__num">04</div>
+        <div class="case-card__num">05</div>
         <img src="assets/portfolio/am-billboard-jacto.webp" alt="Агро-Мастер — реклама" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1583,7 +1656,7 @@ body {
 
     <div class="case-card" data-case="sites">
       <div class="case-card__thumb">
-        <div class="case-card__num">05</div>
+        <div class="case-card__num">06</div>
         <img src="assets/portfolio/cover-sites.webp" alt="AI-сайты и лендинги" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1595,7 +1668,7 @@ body {
 
     <div class="case-card" data-case="automation">
       <div class="case-card__thumb">
-        <div class="case-card__num">06</div>
+        <div class="case-card__num">07</div>
         <img src="assets/portfolio/cover-automation.webp" alt="AI-автоматизация" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1607,7 +1680,7 @@ body {
 
     <div class="case-card" data-case="photo">
       <div class="case-card__thumb">
-        <div class="case-card__num">07</div>
+        <div class="case-card__num">08</div>
         <img src="assets/portfolio/cover-photo.webp" alt="AI-фото и товарка" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1619,7 +1692,7 @@ body {
 
     <div class="case-card" data-case="brand">
       <div class="case-card__thumb">
-        <div class="case-card__num">08</div>
+        <div class="case-card__num">09</div>
         <img src="assets/portfolio/cover-brand.webp" alt="Брендинг" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
@@ -1853,6 +1926,56 @@ body {
 
 <script>
 /* Each block isolated in its own IIFE so one failure never blocks the others */
+
+/* ============ PRELOADER ============ */
+(function() {
+  try {
+    const pre = document.getElementById('preloader');
+    if (!pre) return;
+    const fill = document.getElementById('plFill');
+    const pct = document.getElementById('plPct');
+    let p = 0, done = false;
+    const set = v => { p = Math.min(100, v); if (fill) fill.style.width = p + '%'; if (pct) pct.textContent = Math.round(p) + '%'; };
+
+    // Simulated progress that keeps moving, then snaps to 100 on real load
+    const tick = setInterval(() => {
+      if (done) return;
+      const step = p < 70 ? 4 + Math.random() * 8 : (p < 92 ? 1 + Math.random() * 3 : 0.4);
+      set(p + step);
+    }, 130);
+
+    function finish() {
+      if (done) return; done = true;
+      clearInterval(tick);
+      set(100);
+      setTimeout(() => {
+        pre.classList.add('done');
+        document.body.style.overflow = '';
+      }, 350);
+    }
+    // lock scroll while loading
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('load', () => setTimeout(finish, 300));
+    // hard safety net so the site never gets stuck behind the loader
+    setTimeout(finish, 4500);
+  } catch(e) { console.warn('preloader:', e); }
+})();
+
+/* ============ CURSOR SPOTLIGHT on cards ============ */
+(function() {
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cards = document.querySelectorAll('.svc-card, .case-card');
+    if (!cards.length) return;
+    cards.forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  } catch(e) { console.warn('spotlight:', e); }
+})();
 
 /* ============ BAR SCROLL ============ */
 (function() {
@@ -2371,18 +2494,27 @@ body {
         ]
       },
       video: {
-        num: '02', title: 'Видео-продакшн', sub: 'Нейровидео · промо',
-        desc: 'Промо-ролики и нейровидео под задачи бренда: спортивные события, техника, рекламные кампании. От идеи и сценария до финального монтажа.',
-        results: [], tags: ['нейровидео','промо','motion'],
+        num: '02', title: 'Видео-продакшн', sub: 'AI-клип · нейровидео · промо',
+        desc: '«Cold Infinity» — авторский AI-музыкальный клип: концепт и сюжет мои, музыка написана в Suno, монтаж мой. Плюс промо-ролики и нейровидео под задачи бренда: спорт, техника, реклама. От идеи и сценария до финального монтажа.',
+        results: [], tags: ['AI-клип','нейровидео','музыка Suno','монтаж'],
         media: [
+          { t:'video', src:'coldinfinity.mp4', poster:'coldinfinity-cover.webp', sound:true },
           { t:'video', src:'vid-tractor.mp4', poster:'vid-tractor-cover.webp' },
           { t:'video', src:'vid-cosmonaut.mp4', poster:'vid-cosmonaut-cover.webp' },
           { t:'video', src:'vid-hockey.mp4', poster:'vid-hockey-cover.webp' },
           { t:'video', src:'vid-testdrive.mp4', poster:'vid-testdrive-cover.webp' }
         ]
       },
+      singer: {
+        num: '03', title: '1213 — AI-клип', sub: 'AI вместо съёмки · липсинк · Seedance 2.5',
+        desc: 'Артист 1213 не хотел сниматься в реальном клипе — сделали видео полностью на нейросетях. Разработал визуальный образ артиста и оживил его как поющий AI-аватар с точным липсинком под трек. Генерация видео — Seedance 2.5; чёрно-белая стилизация с сюрреалистичным окружением и переходами в графику. Цельный клип от концепта до финала.',
+        results: [], tags: ['AI вместо съёмки','липсинк','Seedance 2.5','разработка образа'],
+        media: [
+          { t:'video', src:'singer-clip.mp4', poster:'singer-clip-cover.webp', sound:true, fit:'contain' }
+        ]
+      },
       sos: {
-        num: '03', title: 'SOS — Pitch Deck', sub: 'Презентация · дизайн · 3D',
+        num: '04', title: 'SOS — Pitch Deck', sub: 'Презентация · дизайн · 3D',
         desc: 'Инвестиционная презентация для «Школы зимних видов спорта»: концепция, фирменный стиль, 3D-визуализация пространств и анимация.',
         results: [], tags: ['pitch deck','дизайн','3D'],
         media: [
@@ -2391,7 +2523,7 @@ body {
         ]
       },
       am: {
-        num: '04', title: 'Агро-Мастер', sub: 'Бренд · наружка · полиграфия',
+        num: '05', title: 'Агро-Мастер', sub: 'Бренд · наружка · полиграфия',
         desc: 'Визуальные коммуникации для дистрибьютора сельхозтехники: наружная реклама, упаковка, каталоги и элементы фирменного стиля.',
         results: [], tags: ['брендинг','наружка','полиграфия'],
         media: [
@@ -2404,25 +2536,25 @@ body {
         ]
       },
       sites: {
-        num: '05', title: 'AI-сайты', sub: 'Веб · лендинги · приложения',
+        num: '06', title: 'AI-сайты', sub: 'Веб · лендинги · приложения',
         desc: 'Лендинги, сайты-портфолио и веб-приложения на современных стеках — от идеи до публикации. Сайт, который вы смотрите прямо сейчас, тоже сделан мной.',
         results: [], tags: ['веб','лендинги','дизайн'],
         media: [ { t:'img', src:'cover-sites.webp' }, { t:'img', src:'sites-2.webp' }, { t:'img', src:'sites-3.webp' } ]
       },
       automation: {
-        num: '06', title: 'AI-автоматизация', sub: 'Воронки · процессы',
+        num: '07', title: 'AI-автоматизация', sub: 'Воронки · процессы',
         desc: 'Контент-конвейеры, автопостинг, воронки и интеграции: рутина уходит на автопилот, а вы — масштабируетесь.',
         results: [], tags: ['автоматизация','воронки','интеграции'],
         media: [ { t:'img', src:'cover-automation.webp' }, { t:'img', src:'automation-2.webp' }, { t:'img', src:'automation-3.webp' } ]
       },
       photo: {
-        num: '07', title: 'AI-фото / товарка', sub: 'Предметка · каталог',
+        num: '08', title: 'AI-фото / товарка', sub: 'Предметка · каталог',
         desc: 'Предметная и каталожная съёмка через нейросети: товар в любом окружении и свете — без студии, фотографа и логистики.',
         results: [], tags: ['AI-фото','предметка','e-com'],
         media: [ { t:'img', src:'cover-photo.webp' }, { t:'img', src:'photo-2.webp' }, { t:'img', src:'photo-3.webp' } ]
       },
       brand: {
-        num: '08', title: 'Брендинг', sub: 'Лого · фирстиль · носители',
+        num: '09', title: 'Брендинг', sub: 'Лого · фирстиль · носители',
         desc: 'Целостная айдентика с нуля: логотип, фирменный стиль, носители и гайдлайны — узнаваемый визуальный язык бренда.',
         results: [], tags: ['брендинг','логотип','айдентика'],
         media: [ { t:'img', src:'cover-brand.webp' }, { t:'img', src:'brand-2.webp' }, { t:'img', src:'brand-3.webp' } ]
@@ -2434,10 +2566,18 @@ body {
       if (m.t === 'video') {
         const v = document.createElement('video');
         v.src = P + m.src; if (m.poster) v.poster = P + m.poster;
-        v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
-        v.setAttribute('playsinline',''); v.setAttribute('muted','');
+        v.playsInline = true; v.setAttribute('playsinline','');
+        if (m.sound) {
+          // featured clip: real player with sound + controls, plays full length once
+          v.controls = true; v.loop = false; v.muted = false; v.preload = 'metadata';
+        } else {
+          // ambient loop: muted autoplay
+          v.muted = true; v.loop = true; v.autoplay = true;
+          v.setAttribute('muted','');
+        }
         if (m.fit === 'contain') v.className = 'contain';
-        stage.appendChild(v); v.play().catch(()=>{});
+        stage.appendChild(v);
+        if (!m.sound) v.play().catch(()=>{});
       } else {
         const img = document.createElement('img');
         img.src = P + m.src; img.alt = '';
