@@ -1472,6 +1472,38 @@ html, body { overflow-x: clip !important; }
 .reel__strip img { width: 380px; height: 238px; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line-2); }
 @keyframes reelStrip { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .reel__strip { animation: none; } }
+
+/* ============ SERVICES: live pipeline (assets/svc/pipeline.js) ============ */
+.svc-section {
+  background-image: radial-gradient(circle, rgba(30,60,0,.075) 1px, transparent 1.4px);
+  background-size: 24px 24px; background-position: center top;
+}
+.svc-svg-connectors { z-index: 3; filter: none; }
+.svc-card:hover { transform: none; }                 /* wires attach to the icons, cards stay put */
+.svc-desc { flex: 0 0 auto; }
+.svc-viz { position: relative; }
+.svc-viz--small { flex: 1; min-height: 112px; display: flex; align-items: center; margin: 2px 0 6px; }
+.svc-viz__svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.svc-half--viz { background: transparent; padding: 18px 18px 18px 4px; display: flex; align-items: center; justify-content: center; }
+.svc-half--viz .svc-viz { width: 100%; height: 100%; }
+.v-mono { font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em; fill: #5d6b52; }
+.v-code { font-family: var(--mono); font-size: 8.5px; }
+.v-t { fill: #3f8f00; } .v-a { fill: #8f9a86; } .v-s { fill: #6b7a5f; } .v-x { fill: #161616; }
+.v-mute { fill: #a3ab9c; } .v-ink { fill: #1b1b1b; } .v-ok { fill: #4d9a00; } .v-xs { font-size: 6.5px; } .v-limef { fill: #c0ff33; }
+.v-chip { font-size: 8px; font-weight: 600; fill: #2f6300; letter-spacing: .1em; }
+.v-disp { font-family: var(--display); font-weight: 800; fill: #161616; letter-spacing: -.02em; }
+.v-flow { stroke-dasharray: 2 7; animation: vFlow 1s linear infinite; }
+@keyframes vFlow { to { stroke-dashoffset: -18; } }
+.svc-icon { transition: background .35s, box-shadow .35s, color .35s; }
+.svc-card.svc-hit { border-color: rgba(95,184,0,.9); box-shadow: 0 0 0 3px rgba(192,255,51,.32), 0 14px 44px rgba(95,184,0,.16); }
+.svc-card.svc-hit .svc-icon { background: var(--green); color: #1d3a00; box-shadow: 0 0 0 4px rgba(192,255,51,.35), 0 0 18px rgba(160,221,0,.55); }
+#svcCard4 .svc-name { font-size: clamp(19px, 1.62vw, 24px); }   /* one line, never under the scene */
+@media (max-width: 1240px) and (min-width: 901px) {   /* six nav links + CTA: keep one line on laptops/tablets */
+  .bar__nav { gap: 20px; font-size: 10px; } .bar__nav a { white-space: nowrap; } .bar__cta { padding: 10px 14px; }
+}
+@media (max-width: 1100px) { .svc-half--viz { height: 250px; padding: 12px; } }
+@media (max-width: 600px) { .svc-half--viz { height: 230px; } }
+@media (prefers-reduced-motion: reduce) { .v-flow { animation: none; } }
 </style>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js" crossorigin>
 </head>
@@ -1676,7 +1708,7 @@ html, body { overflow-x: clip !important; }
       <div class="sec-subtitle">AI-POWERED GROWTH SYSTEM</div>
     </div>
     <div>
-      <p class="sec-desc">Объединяю AI-инструменты, стратегию, дизайн и контент в единую систему, которая работает на ваш рост.</p>
+      <p class="sec-desc">Стратегия, контент, автоматизация и сайты связаны в одну систему: результат одного блока сразу становится задачей для следующего.</p>
       <a href="#formats" class="sec-all">ФОРМАТЫ РАБОТЫ</a>
     </div>
   </div>
@@ -1689,6 +1721,7 @@ html, body { overflow-x: clip !important; }
     <h3 class="svc-name">AI-СТРАТЕГИЯ</h3>
     <span class="svc-sub">STRATEGY CORE</span>
     <p class="svc-desc">Аудит процессов, стратегия и подбор AI-инструментов под цели бизнеса.</p>
+    <div class="svc-viz svc-viz--small" data-viz="radar" aria-hidden="true"></div>
     <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
   </article>
 
@@ -1697,6 +1730,7 @@ html, body { overflow-x: clip !important; }
     <h3 class="svc-name">AI-КОНТЕНТ</h3>
     <span class="svc-sub">CONTENT ENGINE</span>
     <p class="svc-desc">Видео, AI-аватары, фото, графика и визуальные системы для бренда.</p>
+    <div class="svc-viz svc-viz--small" data-viz="gen" aria-hidden="true"></div>
     <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
   </article>
 
@@ -1714,8 +1748,8 @@ html, body { overflow-x: clip !important; }
       </div>
       <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
-    <div class="svc-half svc-half--img">
-      <img src="assets/svc-automation.webp" alt="AI-автоматизация — нейросеть и шестерёнки" loading="lazy" decoding="async"/>
+    <div class="svc-half svc-half--img svc-half--viz">
+      <div class="svc-viz" data-viz="auto" aria-hidden="true"></div>
     </div>
   </article>
 
@@ -1728,8 +1762,8 @@ html, body { overflow-x: clip !important; }
       <p class="svc-desc">Лендинги, сайты-портфолио, прототипы и веб-приложения на современных стеках.</p>
       <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
-    <div class="svc-half svc-half--img">
-      <img src="assets/svc-sites.webp" alt="AI-сайты — браузерный интерфейс" loading="lazy" decoding="async"/>
+    <div class="svc-half svc-half--img svc-half--viz">
+      <div class="svc-viz" data-viz="code" aria-hidden="true"></div>
     </div>
   </article>
 
@@ -1742,8 +1776,8 @@ html, body { overflow-x: clip !important; }
       <p class="svc-desc">Полный цикл производства контента на постоянной основе для брендов и экспертов.</p>
       <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
-    <div class="svc-half svc-half--img">
-      <img src="assets/svc-factory.webp" alt="Контент-завод — конвейер контента" loading="lazy" decoding="async"/>
+    <div class="svc-half svc-half--img svc-half--viz">
+      <div class="svc-viz" data-viz="factory" aria-hidden="true"></div>
     </div>
   </article>
 
@@ -2356,96 +2390,6 @@ html, body { overflow-x: clip !important; }
   } catch(e) { console.warn('reveal:', e); }
 })();
 
-/* ============ SERVICE CONNECTORS (animated) ============ */
-(function() {
-  try {
-    const grid = document.getElementById('svcGrid');
-    const svg  = document.getElementById('svcSvg');
-    if (!grid || !svg) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const GREEN = '#5fb800', PULSE = '#b6f000';
-
-    function iconC(card) {
-      const gr = grid.getBoundingClientRect();
-      const ic = card.querySelector('.svc-icon');
-      const b = (ic || card).getBoundingClientRect();
-      if (ic) return { x: b.left - gr.left + b.width/2, y: b.top - gr.top + b.height/2 };
-      return { x: b.left - gr.left + 30, y: b.top - gr.top + 50 };
-    }
-    function edges(card) {
-      const gr = grid.getBoundingClientRect(), b = card.getBoundingClientRect();
-      return { l: b.left-gr.left, r: b.right-gr.left, t: b.top-gr.top, b: b.bottom-gr.top };
-    }
-
-    function build() {
-      const c1=document.getElementById('svcCard1'), c2=document.getElementById('svcCard2'),
-            c4=document.getElementById('svcCard4'), c3=document.getElementById('svcCard3'),
-            c5=document.getElementById('svcCard5');
-      if (!c1||!c2||!c4||!c3||!c5) return;
-      const gr = grid.getBoundingClientRect();
-      const e1=edges(c1), e2=edges(c2), e4=edges(c4), e3=edges(c3), e5=edges(c5);
-      // only draw in the 3-column desktop layout (c4 sits top-right, same row as c1/c2)
-      if (Math.abs(e1.t - e4.t) > 24 || e4.l < e2.r) { svg.innerHTML=''; return; }
-
-      const y1=iconC(c1).y, y4=iconC(c4).y, y3=iconC(c3).y, y5=iconC(c5).y;
-      const gx = (e1.r + e2.l)/2;          // gutter between card1 & card2 (branch point)
-
-      // path definitions [id, d]
-      const segs = [
-        ['pA', `M ${e1.r} ${y1} L ${e2.l} ${y1}`],                         // c1 -> c2
-        ['pB', `M ${e2.r} ${y1} L ${e4.l} ${y4}`],                         // c2 -> c4
-        ['pC', `M ${gx} ${y1} L ${gx} ${e3.t-2}`],                         // branch down -> c3
-        ['pD', `M ${e3.r} ${y3} L ${e5.l} ${y5}`]                          // c3 -> c5
-      ];
-      const nodes = [ [e1.r,y1], [e2.r,y1], [gx,y1], [e3.r,y3] ];
-      const arrowsDown = [ [gx, e3.t-2] ];
-
-      let h = `<defs>
-        <marker id="svcArrow" markerWidth="9" markerHeight="9" refX="5.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-          <path d="M0,0 L6,3 L0,6" fill="none" stroke="${GREEN}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker></defs>`;
-      // rail (faint dashed under-line)
-      segs.forEach(([id,d]) => {
-        h += `<path d="${d}" fill="none" stroke="${GREEN}" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 4"/>`;
-      });
-      // bright lines with arrow ends
-      segs.forEach(([id,d]) => {
-        h += `<path id="${id}" d="${d}" fill="none" stroke="${GREEN}" stroke-opacity=".85" stroke-width="1.9" stroke-linecap="round" marker-end="url(#svcArrow)"/>`;
-      });
-      // junction nodes
-      nodes.forEach(([x,y]) => {
-        h += `<circle cx="${x}" cy="${y}" r="8.5" fill="none" stroke="${GREEN}" stroke-opacity=".3" stroke-width="1"/>`;
-        h += `<circle cx="${x}" cy="${y}" r="4.2" fill="${GREEN}"/>`;
-        h += `<circle cx="${x}" cy="${y}" r="1.8" fill="#eaffb0"/>`;
-      });
-      // travelling pulses
-      if (!reduce) {
-        segs.forEach(([id], i) => {
-          h += `<circle r="3.4" fill="${PULSE}">
-            <animateMotion dur="${2.2 + i*0.25}s" begin="${i*0.4}s" repeatCount="indefinite" rotate="auto">
-              <mpath href="#${id}" xlink:href="#${id}"/>
-            </animateMotion>
-          </circle>`;
-        });
-      }
-      svg.innerHTML = h;
-    }
-
-    let raf;
-    function schedule(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(build); }
-    window.addEventListener('load', () => setTimeout(build, 300));
-    window.addEventListener('resize', schedule, {passive:true});
-    setTimeout(build, 700);
-    // rebuild once the section settles after its entrance animation
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { setTimeout(build, 200); setTimeout(build, 1100); }
-      }), {threshold: .15});
-      io.observe(grid);
-    }
-  } catch(e){ console.warn('connectors:', e); }
-})();
-
 /* ============ CASES CAROUSEL ============ */
 (function() {
   try {
@@ -3033,6 +2977,7 @@ html, body { overflow-x: clip !important; }
   } catch(e) { console.warn('case modal:', e); }
 })();
 </script>
+<script src="assets/svc/pipeline.js" defer></script>
 <script type="module" src="assets/reel/reel.js"></script>
 <script>
   // if WebGL or the CDN is unavailable, show the static strip instead of an empty stage
