@@ -700,6 +700,33 @@ body {
 }
 .case-card:hover .case-card__expand { opacity:1; transform:scale(1); }
 
+/* ============ SITES GRID ============ */
+.sites-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  grid-auto-flow: row dense;
+}
+.site-card { flex: none; }
+.site-card--wide { grid-column: span 2; }
+.site-card .case-card__thumb { height: 240px; }
+.site-card .case-card__thumb img { object-position: center top; }
+.site-card .case-card__body { padding: 20px 22px 22px; gap: 10px; }
+.site-card .case-card__num { top: auto; bottom: 12px; left: 12px; color: var(--green); background: rgba(10,10,10,.82); }
+@media(max-width:1100px){
+  .sites-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:600px){
+  .sites-grid { gap: 10px; }
+  .site-card .case-card__thumb { height: 118px; }
+  .site-card--wide .case-card__thumb { height: 190px; }
+  .site-card .case-card__body { padding: 12px 12px 14px; gap: 6px; }
+  .site-card .case-card__title { font-size: 11px; letter-spacing: .01em; line-height: 1.25; }
+  .site-card .case-card__desc { display: none; }
+  .site-card--wide .case-card__desc { display: block; font-size: 12px; }
+  .site-card .case-card__tag { font-size: 8px; letter-spacing: .1em; }
+  .site-card .case-card__num { bottom: 8px; left: 8px; font-size: 8px; padding: 3px 6px; }
+  .case-modal__stage.tall { aspect-ratio: 3/4; }
+}
+
 /* ---- Case modal ---- */
 .case-modal{
   position:fixed; inset:0; z-index:1000;
@@ -1361,6 +1388,7 @@ body {
     <a href="#about">ОБО МНЕ</a>
     <a href="#services">УСЛУГИ</a>
     <a href="#cases">ПРОЕКТЫ</a>
+    <a href="#sites">САЙТЫ</a>
     <a href="#process">ПРОЦЕСС</a>
     <a href="#contact">КОНТАКТЫ</a>
   </div>
@@ -1376,6 +1404,7 @@ body {
     <a href="#about">ОБО МНЕ</a>
     <a href="#services">УСЛУГИ</a>
     <a href="#cases">ПРОЕКТЫ</a>
+    <a href="#sites">САЙТЫ</a>
     <a href="#process">ПРОЦЕСС</a>
     <a href="#contact">КОНТАКТЫ</a>
   </nav>
@@ -1590,7 +1619,7 @@ body {
     </div>
     <div>
       <p class="sec-desc">Работы для клиентов и свои проекты: инвест-пакет, AI-клипы, AI-аватар, маркетинг под ключ. Карточка открывает кейс целиком.</p>
-      <a href="#contact" class="sec-all">СМОТРЕТЬ ВСЕ КЕЙСЫ</a>
+      <a href="#sites" class="sec-all">САЙТЫ И ЛЕНДИНГИ</a>
     </div>
   </div>
 
@@ -1661,7 +1690,7 @@ body {
         <img src="assets/portfolio/osminog-cover.webp" alt="OSMINOG — премиальный лендинг веб-студии" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">OSMINOG · ЛЕНДИНГ</h3>
+        <h3 class="case-card__title">OSMINOG / ЛЕНДИНГ</h3>
         <p class="case-card__desc">Премиальный лендинг веб-студии под ключ: 3 версии под ниши, видео-hero с осьминогом, 20 живых кейсов, кастомный код.</p>
         <span class="case-card__tag">ПРЕМИУМ-ВЕБ</span>
       </div>
@@ -1670,24 +1699,24 @@ body {
     <div class="case-card" data-case="automation">
       <div class="case-card__thumb">
         <div class="case-card__num">07</div>
-        <img src="assets/portfolio/cover-automation.webp" alt="AI-автоматизация" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/web-zapis-t.webp" alt="ЗаписьИИ — ИИ-администратор записи" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">AI-АВТОМАТИЗАЦИЯ</h3>
-        <p class="case-card__desc">Контент-конвейеры, воронки и автопостинг — бизнес-процессы на автопилоте.</p>
-        <span class="case-card__tag">СИСТЕМЫ</span>
+        <p class="case-card__desc">Два рабочих инструмента: ИИ-администратор записи клиентов и ИИ-аналитик для внедренца 1С:УНФ.</p>
+        <span class="case-card__tag">ИНСТРУМЕНТЫ</span>
       </div>
     </div>
 
     <div class="case-card" data-case="photo">
       <div class="case-card__thumb">
         <div class="case-card__num">08</div>
-        <img src="assets/portfolio/cover-photo.webp" alt="AI-фото и товарка" loading="lazy" decoding="async"/>
+        <img src="assets/portfolio/snyato-pair-1.webp" alt="СНЯТО — фото машины до и после" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
-        <h3 class="case-card__title">AI-ФОТО / ТОВАРКА</h3>
-        <p class="case-card__desc">Предметная и каталожная съёмка через нейросети — без студии и фотографа.</p>
-        <span class="case-card__tag">ФОТО</span>
+        <h3 class="case-card__title">AI-ФОТО / СНЯТО</h3>
+        <p class="case-card__desc">Фото машины с телефона превращается в кадр уровня дилерского каталога. Реальный пример на VW Tiguan.</p>
+        <span class="case-card__tag">ДО / ПОСЛЕ</span>
       </div>
     </div>
 
@@ -1710,11 +1739,147 @@ body {
   </div>
 </section>
 
+<!-- ============ SITES ============ -->
+<section class="section" id="sites">
+  <div class="sec-head">
+    <div>
+      <div class="sec-label">03 / САЙТЫ</div>
+      <h2 class="sec-title">САЙТЫ<br>И ЛЕНДИНГИ</h2>
+    </div>
+    <div>
+      <p class="sec-desc">10 живых сайтов: для клиентов, для своих проектов и демо. Всё написано кодом, без конструкторов. В карточке видно, как сайт выглядит на компьютере и на телефоне.</p>
+      <a href="#contact" class="sec-all">ХОЧУ ТАКОЙ ЖЕ</a>
+    </div>
+  </div>
+
+  <div class="sites-grid" id="sitesGrid">
+    <div class="case-card site-card site-card--wide" data-case="sites">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КЛИЕНТ</div>
+        <img src="assets/portfolio/web-osminog-t.webp" alt="OSMINOG — лендинг веб-студии" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">OSMINOG</h3>
+        <p class="case-card__desc">Премиальный лендинг веб-студии: видео на первом экране, 20 кейсов с фильтром, три версии под рекламу.</p>
+        <span class="case-card__tag">ВЕБ-СТУДИЯ</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-olga">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КЛИЕНТ</div>
+        <img src="assets/portfolio/web-olga-t.webp" alt="Сайт Ольги Калинкиной — концертный директор" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">ОЛЬГА КАЛИНКИНА</h3>
+        <p class="case-card__desc">Концертный директор и букинг артистов. Чёрно-золотой стиль с визитки клиентки, настоящие фото артистов.</p>
+        <span class="case-card__tag">БУКИНГ АРТИСТОВ</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-phyto">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КЛИЕНТ</div>
+        <img src="assets/portfolio/web-phytoclone-t.webp" alt="PhytoClone — лаборатория микроклонального размножения" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">PHYTOCLONE</h3>
+        <p class="case-card__desc">Лаборатория, которая выращивает редкие растения из пробирки. Собран по макету и фото клиента.</p>
+        <span class="case-card__tag">ЛАБОРАТОРИЯ</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card site-card--wide" data-case="w-kovriki">
+      <div class="case-card__thumb">
+        <div class="case-card__num">ДЕМО ДЛЯ КЛИЕНТА</div>
+        <img src="assets/portfolio/web-kovriki-t.webp" alt="3D-коврик с ворсом — демо сайта" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">3D-КОВРИКИ</h3>
+        <p class="case-card__desc">Демо для мастерской автоковриков: коврик в 3D крутится, ворс растёт ползунком от 5 до 16 мм, цвет ворса и окантовки меняется на модели.</p>
+        <span class="case-card__tag">THREE.JS / 3D</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-steklo">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КЛИЕНТ</div>
+        <img src="assets/portfolio/web-steklo-t.webp" alt="СтеклА — конструкции из закалённого стекла" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">СТЕКЛА</h3>
+        <p class="case-card__desc">Душевые, перегородки и перила из закалённого стекла, Новосибирск. Первый экран со стеклянными панелями и бликами.</p>
+        <span class="case-card__tag">САЙТ-ВИЗИТКА</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-snyato">
+      <div class="case-card__thumb">
+        <div class="case-card__num">СВОЙ ПРОЕКТ</div>
+        <img src="assets/portfolio/web-snyato-t.webp" alt="СНЯТО — студийные фото из снимков на телефон" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">СНЯТО</h3>
+        <p class="case-card__desc">Сервис студийных фото из снимков на телефон. На первом экране настоящий пример до и после.</p>
+        <span class="case-card__tag">AI-ФОТО</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-taro">
+      <div class="case-card__thumb">
+        <div class="case-card__num">СВОЙ ПРОЕКТ</div>
+        <img src="assets/portfolio/web-taro-t.webp" alt="NOCTARO — таро-расклады" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">NOCTARO</h3>
+        <p class="case-card__desc">Таро-расклады на отношения, энергетику и защиту. Тёплая тёмная палитра и спокойная подача.</p>
+        <span class="case-card__tag">ЛЕНДИНГ</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-sayty">
+      <div class="case-card__thumb">
+        <div class="case-card__num">СВОЙ ПРОЕКТ</div>
+        <img src="assets/portfolio/web-sayty-t.webp" alt="Сайты через ИИ — лендинг курса" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">САЙТЫ ЧЕРЕЗ ИИ</h3>
+        <p class="case-card__desc">Лендинг моего курса о сайтах, которые не выглядят шаблоном нейросети. Есть открытое демо.</p>
+        <span class="case-card__tag">КУРС</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-zapis">
+      <div class="case-card__thumb">
+        <div class="case-card__num">ДЕМО</div>
+        <img src="assets/portfolio/web-zapis-t.webp" alt="ЗаписьИИ — ИИ-администратор записи" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">ЗАПИСЬИИ</h3>
+        <p class="case-card__desc">ИИ-администратор записи для салонов, барбершопов и автосервисов: диалог в чате и запись в календарь.</p>
+        <span class="case-card__tag">ВЕБ-ПРИЛОЖЕНИЕ</span>
+      </div>
+    </div>
+
+    <div class="case-card site-card" data-case="w-lumora">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КОНЦЕПТ</div>
+        <img src="assets/portfolio/web-lumora-t.webp" alt="Lumora — концепт сайта студии дизайна" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">LUMORA</h3>
+        <p class="case-card__desc">Сайт студии дизайна по референсу: лоадер, «жидкое» проявление фото под курсором, анимации текста.</p>
+        <span class="case-card__tag">АНИМАЦИИ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PROCESS ============ -->
 <section class="section process-light" id="process">
   <div class="sec-head">
     <div>
-      <div class="sec-label">03 / ПРОЦЕСС</div>
+      <div class="sec-label">04 / ПРОЦЕСС</div>
       <h2 class="sec-title">ПРОЗРАЧНЫЙ ПРОЦЕСС<br><span style="color:var(--green)">БЕЗ СЮРПРИЗОВ</span></h2>
     </div>
     <p class="sec-desc" style="align-self:end">Без лишних созвонов. Задачу, сроки и цену фиксирую письменно, апдейты присылаю в Telegram.</p>
@@ -1751,7 +1916,7 @@ body {
 <!-- ============ TOOLS ============ -->
 <div class="tools" id="tools">
   <div>
-    <div class="sec-label">04 / ИНСТРУМЕНТЫ</div>
+    <div class="sec-label">05 / ИНСТРУМЕНТЫ</div>
     <h2 class="tools__title">AI-ИНСТРУМЕНТЫ,<br>КОТОРЫЕ<br>ИСПОЛЬЗУЮ</h2>
   </div>
   <div class="tools__right">
@@ -1780,7 +1945,7 @@ body {
 <section class="section formats" id="formats">
   <div class="sec-head">
     <div>
-      <div class="sec-label">05 / ФОРМАТЫ</div>
+      <div class="sec-label">06 / ФОРМАТЫ</div>
       <h2 class="sec-title">КАК СО МНОЙ<br>РАБОТАЮТ</h2>
     </div>
     <div>
@@ -1835,7 +2000,7 @@ body {
 <section class="section faq" id="faq">
   <div class="sec-head">
     <div>
-      <div class="sec-label">06 / ВОПРОСЫ</div>
+      <div class="sec-label">07 / ВОПРОСЫ</div>
       <h2 class="sec-title">ЧАСТЫЕ<br>ВОПРОСЫ</h2>
     </div>
     <div>
@@ -1883,7 +2048,7 @@ body {
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="contact__left reveal">
-    <div class="contact__label">07 / ДАВАЙТЕ РАБОТАТЬ</div>
+    <div class="contact__label">08 / ДАВАЙТЕ РАБОТАТЬ</div>
     <h2 class="contact__title">
       ДАВАЙТЕ СОЗДАДИМ<br>
       ВАШ <span class="green">СЛЕДУЮЩИЙ<br>ПРОЕКТ</span>
@@ -2328,7 +2493,8 @@ body {
     const groups = [
       ['.about-col', 0.12, {y:36}],
       ['.svc-card', 0.10, {y:44}],
-      ['.case-card', 0.08, {y:0, x:46}],
+      ['#casesWrap .case-card', 0.08, {y:0, x:46}],
+      ['.site-card', 0.06, {y:40}],
       ['.process-step', 0.10, {y:40}],
       ['.tool-tag', 0.03, {y:18, scale:.85}],
       ['.stat', 0.08, {y:30}]
@@ -2481,7 +2647,7 @@ body {
 
     const DATA = {
       timur: {
-        num: '01', title: 'BAD.TIMUR', sub: 'AI-аватар · UGC-инфлюенсер',
+        num: '01', title: 'BAD.TIMUR', sub: 'AI-аватар / UGC-инфлюенсер',
         desc: 'Полностью AI-инфлюенсер: внешность, голос и контент сгенерированы нейросетями. Веду как настоящий блог — рилсы, сторис, реакции на тренды.',
         results: [['5 310','подписчиков'],['680К','просмотров / 30 дней'],['1М','топ-ролик']],
         tags: ['AI-аватар','нейровидео','UGC'],
@@ -2495,7 +2661,7 @@ body {
         ]
       },
       video: {
-        num: '02', title: 'Видео-продакшн', sub: 'AI-клип · нейровидео · промо',
+        num: '02', title: 'Видео-продакшн', sub: 'AI-клип / нейровидео / промо',
         desc: '«Cold Infinity» — авторский AI-музыкальный клип: концепт и сюжет мои, музыка написана в Suno, монтаж мой. Плюс промо-ролики и нейровидео под задачи бренда: спорт, техника, реклама. От идеи и сценария до финального монтажа.',
         results: [['1:33','хронометраж клипа'],['Suno','AI-музыка'],['1080p','кинокачество']],
         tags: ['AI-клип','нейровидео','музыка Suno','монтаж'],
@@ -2508,7 +2674,7 @@ body {
         ]
       },
       singer: {
-        num: '03', title: '1213 — AI-клип', sub: 'AI вместо съёмки · липсинк · Seedance 2.5',
+        num: '03', title: '1213 — AI-клип', sub: 'AI вместо съёмки / липсинк / Seedance 2.5',
         desc: 'Артист 1213 не хотел сниматься в реальном клипе — сделали видео полностью на нейросетях. Разработал визуальный образ артиста и оживил его как поющий AI-аватар с точным липсинком под трек. Генерация видео — Seedance 2.5; чёрно-белая стилизация с сюрреалистичным окружением и переходами в графику. Цельный клип от концепта до финала.',
         results: [['0','съёмочных дней'],['Seedance 2.5','генерация видео'],['липсинк','точная синхра']],
         tags: ['AI вместо съёмки','липсинк','Seedance 2.5','разработка образа'],
@@ -2517,7 +2683,7 @@ body {
         ]
       },
       sos: {
-        num: '04', title: 'SOS — Инвест-пакет', sub: 'Pitch deck · бизнес-план · 3D · брендинг',
+        num: '04', title: 'SOS — Инвест-пакет', sub: 'Pitch deck / бизнес-план / 3D / брендинг',
         desc: 'Полный инвестиционный пакет для спортивного центра зимних видов спорта: pitch deck на 13 слайдов, бизнес-план на 32 страницы с финансовой моделью, продуктовая презентация на 17 слайдов с 3D-визуализацией всех зон центра, нейросетевой видеотур «от первого лица», логотип и брендинг.',
         results: [['13','слайдов pitch deck'],['32 стр.','бизнес-план + финмодель'],['3D','визуализация всех зон']],
         tags: ['pitch deck','бизнес-план','3D','брендинг'],
@@ -2527,9 +2693,9 @@ body {
         ]
       },
       am: {
-        num: '05', title: 'Агро-Мастер', sub: 'Маркетинг под ключ · с 2022',
+        num: '05', title: 'Агро-Мастер', sub: 'Маркетинг под ключ / с 2022',
         desc: 'Комплексный маркетинг дилера сельхозтехники «Агро-Мастер» с 2022 года — не только дизайн. Видеопродакшн и монтаж роликов о технике, ведение соцсетей и рассылок (Telegram/WhatsApp), YouTube-канал, наружная реклама под бренды JACTO и YTO, полиграфия (каталоги, листовки, буклеты, упаковка-мерч), оформление выставочных стендов («Сибирская аграрная неделя» и др.), поддержка и наполнение сайта, товарный фид для поиска в Яндекс/Google. Последние годы — переход на нейросети в контенте.',
-        results: [['с 2022','маркетинг компании'],['360°','видео · SMM · бренд · сайт'],['JACTO·YTO','наружка + полиграфия']],
+        results: [['с 2022','маркетинг компании'],['360°','видео, SMM, бренд, сайт'],['JACTO / YTO','наружка + полиграфия']],
         tags: ['маркетинг','видео','SMM','наружка','брендинг'],
         media: [
           { t:'img', src:'am-billboard-jacto.webp' },
@@ -2541,27 +2707,94 @@ body {
         ]
       },
       sites: {
-        num: '06', title: 'OSMINOG — Лендинг', sub: 'Премиум-лендинг веб-студии · 3 версии под ниши',
-        desc: 'Премиальный лендинг для веб-студии OSMINOG — полностью кастомный, без конструкторов: тёмный дизайн, видео-hero с 3D-осьминогом, галерея из 20 живых кейсов с фильтром по типам, блоки услуг, команды, гарантий и FAQ. Собрал три версии под контекстную рекламу — основная, под клиники и под интернет-магазины — с плавными анимациями и полным адаптивом. В вебе также: студия Lumora и это портфолио.',
+        num: '06', title: 'OSMINOG — Лендинг', sub: 'Премиум-лендинг веб-студии / 3 версии под ниши',
+        desc: 'Премиальный лендинг для веб-студии OSMINOG — полностью кастомный, без конструкторов: тёмный дизайн, видео-hero с 3D-осьминогом, галерея из 20 живых кейсов с фильтром по типам, блоки услуг, команды, гарантий и FAQ. Собрал три версии под контекстную рекламу — основная, под клиники и под интернет-магазины — с плавными анимациями и полным адаптивом. Остальные сайты собраны в блоке «Сайты и лендинги».',
         results: [['3','версии под ниши'],['20','живых кейсов'],['0','конструкторов — чистый код']],
         tags: ['лендинг','кастомная вёрстка','видео-hero','адаптив','SEO-ready'],
         link: { url: 'https://coldinfinity696969-byte.github.io/osminog/', text: 'Открыть лендинг' },
-        media: [ { t:'img', src:'osminog-cover.webp' }, { t:'img', src:'osminog-services.webp' }, { t:'img', src:'osminog-benefits.webp' }, { t:'img', src:'osminog-mobile.webp', fit:'contain' } ]
+        media: [ { t:'img', src:'osminog-cover.webp' }, { t:'img', src:'osminog-services.webp' }, { t:'img', src:'osminog-benefits.webp' }, { t:'img', src:'osminog-mobile.webp', fit:'contain', tall:true } ]
       },
       automation: {
-        num: '07', title: 'AI-автоматизация', sub: 'Воронки · процессы',
-        desc: 'Контент-конвейеры, автопостинг, воронки и интеграции: рутина уходит на автопилот, а вы — масштабируетесь.',
-        results: [], tags: ['автоматизация','воронки','интеграции'],
-        media: [ { t:'img', src:'cover-automation.webp' }, { t:'img', src:'automation-2.webp' }, { t:'img', src:'automation-3.webp' } ]
+        num: '07', title: 'AI-автоматизация', sub: 'ЗаписьИИ / Аналитик 1С:УНФ',
+        desc: 'Два рабочих инструмента. ЗаписьИИ: демо ИИ-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь, ниши переключаются на лету. Аналитик 1С:УНФ: внедренец описывает процесс клиента, инструмент собирает запрос с методикой и базой знаний по УНФ 3.0 и отправляет его в бесплатный DeepSeek. На выходе разбор по документам и черновик ТЗ, без VPN, ключей и оплаты.',
+        results: [['2','рабочих инструмента'],['УНФ 3.0','база знаний аналитика'],['без VPN','и без ключей API']],
+        tags: ['ИИ-администратор','онлайн-запись','1С:УНФ','DeepSeek'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/zapis-ai/', text: 'Открыть демо ЗаписьИИ' },
+        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp', fit:'contain', tall:true }, { t:'img', src:'web-unf-d.webp' } ]
       },
       photo: {
-        num: '08', title: 'AI-фото / товарка', sub: 'Предметка · каталог',
-        desc: 'Предметная и каталожная съёмка через нейросети: товар в любом окружении и свете — без студии, фотографа и логистики.',
-        results: [], tags: ['AI-фото','предметка','e-com'],
-        media: [ { t:'img', src:'cover-photo.webp' }, { t:'img', src:'photo-2.webp' }, { t:'img', src:'photo-3.webp' } ]
+        num: '08', title: 'AI-фото: СНЯТО', sub: 'Свой сервис / фото с телефона в студийный кадр',
+        desc: 'Мой сервис студийных фото без студии. Машину снимают на телефон где угодно: во дворе, на парковке, у дома. Нейросеть переносит её в светлую студию с правильным светом, а сама машина остаётся той же до мелочей. На слайдах реальные пары до и после на белом VW Tiguan. Следующие ниши на очереди: товары для маркетплейсов, еда и интерьеры.',
+        results: [['3','пары до / после'],['VW Tiguan','реальная машина'],['1','фото с телефона на кадр']],
+        tags: ['AI-фото','авто','до / после','свой проект'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/snyato/', text: 'Открыть сайт СНЯТО' },
+        media: [ { t:'img', src:'snyato-pair-1.webp', fit:'contain' }, { t:'img', src:'snyato-pair-2.webp', fit:'contain' }, { t:'img', src:'snyato-pair-3.webp', fit:'contain' }, { t:'img', src:'web-snyato-d.webp' } ]
+      },
+      'w-olga': {
+        label: 'САЙТ / КЛИЕНТ', title: 'Ольга Калинкина', sub: 'Лендинг / концертный директор, букинг артистов',
+        desc: 'Лендинг для концертного директора: организация концертов и букинг артистов на свадьбы, банкеты, корпоративы и частные события. Чёрно-золотой стиль взят с настоящей визитки и прайса клиентки, фото артистов вырезаны из её презентаций. Одно главное действие: написать или позвонить.',
+        results: [], tags: ['лендинг','клиент','букинг','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/olga-kalinkina/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-olga-d.webp' }, { t:'img', src:'web-olga-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-phyto': {
+        label: 'САЙТ / КЛИЕНТ', title: 'PhytoClone', sub: 'Лендинг / лаборатория микроклонального размножения',
+        desc: 'Сайт лаборатории, которая выращивает редкие комнатные и коллекционные растения из пробирки: без вирусов, вредителей и пересорта. Собран по макету клиента и его реальным фото: банка-фласк, орхидея, монстера, чашка Петри. Структура: обложка, факты, сравнение «с рынка или из пробирки», этапы и подбор растения.',
+        results: [], tags: ['лендинг','клиент','по макету клиента','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/phytoclone/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-phytoclone-d.webp' }, { t:'img', src:'web-phytoclone-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-kovriki': {
+        label: 'ДЕМО / КЛИЕНТ', title: '3D-коврики', sub: 'Демо сайта / 3D-коврик в браузере',
+        desc: 'Демо для мастерской ворсовых автоковриков. Коврик показан в 3D: его можно крутить, а при прокрутке страницы он меняется. Высота ворса растёт ползунком от 5 до 16 мм прямо на модели, цвет ворса и окантовки выбирается образцами. Сделано на Three.js, ворс собран слоями, поэтому разницу в высоте видно наглядно.',
+        results: [], tags: ['3D','Three.js','демо','ворс ползунком'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/kovriki-3d/', text: 'Открыть демо' },
+        media: [ { t:'img', src:'web-kovriki-d.webp' }, { t:'img', src:'web-kovriki-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-steklo': {
+        label: 'САЙТ / КЛИЕНТ', title: 'СтеклА', sub: 'Сайт-визитка / стеклянные конструкции, Новосибирск',
+        desc: 'Сайт-визитка компании, которая делает душевые, перегородки, перила, козырьки и витрины из закалённого стекла в Новосибирске. Фишка первого экрана: полупрозрачные стеклянные панели с бликами и стеклянные кнопки. Услуги, этапы работы, примеры и быстрые кнопки мессенджеров.',
+        results: [], tags: ['сайт-визитка','клиент','стеклянный первый экран','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/steklo/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-steklo-d.webp' }, { t:'img', src:'web-steklo-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-snyato': {
+        label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'СНЯТО', sub: 'Лендинг / студийные фото из снимков на телефон',
+        desc: 'Лендинг моего сервиса: присылаете обычные фото машины или товара с телефона и получаете кадры уровня дилерского каталога. На первом экране настоящий пример до и после на белом VW Tiguan, дальше ниши, цены и примеры.',
+        results: [], tags: ['лендинг','свой проект','AI-фото','до / после'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/snyato/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-snyato-d.webp' }, { t:'img', src:'web-snyato-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-taro': {
+        label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'NOCTARO', sub: 'Лендинг / таро-расклады',
+        desc: 'Лендинг моей таро-практики: расклады на отношения, энергетику и защиту. Тёмная тёплая палитра со свечами и золотом, спокойная подача без запугивания. Главное действие: выбрать расклад и записаться.',
+        results: [], tags: ['лендинг','свой проект','тёмная тема','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/taro/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-taro-d.webp' }, { t:'img', src:'web-taro-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-sayty': {
+        label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'Сайты через ИИ', sub: 'Лендинг курса',
+        desc: 'Лендинг моего курса о том, как собирать сайты нейросетью так, чтобы они не выглядели шаблоном. Чёрно-красная палитра, полноэкранный первый экран, программа курса и открытое демо без пароля и оплаты.',
+        results: [], tags: ['лендинг','свой проект','курс','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/sayty/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-sayty-d.webp' }, { t:'img', src:'web-sayty-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-zapis': {
+        label: 'ДЕМО ПРОДУКТА', title: 'ЗаписьИИ', sub: 'Веб-приложение / ИИ-администратор записи',
+        desc: 'Демо ИИ-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь. Ниши переключаются на лету.',
+        results: [], tags: ['демо','ИИ-чат','онлайн-запись','веб-приложение'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/zapis-ai/', text: 'Открыть демо' },
+        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-lumora': {
+        label: 'САЙТ / КОНЦЕПТ', title: 'Lumora', sub: 'Концепт / сайт студии дизайна',
+        desc: 'Концепт сайта студии дизайна и разработки по референсу, полностью на русском. Вступительный лоадер, «жидкое» проявление фото под курсором на первом экране, появление текста по строкам и словам, счётчики, карусель и окно заявки.',
+        results: [], tags: ['концепт','анимации','лоадер','адаптив'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/lumora/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-lumora-d.webp' }, { t:'img', src:'web-lumora-m.webp', fit:'contain', tall:true } ]
       },
       brand: {
-        num: '09', title: 'Брендинг', sub: 'Лого · фирстиль · носители',
+        num: '09', title: 'Брендинг', sub: 'Лого / фирстиль / носители',
         desc: 'Целостная айдентика с нуля: логотип, фирменный стиль, носители и гайдлайны — узнаваемый визуальный язык бренда.',
         results: [], tags: ['брендинг','логотип','айдентика'],
         media: [ { t:'img', src:'cover-brand.webp' }, { t:'img', src:'brand-2.webp' }, { t:'img', src:'brand-3.webp' } ]
@@ -2570,6 +2803,7 @@ body {
 
     function showMedia(m) {
       stage.innerHTML = '';
+      stage.classList.toggle('tall', !!m.tall);
       if (m.t === 'video') {
         const v = document.createElement('video');
         v.src = P + m.src; if (m.poster) v.poster = P + m.poster;
@@ -2595,7 +2829,7 @@ body {
 
     function open(id) {
       const d = DATA[id]; if (!d) return;
-      elNum.textContent = 'CASE ' + d.num;
+      elNum.textContent = d.label || ('CASE ' + d.num);
       elTitle.textContent = d.title;
       elSub.textContent = d.sub || '';
       elDesc.textContent = d.desc || '';
