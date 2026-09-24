@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Никита Ульянов — ai-специалист · маркетинг, дизайн, видео, сайты</title>
-<meta name="description" content="ai-специалист полного цикла. Маркетинг без отдела, видео без студии, сайты без агентства. Для предпринимателей, компаний и блогеров." />
-<meta property="og:title" content="Никита Ульянов — ai-специалист" />
-<meta property="og:description" content="AI-контент. Системы. Результат. Один человек вместо команды." />
+<title>Никита Ульянов — AI-специалист: маркетинг, дизайн, видео, сайты</title>
+<meta name="description" content="AI-специалист полного цикла. Маркетинг без отдела, видео без студии, сайты без агентства. Для предпринимателей, компаний и блогеров." />
+<meta property="og:title" content="Никита Ульянов — AI-специалист" />
+<meta property="og:description" content="Сайты, нейровидео, AI-аватары и маркетинг на нейросетях. Один человек вместо команды." />
 <meta property="og:image" content="https://coldinfinity696969-byte.github.io/assets/nikita.webp?v=4" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://coldinfinity696969-byte.github.io/assets/nikita.webp?v=4" />
@@ -24,7 +24,6 @@
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -632,7 +631,8 @@ body {
 }
 .cases-wrap::-webkit-scrollbar {display:none;}
 .case-card {
-  min-width: clamp(280px, 32vw, 380px);
+  position: relative;
+  flex: 0 0 clamp(280px, 30vw, 400px); min-width: 0;
   background: var(--card); border: 1px solid var(--line);
   border-radius: var(--radius); overflow: hidden;
   scroll-snap-align: start;
@@ -1282,6 +1282,7 @@ body {
   .process-step { border-right: none; border-top: 1px solid var(--line); }
   .process-step:first-child { border-top: none; }
   .svc-stats { gap: 14px 18px; }
+  .case-card { flex-basis: 84vw; }
 }
 
 /* ============ PRELOADER ============ */
@@ -1352,7 +1353,7 @@ body {
 
 <!-- ============ BAR ============ -->
 <nav class="bar" id="bar">
-  <a href="#" class="bar__logo">
+  <a href="#home" class="bar__logo">
     <span class="bar__logo-dot"></span>
     ULYANOV
   </a>
@@ -1379,7 +1380,7 @@ body {
     <a href="#contact">КОНТАКТЫ</a>
   </nav>
   <a href="#contact" class="btn-green mobile-menu__cta">ОБСУДИТЬ ПРОЕКТ →</a>
-  <div class="mobile-menu__foot">@Cold_69 · AI-специалист</div>
+  <div class="mobile-menu__foot">@Cold_69 / AI-специалист</div>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -1405,8 +1406,8 @@ body {
   <div class="hero__body">
     <div>
       <p class="hero__copy">
-        Создаю ai-контент и медиасистемы с помощью нейросетей:<br>
-        от стратегии до масштабирования.<br>
+        Делаю сайты, нейровидео, AI-аватаров и маркетинг<br>
+        на нейросетях: от идеи до запуска.<br>
         <strong>Один человек — вместо команды.</strong>
       </p>
       <div class="hero__btns">
@@ -1446,7 +1447,7 @@ body {
     <div class="stat__label">НА ОЦЕНКУ<br>ПРОЕКТА</div>
   </div>
   <div class="stat stat--link">
-    <a href="#about">ВСЕ ЦИФРЫ</a>
+    <a href="#cases">СМОТРЕТЬ ПРОЕКТЫ</a>
   </div>
 </div>
 
@@ -1459,13 +1460,13 @@ body {
   </div>
   <div class="about-cols">
     <div class="about-col">
-      <p>Я — <strong>ai-специалист полного цикла</strong>. Закрываю задачи маркетинга, дизайна, видео и веб-разработки — один, на современных ai-инструментах.</p>
+      <p>Я — <strong>AI-специалист полного цикла</strong>. Закрываю задачи маркетинга, дизайна, видео и веб-разработки — один, на современных AI-инструментах.</p>
     </div>
     <div class="about-col">
       <p>За 7+ лет прошёл путь от дизайнера до человека, который <strong>в одиночку закрывал</strong> функционал маркетинг-отдела, видео-продакшна и контент-фабрики.</p>
     </div>
     <div class="about-col">
-      <p>Параллельно — фриланс: инвест-презентации, ai-аватары для брендов, нейровидео, лендинги и ai-стратегии.</p>
+      <p>Параллельно — фриланс: инвест-презентации, AI-аватары для брендов, нейровидео, лендинги и AI-стратегии.</p>
     </div>
   </div>
 </section>
@@ -1508,7 +1509,7 @@ body {
     </div>
     <div>
       <p class="sec-desc">Объединяю AI-инструменты, стратегию, дизайн и контент в единую систему, которая работает на ваш рост.</p>
-      <a href="#contact" class="sec-all">ВСЕ УСЛУГИ</a>
+      <a href="#formats" class="sec-all">ФОРМАТЫ РАБОТЫ</a>
     </div>
   </div>
 
@@ -1538,10 +1539,10 @@ body {
       <span class="svc-sub">AUTOMATION CORE</span>
       <p class="svc-desc">Автоматизация контента, воронки, публикации и бизнес-процессов.</p>
       <div class="svc-stats">
-        <div><small>ЭФФЕКТИВНОСТЬ</small><strong>+300%</strong></div>
-        <div><small>ЭКОНОМИЯ ВРЕМЕНИ</small><strong>-80%</strong></div>
-        <div><small>МЕНЬШЕ ОШИБОК</small><strong>-95%</strong></div>
-        <div><small>МАСШТАБ</small><strong>∞</strong></div>
+        <div><small>ЗАПИСЬ КЛИЕНТОВ</small><strong>ИИ-ЧАТ</strong></div>
+        <div><small>ЗАЯВКИ С САЙТА</small><strong>В TG</strong></div>
+        <div><small>АНАЛИТИК 1С</small><strong>УНФ</strong></div>
+        <div><small>КОНТЕНТ</small><strong>ПОТОК</strong></div>
       </div>
       <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
@@ -1588,7 +1589,7 @@ body {
       <h2 class="sec-title">ИЗБРАННЫЕ<br>ПРОЕКТЫ</h2>
     </div>
     <div>
-      <p class="sec-desc">Реальные проекты с измеримыми результатами. От инвест-пакетов до ai-аватаров и систем контента.</p>
+      <p class="sec-desc">Работы для клиентов и свои проекты: инвест-пакет, AI-клипы, AI-аватар, маркетинг под ключ. Карточка открывает кейс целиком.</p>
       <a href="#contact" class="sec-all">СМОТРЕТЬ ВСЕ КЕЙСЫ</a>
     </div>
   </div>
@@ -1716,7 +1717,7 @@ body {
       <div class="sec-label">03 / ПРОЦЕСС</div>
       <h2 class="sec-title">ПРОЗРАЧНЫЙ ПРОЦЕСС<br><span style="color:var(--green)">БЕЗ СЮРПРИЗОВ</span></h2>
     </div>
-    <p class="sec-desc" style="align-self:end">Чёткий процесс без лишних созвонов и согласований. От брифа до отгрузки — письменно и в срок.</p>
+    <p class="sec-desc" style="align-self:end">Без лишних созвонов. Задачу, сроки и цену фиксирую письменно, апдейты присылаю в Telegram.</p>
   </div>
 
   <div class="process-grid">
@@ -1760,17 +1761,18 @@ body {
       <span class="tool-tag tool-tag--active">Kling</span>
       <span class="tool-tag tool-tag--active">Seedream</span>
       <span class="tool-tag tool-tag--active">Veo 3</span>
+      <span class="tool-tag tool-tag--active">Seedance</span>
+      <span class="tool-tag tool-tag--active">Claude</span>
       <span class="tool-tag">ElevenLabs</span>
       <span class="tool-tag">Runway</span>
       <span class="tool-tag">Magnific</span>
-      <span class="tool-tag">Claude</span>
       <span class="tool-tag">ChatGPT</span>
       <span class="tool-tag">Figma</span>
       <span class="tool-tag">Notion</span>
       <span class="tool-tag">Webflow</span>
       <span class="tool-tag">Suno</span>
     </div>
-    <a href="#contact" class="tools__all">ВСЕ ИНСТРУМЕНТЫ</a>
+    <a href="#contact" class="tools__all">ОБСУДИТЬ ЗАДАЧУ</a>
   </div>
 </div>
 
@@ -1803,7 +1805,6 @@ body {
 
     <article class="format-card format-card--feat">
       <div class="format-card__num">02</div>
-      <span class="format-card__badge">ПОПУЛЯРНОЕ</span>
       <h3 class="format-card__title">Контент на потоке</h3>
       <p class="format-card__sub">Ежемесячное производство</p>
       <ul class="format-card__list">
@@ -1854,7 +1855,7 @@ body {
     </div>
     <div class="faq-item">
       <button class="faq-q"><span>Как строится работа?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Бриф (30 минут, бесплатно) → стратегия и оценка → реализация с регулярными апдейтами в TG-чате → результат и поддержка.</p></div>
+      <div class="faq-a"><p>Бриф (30 минут, бесплатно), затем стратегия и оценка, реализация с регулярными апдейтами в TG-чате, в конце результат и поддержка.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q"><span>Вы правда работаете один?</span><i class="faq-ic"></i></button>
@@ -1921,7 +1922,7 @@ body {
 <footer class="footer">
   <span>© 2026 НИКИТА УЛЬЯНОВ</span>
   <span>AI CONTENT CREATOR & DIGITAL OPERATOR</span>
-  <span>СОЗДАЮ БУДУЩЕЕ КОНТЕНТА.</span>
+  <a href="https://t.me/Cold_69" target="_blank" rel="noopener">TELEGRAM @COLD_69</a>
 </footer>
 
 <script>
@@ -2544,7 +2545,7 @@ body {
         desc: 'Премиальный лендинг для веб-студии OSMINOG — полностью кастомный, без конструкторов: тёмный дизайн, видео-hero с 3D-осьминогом, галерея из 20 живых кейсов с фильтром по типам, блоки услуг, команды, гарантий и FAQ. Собрал три версии под контекстную рекламу — основная, под клиники и под интернет-магазины — с плавными анимациями и полным адаптивом. В вебе также: студия Lumora и это портфолио.',
         results: [['3','версии под ниши'],['20','живых кейсов'],['0','конструкторов — чистый код']],
         tags: ['лендинг','кастомная вёрстка','видео-hero','адаптив','SEO-ready'],
-        link: { url: 'https://coldinfinity696969-byte.github.io/osminog/', text: 'Открыть лендинг →' },
+        link: { url: 'https://coldinfinity696969-byte.github.io/osminog/', text: 'Открыть лендинг' },
         media: [ { t:'img', src:'osminog-cover.webp' }, { t:'img', src:'osminog-services.webp' }, { t:'img', src:'osminog-benefits.webp' }, { t:'img', src:'osminog-mobile.webp', fit:'contain' } ]
       },
       automation: {
