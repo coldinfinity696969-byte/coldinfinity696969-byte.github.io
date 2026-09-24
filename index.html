@@ -653,7 +653,7 @@ body {
 .case-card__num {
   position: absolute; top: 16px; left: 16px;
   font-family: var(--mono); font-size: 10px;
-  letter-spacing: .14em; color: var(--ink-3);
+  letter-spacing: .14em; color: var(--ink-2);
   background: rgba(10,10,10,.6); backdrop-filter: blur(4px);
   padding: 4px 8px; border-radius: 4px;
 }
@@ -1310,6 +1310,7 @@ body {
   .process-step:first-child { border-top: none; }
   .svc-stats { gap: 14px 18px; }
   .case-card { flex-basis: 84vw; }
+  .cases-wrap { margin-right: calc(-1 * var(--gutter)); padding-right: var(--gutter); scroll-padding-left: 0; }
 }
 
 /* ============ PRELOADER ============ */
@@ -1348,6 +1349,27 @@ body {
   font-family: var(--mono); font-size: 10px;
   letter-spacing: .2em; color: var(--ink-2);
 }
+
+/* ============ ICONS: SVG instead of keyboard glyphs ============ */
+:root {
+  --i-arr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E");
+  --i-tg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 4 3 11l6 2.5M21 4l-4 16-8-6.5M21 4 9 13.5V19l3-3.2'/%3E%3C/svg%3E");
+}
+.i-arr, .i-tg,
+.bar__cta::after, .stat--link a::after, .sec-all::after, .case-modal__link::after, .tools__all::after {
+  content: ''; display: inline-block; flex-shrink: 0;
+  width: 1.15em; height: 1.15em; vertical-align: -.2em;
+  background-color: currentColor;
+  -webkit-mask: var(--i-arr) center / contain no-repeat;
+          mask: var(--i-arr) center / contain no-repeat;
+}
+.i-tg { -webkit-mask-image: var(--i-tg); mask-image: var(--i-tg); }
+.i-arr--left { transform: scaleX(-1); }
+.cases-btn .i-arr, .format-card__arr .i-arr { width: 18px; height: 18px; }
+.case-card__expand svg, .case-modal__close svg { display: block; }
+
+/* keyboard focus */
+.case-card:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
 
 /* ============ CURSOR SPOTLIGHT on cards ============ */
 .svc-card::before, .case-card::before {
@@ -1408,7 +1430,7 @@ body {
     <a href="#process">ПРОЦЕСС</a>
     <a href="#contact">КОНТАКТЫ</a>
   </nav>
-  <a href="#contact" class="btn-green mobile-menu__cta">ОБСУДИТЬ ПРОЕКТ →</a>
+  <a href="#contact" class="btn-green mobile-menu__cta">ОБСУДИТЬ ПРОЕКТ <i class="i-arr" aria-hidden="true"></i></a>
   <div class="mobile-menu__foot">@Cold_69 / AI-специалист</div>
 </div>
 
@@ -1440,8 +1462,8 @@ body {
         <strong>Один человек — вместо команды.</strong>
       </p>
       <div class="hero__btns">
-        <a href="#contact" class="btn-green">ОБСУДИТЬ ПРОЕКТ →</a>
-        <a href="#cases" class="btn-ghost">СМОТРЕТЬ КЕЙСЫ →</a>
+        <a href="#contact" class="btn-green">ОБСУДИТЬ ПРОЕКТ <i class="i-arr" aria-hidden="true"></i></a>
+        <a href="#cases" class="btn-ghost">СМОТРЕТЬ КЕЙСЫ <i class="i-arr" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -1550,7 +1572,7 @@ body {
     <h3 class="svc-name">AI-СТРАТЕГИЯ</h3>
     <span class="svc-sub">STRATEGY CORE</span>
     <p class="svc-desc">Аудит процессов, стратегия и подбор AI-инструментов под цели бизнеса.</p>
-    <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+    <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
   </article>
 
   <article class="svc-card svc-card--sm" id="svcCard2">
@@ -1558,7 +1580,7 @@ body {
     <h3 class="svc-name">AI-КОНТЕНТ</h3>
     <span class="svc-sub">CONTENT ENGINE</span>
     <p class="svc-desc">Видео, AI-аватары, фото, графика и визуальные системы для бренда.</p>
-    <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+    <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
   </article>
 
   <article class="svc-card svc-card--big" id="svcCard4">
@@ -1573,7 +1595,7 @@ body {
         <div><small>АНАЛИТИК 1С</small><strong>УНФ</strong></div>
         <div><small>КОНТЕНТ</small><strong>ПОТОК</strong></div>
       </div>
-      <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
       <img src="assets/svc-automation.webp" alt="AI-автоматизация — нейросеть и шестерёнки" loading="lazy" decoding="async"/>
@@ -1587,7 +1609,7 @@ body {
         <div><h3 class="svc-name">AI-САЙТЫ</h3><span class="svc-sub">WEB ENGINE</span></div>
       </div>
       <p class="svc-desc">Лендинги, сайты-портфолио, прототипы и веб-приложения на современных стеках.</p>
-      <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
       <img src="assets/svc-sites.webp" alt="AI-сайты — браузерный интерфейс" loading="lazy" decoding="async"/>
@@ -1601,7 +1623,7 @@ body {
         <div><h3 class="svc-name">КОНТЕНТ ЗАВОД</h3><span class="svc-sub">CONTENT FACTORY</span></div>
       </div>
       <p class="svc-desc">Полный цикл производства контента на постоянной основе для брендов и экспертов.</p>
-      <div class="svc-foot"><span class="svc-arr">→</span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
     </div>
     <div class="svc-half svc-half--img">
       <img src="assets/svc-factory.webp" alt="Контент-завод — конвейер контента" loading="lazy" decoding="async"/>
@@ -1734,8 +1756,8 @@ body {
   </div>
 
   <div class="cases-nav">
-    <button class="cases-btn" id="casesPrev" aria-label="назад">←</button>
-    <button class="cases-btn" id="casesNext" aria-label="вперёд">→</button>
+    <button class="cases-btn" id="casesPrev" aria-label="назад"><i class="i-arr i-arr--left" aria-hidden="true"></i></button>
+    <button class="cases-btn" id="casesNext" aria-label="вперёд"><i class="i-arr" aria-hidden="true"></i></button>
   </div>
 </section>
 
@@ -1890,25 +1912,25 @@ body {
       <div class="process-step__num">01</div>
       <h3 class="process-step__title">ЗНАКОМСТВО</h3>
       <p class="process-step__desc">Понимаю задачу, цели и контекст бизнеса. Бриф за 30 минут — бесплатно.</p>
-      <span class="process-step__arr">→</span>
+      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
     </div>
     <div class="process-step">
       <div class="process-step__num">02</div>
       <h3 class="process-step__title">СТРАТЕГИЯ</h3>
       <p class="process-step__desc">Предлагаю план, подход и инструменты. Оценка за 1 день — фикс или диапазон.</p>
-      <span class="process-step__arr">→</span>
+      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
     </div>
     <div class="process-step">
       <div class="process-step__num">03</div>
       <h3 class="process-step__title">РЕАЛИЗАЦИЯ</h3>
       <p class="process-step__desc">Создаю контент и систему, держу в курсе. Регулярные апдейты в TG-чате.</p>
-      <span class="process-step__arr">→</span>
+      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
     </div>
     <div class="process-step">
       <div class="process-step__num">04</div>
       <h3 class="process-step__title">РЕЗУЛЬТАТ</h3>
       <p class="process-step__desc">Получаете результат и поддержку. Правки и доработки — по договорённости.</p>
-      <span class="process-step__arr">→</span>
+      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
     </div>
   </div>
 </section>
@@ -1965,7 +1987,7 @@ body {
         <li>Правки и доработки — по договорённости</li>
         <li>Исходники передаю вам</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">Расчёт после брифа</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+      <div class="format-card__foot"><span class="format-card__price">Расчёт после брифа</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
 
     <article class="format-card format-card--feat">
@@ -1978,7 +2000,7 @@ body {
         <li>Ведение, апдейты и отчётность</li>
         <li>Приоритетная поддержка</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">По запросу · помесячно</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+      <div class="format-card__foot"><span class="format-card__price">По запросу, помесячно</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
 
     <article class="format-card">
@@ -1991,7 +2013,7 @@ body {
         <li>Настройка автоматизаций и воронок</li>
         <li>Обучение команды работе с AI</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">Индивидуально</span><a href="#contact" class="format-card__arr" aria-label="обсудить">→</a></div>
+      <div class="format-card__foot"><span class="format-card__price">Индивидуально</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
   </div>
 </section>
@@ -2054,8 +2076,8 @@ body {
       ВАШ <span class="green">СЛЕДУЮЩИЙ<br>ПРОЕКТ</span>
     </h2>
     <div class="contact__btns">
-      <a href="https://t.me/Cold_69" class="btn-green" target="_blank" rel="noopener">ОБСУДИТЬ ПРОЕКТ →</a>
-      <a href="https://t.me/Cold_69" class="btn-ghost" target="_blank" rel="noopener">НАПИСАТЬ В TELEGRAM ✈</a>
+      <a href="https://t.me/Cold_69" class="btn-green" target="_blank" rel="noopener">ОБСУДИТЬ ПРОЕКТ <i class="i-arr" aria-hidden="true"></i></a>
+      <a href="https://t.me/Cold_69" class="btn-ghost" target="_blank" rel="noopener">НАПИСАТЬ В TELEGRAM <i class="i-tg" aria-hidden="true"></i></a>
     </div>
   </div>
   <div class="contact__photos">
@@ -2068,7 +2090,7 @@ body {
 <!-- ============ CASE MODAL ============ -->
 <div class="case-modal" id="caseModal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="case-modal__box">
-    <button class="case-modal__close" id="caseModalClose" aria-label="закрыть">×</button>
+    <button class="case-modal__close" id="caseModalClose" aria-label="закрыть"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     <div class="case-modal__stage" id="caseStage"></div>
     <div class="case-modal__thumbs" id="caseThumbs"></div>
     <div class="case-modal__body">
@@ -2725,7 +2747,7 @@ body {
       photo: {
         num: '08', title: 'AI-фото: СНЯТО', sub: 'Свой сервис / фото с телефона в студийный кадр',
         desc: 'Мой сервис студийных фото без студии. Машину снимают на телефон где угодно: во дворе, на парковке, у дома. Нейросеть переносит её в светлую студию с правильным светом, а сама машина остаётся той же до мелочей. На слайдах реальные пары до и после на белом VW Tiguan. Следующие ниши на очереди: товары для маркетплейсов, еда и интерьеры.',
-        results: [['3','пары до / после'],['VW Tiguan','реальная машина'],['1','фото с телефона на кадр']],
+        results: [['3','пары до / после'],['VW Tiguan','реальная машина']],
         tags: ['AI-фото','авто','до / после','свой проект'],
         link: { url: 'https://coldinfinity696969-byte.github.io/snyato/', text: 'Открыть сайт СНЯТО' },
         media: [ { t:'img', src:'snyato-pair-1.webp', fit:'contain' }, { t:'img', src:'snyato-pair-2.webp', fit:'contain' }, { t:'img', src:'snyato-pair-3.webp', fit:'contain' }, { t:'img', src:'web-snyato-d.webp' } ]
@@ -2843,7 +2865,7 @@ body {
         th.className = 'case-modal__thumb' + (i === 0 ? ' active' : '');
         const im = document.createElement('img'); im.src = P + (m.poster || m.src); im.alt = '';
         th.appendChild(im);
-        if (m.t === 'video') { const vm = document.createElement('span'); vm.className = 'vidmark'; vm.textContent = '▶'; th.appendChild(vm); }
+        if (m.t === 'video') { const vm = document.createElement('span'); vm.className = 'vidmark'; vm.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'; th.appendChild(vm); }
         th.addEventListener('click', () => {
           thumbs.querySelectorAll('.case-modal__thumb').forEach(x => x.classList.remove('active'));
           th.classList.add('active'); showMedia(m);
@@ -2867,14 +2889,30 @@ body {
     }
     cards.forEach(card => {
       const badge = document.createElement('div');
-      badge.className = 'case-card__expand'; badge.innerHTML = '⤢';
+      badge.className = 'case-card__expand'; badge.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>';
       const thumb = card.querySelector('.case-card__thumb');
       if (thumb) thumb.appendChild(badge);
       card.addEventListener('click', () => open(card.dataset.case));
+      // keyboard: Tab to a card, Enter/Space opens it
+      const t = card.querySelector('.case-card__title');
+      card.tabIndex = 0; card.setAttribute('role', 'button');
+      if (t) card.setAttribute('aria-label', 'Открыть: ' + t.textContent.trim());
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card.dataset.case); }
+      });
     });
     btnClose.addEventListener('click', close);
     modal.addEventListener('click', e => { if (e.target === modal) close(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+    document.addEventListener('keydown', e => {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const list = [...thumbs.querySelectorAll('.case-modal__thumb')];
+        if (list.length < 2) return;
+        const i = list.findIndex(x => x.classList.contains('active'));
+        list[(i + (e.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length].click();
+      }
+    });
   } catch(e) { console.warn('case modal:', e); }
 })();
 </script>
