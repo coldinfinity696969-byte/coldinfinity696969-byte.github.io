@@ -1,6 +1,8 @@
 /* ============ SHOWREEL: ring of live website screens (Three.js) ============
-   10 curved browser screens on a tilted ring. Each screen shows a full-page
-   capture of a real site that slowly scrolls, so the sites look alive.
+   10 curved browser screens on a tilted ring. Each texture is a stack of
+   viewport-sized bands: the site's hero first, then its most striking blocks.
+   Idle screens show the hero; the screen in front holds the hero, then glides
+   band to band and back, so every site starts from its best frame.
    Page scroll (sticky section) spins the ring and brings sites to the front
    one by one; fast scrolling bends the screens and splits RGB a little.
    Drag to spin, click a screen to open the case card. */
@@ -171,11 +173,15 @@ function init() {
     const refl = new THREE.Mesh(geo, rmat); refl.position.set(0, 2 * FLOOR, R); refl.scale.y = -1; refl.renderOrder = -1; pivot.add(refl);
     hitMeshes.push(mesh);
 
-    panels.push({ site, u, theta: k * STEP, phase: k * 1.7, speed: 0.8 + (k % 3) * 0.18, revealAt: -1, barTex });
+    const pn = { site, u, theta: k * STEP, bands: 1, band: 0, activeSince: 0, revealAt: -1, barTex };
+    panels.push(pn);
 
-    loader.load(`tex/${site.slug}-${size}.webp`, tex => {
+    // textures sit next to this module, whatever page loads it
+    loader.load(new URL(`tex/${site.slug}-${size}.webp`, import.meta.url).href, tex => {
       tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso;
-      u.uMap.value = tex; u.uTexAspect.value = tex.image.height / tex.image.width;
+      const ar = tex.image.height / tex.image.width;
+      u.uMap.value = tex; u.uTexAspect.value = ar;
+      pn.bands = Math.max(1, Math.round(ar / (CH / PW)));     // one band = one 16:10 screen
       u.uLoaded.value = 1;
     });
   });
@@ -295,6 +301,24 @@ function init() {
     if (running && !raf) raf = requestAnimationFrame(frame);
   }, { rootMargin: '120px' }).observe(root);
 
+  // front screen timeline: hold the hero, glide to each highlight, hold, then glide back to the hero
+  const HOLD0 = 2.6, GLIDE = 0.95, HOLD = 2.1, BACK = 1.4;
+  const easeIO = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  function bandAt(time, nb) {
+    if (nb < 2) return 0;
+    let e = time % (HOLD0 + (nb - 1) * (GLIDE + HOLD) + BACK);
+    if (e < HOLD0) return 0;
+    e -= HOLD0;
+    for (let b = 1; b < nb; b++) {
+      if (e < GLIDE) return b - 1 + easeIO(e / GLIDE);
+      e -= GLIDE;
+      if (e < HOLD) return b;
+      e -= HOLD;
+    }
+    return (nb - 1) * (1 - easeIO(Math.min(1, e / BACK)));
+  }
+  let activeK = -1;
+
   const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
   const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));
 
@@ -330,13 +354,18 @@ function init() {
     if (!revealed && enter > 0.35) { revealed = true; panels.forEach((pn, k) => { pn.revealAt = t + 0.15 + k * 0.09; }); }
 
     let best = 0, bestA = 9;
+    panels.forEach((pn, k) => { const a = Math.abs(wrap(pn.theta + rot)); if (a < bestA) { bestA = a; best = k; } });
+    if (best !== activeK) { activeK = best; panels[best].activeSince = t; }
     panels.forEach((pn, k) => {
       const a = Math.abs(wrap(pn.theta + rot));
-      if (a < bestA) { bestA = a; best = k; }
       const focus = 1 - smooth(0.06, STEP * 0.8, a);
       pn.u.uFocus.value += (focus - pn.u.uFocus.value) * 0.15;
       pn.u.uHover.value += ((k === hover ? 1 : 0) - pn.u.uHover.value) * 0.18;
-      pn.u.uScroll.value = reduce ? 0 : 0.5 - 0.5 * Math.cos(t * 0.16 * pn.speed + pn.phase);
+      // the screen in front runs its highlight timeline; the rest settle back on the hero
+      const settled = bestA < 0.05 && vel < 0.08 && pn.u.uReveal.value >= 1;   // timeline starts once the screen is on and still
+      if (k === activeK && settled && !reduce) pn.band = bandAt(Math.max(0, t - pn.activeSince), pn.bands);
+      else { pn.band += (0 - pn.band) * 0.08; if (k === activeK) pn.activeSince = t; }
+      pn.u.uScroll.value = pn.bands > 1 ? pn.band / (pn.bands - 1) : 0;
       pn.u.uVel.value = vel;
       pn.u.uBend.value = vel * 0.55;
       if (pn.revealAt > 0) pn.u.uReveal.value = Math.min(1, Math.max(0, (t - pn.revealAt) / 0.8));
