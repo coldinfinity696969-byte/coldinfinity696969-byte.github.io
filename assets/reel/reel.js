@@ -22,7 +22,7 @@ const SITES = [
   { key: 'w-snyato',  slug: 'snyato',  name: 'СНЯТО',           meta: 'Свой проект / AI-фото',             path: 'snyato' },
   { key: 'w-taro',    slug: 'taro',    name: 'NOCTARO',         meta: 'Свой проект / таро-расклады',       path: 'taro' },
   { key: 'w-sayty',   slug: 'sayty',   name: 'Сайты через ИИ',  meta: 'Свой проект / лендинг курса',       path: 'sayty' },
-  { key: 'w-zapis',   slug: 'zapis',   name: 'ЗаписьИИ',        meta: 'Демо продукта / ИИ-администратор',  path: 'zapis-ai' },
+  { key: 'w-zapis',   slug: 'zapis',   name: 'Запись ИИ',        meta: 'Демо продукта / ИИ-администратор',  path: 'zapis-ai' },
   { key: 'w-lumora',  slug: 'lumora',  name: 'Lumora',          meta: 'Концепт / сайт студии дизайна',     path: 'lumora' },
 ];
 
