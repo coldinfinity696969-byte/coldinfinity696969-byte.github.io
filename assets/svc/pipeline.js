@@ -397,6 +397,15 @@
       const host = CARDS[k].querySelector('[data-viz]');
       if (host && FACTORIES[host.dataset.viz]) { try { viz[k] = FACTORIES[host.dataset.viz](host); } catch (e) { console.warn('svc viz', e); } }
     });
+    // only scenes that are on screen redraw (on a phone that is one or two cards out of five)
+    const onScreen = new Set(Object.keys(CARDS));
+    if ('IntersectionObserver' in window) {
+      const cardIO = new IntersectionObserver(es => es.forEach(en => {
+        const k = Object.keys(CARDS).find(key => CARDS[key] === en.target);
+        if (k) { if (en.isIntersecting) onScreen.add(k); else onScreen.delete(k); }
+      }), { rootMargin: '60px' });
+      Object.values(CARDS).forEach(c => cardIO.observe(c));
+    }
 
     const rails = el('g', {}, svg), ports = el('g', {}, svg), packG = el('g', {}, svg);
     let edges = [], sig = '', layout = '';
@@ -556,7 +565,7 @@
       for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= t) { const fn = timers[i].fn; timers.splice(i, 1); fn(t); }
       if (t - lastRun > PERIOD) run(t);
       drawPackets(t);
-      Object.values(viz).forEach(v => v.tick(t, dt));
+      Object.keys(viz).forEach(k => { if (onScreen.has(k)) viz[k].tick(t, dt); });
       raf = requestAnimationFrame(frame);
     }
     new IntersectionObserver(([en]) => {

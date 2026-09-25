@@ -1397,7 +1397,7 @@ body {
    clip hides horizontal overflow the same way without that side effect */
 html, body { overflow-x: clip !important; }
 @supports not (overflow: clip) { html, body { overflow-x: visible !important; } }
-.reel { position: relative; height: 330vh; background: #070707; border-top: 1px solid var(--line); }
+.reel { position: relative; height: 100vh; height: 100svh; min-height: 560px; background: #070707; border-top: 1px solid var(--line); }
 .reel__sticky {
   position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
   background: radial-gradient(60% 55% at 50% 60%, rgba(192,255,51,.07), transparent 70%), #070707;
@@ -1433,14 +1433,27 @@ html, body { overflow-x: clip !important; }
 }
 .reel__name span { display: inline-block; }
 .reel__meta { margin-top: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
-.reel__ticks { display: flex; gap: 6px; margin-top: 16px; }
-.reel__ticks i { width: 20px; height: 2px; background: #2a2a2a; transition: background .3s, width .4s var(--ease); }
-.reel__ticks i.on { width: 42px; background: var(--green); }
+.reel__nav { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.reel__arrow {
+  width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
+  border: 1px solid var(--line-2); background: rgba(10,10,10,.55); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color .25s, color .25s, background .25s;
+}
+.reel__arrow:hover { border-color: var(--green); color: var(--green); }
+.reel__arrow:active { background: var(--green); color: #000; }
+.reel__arrow .i-arr { width: 18px; height: 18px; }
+.reel__ticks { display: flex; align-items: center; gap: 6px; }
+.reel__ticks button {
+  width: 20px; height: 2px; padding: 10px 0; box-sizing: content-box; border: 0; cursor: pointer;
+  background: #2a2a2a; background-clip: content-box; transition: background-color .3s, width .4s var(--ease);
+}
+.reel__ticks button.on { width: 42px; background-color: var(--green); }
 .reel__btns { display: flex; gap: 10px; }
 .reel__btns .btn-green, .reel__btns .btn-ghost { padding: 15px 22px; cursor: pointer; background-color: transparent; }
 .reel__btns .btn-green { background: var(--green); }
 .reel__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; z-index: 2; background: #151515; }
-.reel__bar i { display: block; height: 100%; background: var(--green); transform-origin: 0 50%; transform: scaleX(0); }
+.reel__bar i { display: block; height: 100%; background: var(--green); transform-origin: 0 50%; transform: scaleX(0); transition: transform .6s var(--ease); }
 .reel__cursor {
   position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none;
   margin: 16px 0 0 16px; padding: 8px 12px; border-radius: 100px;
@@ -1450,7 +1463,6 @@ html, body { overflow-x: clip !important; }
 .reel__cursor.on { opacity: 1; scale: 1; }
 .reel__fallback { display: none; }
 @media (max-width: 700px) {
-  .reel { height: 270vh; }
   .reel__title { top: 14vh; font-size: 10.2vw; }
   .reel__t2 { -webkit-text-stroke-width: 1px; }
   .reel__top { top: 80px; }
@@ -1459,9 +1471,11 @@ html, body { overflow-x: clip !important; }
   .reel__count { font-size: 46px; }
   .reel__name { font-size: 18px; }
   .reel__meta { font-size: 9px; }
-  .reel__ticks { margin-top: 12px; }
-  .reel__ticks i { width: 12px; }
-  .reel__ticks i.on { width: 26px; }
+  .reel__nav { gap: 8px; margin-top: 12px; }
+  .reel__arrow { width: 40px; height: 40px; }
+  .reel__ticks { gap: 4px; }
+  .reel__ticks button { width: 6px; }
+  .reel__ticks button.on { width: 14px; }
   .reel__btns { grid-column: 1 / -1; }
   .reel__btns > * { flex: 1; justify-content: center; }
   .reel__btns .btn-green, .reel__btns .btn-ghost { padding: 14px 10px; font-size: 11px; }
@@ -1522,6 +1536,22 @@ html, body { overflow-x: clip !important; }
   .tools__all { padding-block: 13px; margin-block: -13px; }
   .stat--link a { padding-block: 14px; margin-block: -14px; }
   .bar__logo { padding-block: 12px; margin-block: -12px; }
+}
+
+@media (max-width: 380px) { .reel__ticks { display: none; } }
+
+/* ============ PHONES: drop effects that cost frames while scrolling ============ */
+@media (hover: none), (max-width: 900px) {
+  .grain { display: none; }                                   /* 4-screen noise layer re-composited 5 times a second */
+  .bar.scrolled, .mobile-menu, .case-card__num, .case-card__expand, .case-modal__close, .case-modal {
+    -webkit-backdrop-filter: none; backdrop-filter: none;       /* live blur of everything underneath on every scroll frame */
+  }
+  .bar.scrolled { background: rgba(10,10,10,.96); }
+  .case-card__num { background: rgba(10,10,10,.82); }
+  .case-modal { background: rgba(5,5,5,.92); }
+  .hero__grid { animation: none; }                            /* background-position = whole-hero repaint every frame */
+  .process-grid::before { animation: none; opacity: 0; }      /* animated left = layout every frame */
+  .process-step, .process-step .process-step__num { animation: none !important; }
 }
 
 /* ============ SEAMLESS MODE (promo variant, promo/seamless.js) ============ */
@@ -1675,14 +1705,18 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <canvas class="reel__gl" aria-hidden="true"></canvas>
     <div class="reel__top">
       <span class="reel__label"><i></i>ШОУРИЛ<em>&nbsp;/ САЙТЫ НА КОДЕ</em></span>
-      <span class="reel__hint">ЛИСТАЙТЕ ИЛИ ТЯНИТЕ</span>
+      <span class="reel__hint">ЛИСТАЙТЕ ВБОК</span>
     </div>
     <div class="reel__hud">
       <div class="reel__count"><span id="reelNum">01</span><small>/11</small></div>
       <div class="reel__info">
         <div class="reel__name"><span id="reelName">Тёплый бор</span></div>
         <div class="reel__meta" id="reelMeta">Концепт / 3D-сайт стройкомпании</div>
-        <div class="reel__ticks" id="reelTicks"></div>
+        <div class="reel__nav">
+          <button class="reel__arrow" id="reelPrev" type="button" aria-label="Предыдущий сайт"><i class="i-arr i-arr--left" aria-hidden="true"></i></button>
+          <div class="reel__ticks" id="reelTicks"></div>
+          <button class="reel__arrow" id="reelNext" type="button" aria-label="Следующий сайт"><i class="i-arr" aria-hidden="true"></i></button>
+        </div>
       </div>
       <div class="reel__btns">
         <button class="btn-ghost" id="reelMore" type="button">ПОДРОБНЕЕ</button>

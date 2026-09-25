@@ -3,9 +3,12 @@
    viewport-sized bands: the site's hero first, then its most striking blocks.
    Idle screens show the hero; the screen in front holds the hero, then glides
    band to band and back, so every site starts from its best frame.
-   Page scroll (sticky section) spins the ring and brings sites to the front
-   one by one; fast scrolling bends the screens and splits RGB a little.
-   Drag to spin, click a screen to open the case card. */
+   The section is one screen tall and never holds the page: visitors swipe or
+   drag the ring (with a flick), use the arrows / ticks / arrow keys, and until
+   they touch it the ring moves on by itself. Fast spins bend the screens and
+   split RGB a little. Click a screen to open its case card.
+   Performance: frames are drawn only when something changed, phones get a
+   lower pixel ratio without MSAA, and a slow phone drops to 1x on its own. */
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js';
 
 const G = 'https://coldinfinity696969-byte.github.io/';
@@ -35,8 +38,9 @@ try { init(); } catch (e) { fail(e); }
 function init() {
   if (!root || !canvas) return;
   const isSmall = Math.min(innerWidth, innerHeight) < 700;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, isSmall ? 1.5 : 1.75));
+  // phones: no MSAA (screen edges are anti-aliased in the shader) and a lower pixel ratio
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isSmall, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, isSmall ? 1.25 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor(0x000000, 0);
 
@@ -53,7 +57,7 @@ function init() {
   const tilt = new THREE.Group(); tilt.rotation.set(0.05, 0, -0.07); scene.add(tilt);
   const spin = new THREE.Group(); tilt.add(spin);
 
-  const geo = new THREE.PlaneGeometry(PW, PH, 64, 1);
+  const geo = new THREE.PlaneGeometry(PW, PH, isSmall ? 32 : 64, 1);
 
   const vert = /* glsl */`
     uniform float uR; uniform float uBend;
@@ -95,10 +99,12 @@ function init() {
         float ty = uScroll * (1.0 - win) + (1.0 - vy) * win;           // 0 = top of the page
         float v = 1.0 - ty;
         float off = uVel * 0.006;
-        vec3 site = vec3(
-          texture2D(uMap, vec2(uv.x + off, v)).r,
-          texture2D(uMap, vec2(uv.x, v)).g,
-          texture2D(uMap, vec2(uv.x - off, v)).b);
+        vec3 site;
+        if (off > 0.0004) {                                            // RGB split only while spinning fast
+          site = vec3(texture2D(uMap, vec2(uv.x + off, v)).r, texture2D(uMap, vec2(uv.x, v)).g, texture2D(uMap, vec2(uv.x - off, v)).b);
+        } else {
+          site = texture2D(uMap, vec2(uv.x, v)).rgb;
+        }
         // placeholder while the capture loads: dark screen with faint code lines
         float lines = step(0.5, fract(vy * 38.0)) * step(0.08, uv.x) * step(uv.x, 0.18 + 0.6 * fract(sin(floor(vy * 38.0) * 12.9898) * 43758.5));
         vec3 ph = vec3(0.055) + uGreen * lines * 0.05;
@@ -154,6 +160,7 @@ function init() {
   const size = isSmall ? 640 : 960;
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
   const panels = [], hitMeshes = [];
+  let loadedCount = 0, barsVersion = 0;
 
   SITES.forEach((site, k) => {
     const bc = document.createElement('canvas'); bc.width = 1152; bc.height = 72;
@@ -174,7 +181,7 @@ function init() {
     const refl = new THREE.Mesh(geo, rmat); refl.position.set(0, 2 * FLOOR, R); refl.scale.y = -1; refl.renderOrder = -1; pivot.add(refl);
     hitMeshes.push(mesh);
 
-    const pn = { site, u, theta: k * STEP, bands: 1, band: 0, activeSince: 0, revealAt: -1, barTex };
+    const pn = { site, u, theta: k * STEP, bands: 1, band: 0, activeSince: 0, revealAt: -1, autoAt: -1, barTex };
     panels.push(pn);
 
     // textures sit next to this module, whatever page loads it
@@ -184,9 +191,11 @@ function init() {
       u.uMap.value = tex; u.uTexAspect.value = ar;
       pn.bands = Math.max(1, Math.round(ar / (CH / PW)));     // one band = one 16:10 screen
       u.uLoaded.value = 1;
+      renderer.initTexture(tex);                                // upload now, not in the middle of a spin
+      loadedCount++;
     });
   });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => panels.forEach(p => drawBar(p.barTex, p.site)));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { panels.forEach(p => drawBar(p.barTex, p.site)); barsVersion++; });
 
   // ---- floor: faint green grid that fades out, same mood as the hero grid ----
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.ShaderMaterial({
@@ -207,8 +216,13 @@ function init() {
   // ---- HUD ----
   const $ = id => document.getElementById(id);
   const elNum = $('reelNum'), elName = $('reelName'), elMeta = $('reelMeta'), elOpen = $('reelOpen'), elMore = $('reelMore');
-  const elTicks = $('reelTicks'), elFill = $('reelFill'), elCursor = $('reelCursor');
-  SITES.forEach(() => { const t = document.createElement('i'); elTicks.appendChild(t); });
+  const elTicks = $('reelTicks'), elFill = $('reelFill'), elCursor = $('reelCursor'), elPrev = $('reelPrev'), elNext = $('reelNext');
+  SITES.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', s.name);
+    b.addEventListener('click', () => goTo(i));
+    elTicks.appendChild(b);
+  });
   const ticks = [...elTicks.children];
   let shown = -1;
   function setActive(k) {
@@ -218,6 +232,7 @@ function init() {
     elName.textContent = s.name; elMeta.textContent = s.meta;
     elOpen.href = G + s.path + '/';
     ticks.forEach((t, i) => t.classList.toggle('on', i === k));
+    if (elFill) elFill.style.transform = 'scaleX(' + ((k + 1) / N).toFixed(4) + ')';
     if (!reduce && elName.animate) {
       const o = { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)' };
       elName.animate([{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }], o);
@@ -232,19 +247,32 @@ function init() {
   elMore.addEventListener('click', () => openCase(Math.max(shown, 0)));
   setActive(0);
 
-  // ---- scroll: sticky section, progress 0..1 while it is pinned ----
-  let targetP = 0, p = 0, enterT = 0, enter = 0;
-  function readScroll() {
-    const r = root.getBoundingClientRect(), vh = innerHeight;
-    targetP = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
-    enterT = Math.min(1, Math.max(0, 1 - r.top / vh));
+  // ---- navigation: position is measured in sites; swipe, arrows, ticks and keys move the target ----
+  // The page itself scrolls freely: the ring never holds the visitor.
+  let pos = 0, target = 0, touched = false;
+  const wrapIdx = i => ((i % N) + N) % N;
+  function step(d) { touched = true; target = Math.round(target) + d; }
+  function goTo(i) {
+    touched = true;
+    let d = i - wrapIdx(Math.round(target));
+    if (d > N / 2) d -= N; if (d < -N / 2) d += N;
+    target = Math.round(target) + d;
   }
-  addEventListener('scroll', readScroll, { passive: true });
-  readScroll(); enter = enterT; p = targetP;
+  if (elPrev) elPrev.addEventListener('click', () => step(-1));
+  if (elNext) elNext.addEventListener('click', () => step(1));
+  addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (document.querySelector('.case-modal.open')) return;
+    if (/INPUT|TEXTAREA|SELECT/.test((document.activeElement && document.activeElement.tagName) || '')) return;
+    const r = root.getBoundingClientRect();
+    if (r.bottom < innerHeight * 0.45 || r.top > innerHeight * 0.55) return;   // only while the ring is on screen
+    step(e.key === 'ArrowRight' ? 1 : -1);
+  });
 
-  // ---- drag to spin, click to open ----
-  let drag = 0, dragTarget = 0, down = null, hover = -1, mx = 0, my = 0, pmx = 0, pmy = 0;
+  // ---- swipe / drag with a flick, click a screen to open its card ----
+  let down = null, hover = -1, mx = 0, my = 0, pmx = 0, pmy = 0;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const pxPerSite = () => Math.min(320, Math.max(170, canvas.clientWidth * 0.6));   // a calm half-screen swipe = one site
   function pick(e) {
     const r = canvas.getBoundingClientRect();
     ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
@@ -252,35 +280,45 @@ function init() {
     const hit = ray.intersectObjects(hitMeshes, false).find(h => h.point.z > 0);
     return hit ? hit.object.userData.k : -1;
   }
-  canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, d: dragTarget, moved: false }; });
+  canvas.addEventListener('pointerdown', e => {
+    touched = true;
+    down = { x: e.clientX, start: target, moved: false, lastX: e.clientX, lastT: performance.now(), v: 0 };
+  });
   const sticky = root.querySelector('.reel__sticky');
   addEventListener('pointermove', e => {
-    const r = sticky.getBoundingClientRect();
-    mx = (e.clientX / innerWidth) * 2 - 1; my = (e.clientY / innerHeight) * 2 - 1;
+    if (finePointer) { mx = (e.clientX / innerWidth) * 2 - 1; my = (e.clientY / innerHeight) * 2 - 1; }
     if (down) {
       const dx = e.clientX - down.x;
       if (Math.abs(dx) > 6) down.moved = true;
-      dragTarget = down.d + dx * 0.0045;
+      target = down.start - dx / pxPerSite();
+      const now = performance.now();
+      down.v = 0.75 * down.v + 0.25 * ((e.clientX - down.lastX) / Math.max(1, now - down.lastT));   // px per ms
+      down.lastX = e.clientX; down.lastT = now;
     }
     if (finePointer && e.target === canvas) {
+      const r = sticky.getBoundingClientRect();
       hover = down && down.moved ? -1 : pick(e);
       canvas.style.cursor = hover >= 0 ? 'pointer' : (down ? 'grabbing' : 'grab');
       elCursor.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px)`;
     } else if (e.target !== canvas) hover = -1;
     elCursor.classList.toggle('on', hover >= 0);
   }, { passive: true });
-  addEventListener('pointerup', e => {
+  function release(e, cancelled) {
     if (!down) return;
-    const wasClick = !down.moved;
-    down = null;
-    dragTarget = Math.round(dragTarget / STEP) * STEP;     // settle on a screen
-    if (wasClick && e.target === canvas) { const k = pick(e); if (k >= 0) openCase(k); }
-  });
-  addEventListener('pointercancel', () => { if (down) { down = null; dragTarget = Math.round(dragTarget / STEP) * STEP; } });
+    const d = down; down = null;
+    if (cancelled) { target = Math.round(target); return; }          // the browser took the gesture for a vertical scroll
+    const dx = e.clientX - d.x;
+    let dest = Math.round(target - d.v * 90 / pxPerSite());           // a hard flick carries the ring further
+    if (Math.abs(dx) > 24 && dest === Math.round(d.start)) dest += dx < 0 ? 1 : -1;   // a short swipe still moves one site
+    target = dest;
+    if (!d.moved && e.target === canvas) { const k = pick(e); if (k >= 0) openCase(k); }
+  }
+  addEventListener('pointerup', e => release(e, false));
+  addEventListener('pointercancel', e => release(e, true));
   canvas.addEventListener('pointerleave', () => { hover = -1; elCursor.classList.remove('on'); });
 
   // ---- sizing ----
-  let aspect = 1;
+  let aspect = 1, sizeKey = '';
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (!w || !h) return;
@@ -289,21 +327,23 @@ function init() {
     camera.fov = aspect < 1 ? 44 : 32;
     camera.aspect = aspect;
     // shift the picture down so the ring sits under the title and above the HUD
-    const shift = aspect < 1 ? 0.0 : 0.11;
+    const shift = aspect < 1 ? 0.0 : 0.095;
     camera.setViewOffset(w, h, 0, -h * shift, w, h);
     camera.updateProjectionMatrix();
+    sizeKey = w + 'x' + h + '@' + renderer.getPixelRatio();
   }
   new ResizeObserver(resize).observe(canvas); resize();
 
   // ---- loop (only while the section is on screen) ----
-  let running = false, raf = 0, revealed = false, lastRot = 0, vel = 0;
+  let running = false, raf = 0, revealed = false, lastRot = 0, vel = 0, lastNow = 0, enter = 0;
   new IntersectionObserver(([en]) => {
     running = en.isIntersecting;
-    if (running && !raf) raf = requestAnimationFrame(frame);
+    if (running && !raf) { lastNow = 0; raf = requestAnimationFrame(frame); }
   }, { rootMargin: '120px' }).observe(root);
 
   // front screen timeline: hold the hero, glide to each highlight, hold, then glide back to the hero
   const HOLD0 = 2.6, GLIDE = 0.95, HOLD = 2.1, BACK = 1.4;
+  const AUTO = 5.9;                        // demo mode: hero + first highlight, then the next site
   const easeIO = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
   function bandAt(time, nb) {
     if (nb < 2) return 0;
@@ -318,7 +358,7 @@ function init() {
     }
     return (nb - 1) * (1 - easeIO(Math.min(1, e / BACK)));
   }
-  let activeK = -1;
+  let activeK = -1, lastSig = '', slowFrames = 0, dpr = renderer.getPixelRatio();
 
   const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
   const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));
@@ -327,26 +367,28 @@ function init() {
     raf = 0;
     if (!running) return;
     const t = now * 0.001;
-    p += (targetP - p) * (reduce ? 1 : 0.085);
-    enter += (enterT - enter) * 0.08;
-    drag += (dragTarget - drag) * 0.12;
+    const dt = lastNow ? Math.min(0.1, (now - lastNow) / 1000) : 1 / 60;
+    lastNow = now;
+
+    // fly-in while the section enters the screen
+    const rr = root.getBoundingClientRect();
+    const enterT = Math.min(1, Math.max(0, 1 - rr.top / innerHeight));
+    enter += (enterT - enter) * (1 - Math.exp(-dt * 5));
     pmx += (mx - pmx) * 0.05; pmy += (my - pmy) * 0.05;
 
-    // rotation: dwell on each site, glide between them
-    const pp = Math.min(1, Math.max(0, (p - 0.04) / 0.9));
-    const f = pp * (N - 1), i = Math.floor(f), fr = f - i;
-    const eased = i + smooth(0.22, 0.78, fr);
-    const rot = -eased * STEP + drag + (reduce ? 0 : Math.sin(t * 0.35) * 0.03);
+    // ring position follows the target with a soft spring (snappier while the finger is down)
+    pos += (target - pos) * (1 - Math.exp(-dt * (down ? 20 : 5.2)));
+    if (Math.abs(target - pos) < 0.0004 && !down) pos = target;
+    const rot = -pos * STEP + (reduce || isSmall ? 0 : Math.sin(t * 0.35) * 0.03);
     spin.rotation.y = rot;
     const dr = Math.abs(rot - lastRot); lastRot = rot;
-    vel += (Math.min(dr * 18, 1.4) - vel) * 0.12;
-    if (reduce) vel = 0;
+    vel += (Math.min((dr / Math.max(dt, 0.001)) * 0.3, 1.4) - vel) * 0.12;
+    if (reduce || vel < 0.002) vel = reduce ? 0 : vel * 0.5;
 
-    // camera: flies in while the section enters, then orbits a touch with the mouse.
-    // Distance keeps the front screen at a fixed share of the frame (width on phones, height on desktop).
+    // camera: distance keeps the front screen at a fixed share of the frame (width on phones, height on desktop)
     const e = 1 - Math.pow(1 - Math.min(1, enter), 3);
     const fovV = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2), fovH = fovV * aspect;
-    const dist = Math.max(PW / ((aspect < 1 ? 0.9 : 0.5) * fovH), PH / ((aspect < 1 ? 0.3 : 0.42) * fovV));
+    const dist = Math.max(PW / ((aspect < 1 ? 0.9 : 0.5) * fovH), PH / ((aspect < 1 ? 0.3 : 0.39) * fovV));
     const lift = dist * (aspect < 1 ? 0.42 : 0.27);             // look down on the ring so the far side peeks out
     camera.position.set(pmx * 0.9, lift + (1 - e) * 4 - pmy * 0.5, R + dist + (1 - e) * 12);
     camera.lookAt(0, -(1 - e) * 1.5, R);
@@ -354,27 +396,50 @@ function init() {
     // power the screens on once the ring is in view
     if (!revealed && enter > 0.35) { revealed = true; panels.forEach((pn, k) => { pn.revealAt = t + 0.15 + k * 0.09; }); }
 
-    let best = 0, bestA = 9;
-    panels.forEach((pn, k) => { const a = Math.abs(wrap(pn.theta + rot)); if (a < bestA) { bestA = a; best = k; } });
-    if (best !== activeK) { activeK = best; panels[best].activeSince = t; }
+    const best = wrapIdx(Math.round(pos));
+    if (best !== activeK) { activeK = best; panels[best].activeSince = t; panels[best].autoAt = -1; }
+    const settled = Math.abs(pos - Math.round(pos)) < 0.01 && !down && vel < 0.08;
+    let sBand = 0, sFocus = 0, sHover = 0, sReveal = 0;
     panels.forEach((pn, k) => {
       const a = Math.abs(wrap(pn.theta + rot));
       const focus = 1 - smooth(0.06, STEP * 0.8, a);
       pn.u.uFocus.value += (focus - pn.u.uFocus.value) * 0.15;
-      pn.u.uHover.value += ((k === hover ? 1 : 0) - pn.u.uHover.value) * 0.18;
+      if (Math.abs(focus - pn.u.uFocus.value) < 0.001) pn.u.uFocus.value = focus;
+      const hv = k === hover ? 1 : 0;
+      pn.u.uHover.value += (hv - pn.u.uHover.value) * 0.18;
+      if (Math.abs(hv - pn.u.uHover.value) < 0.002) pn.u.uHover.value = hv;
       // the screen in front runs its highlight timeline; the rest settle back on the hero
-      const settled = bestA < 0.05 && vel < 0.08 && pn.u.uReveal.value >= 1;   // timeline starts once the screen is on and still
-      if (k === activeK && settled && !reduce) pn.band = bandAt(Math.max(0, t - pn.activeSince), pn.bands);
-      else { pn.band += (0 - pn.band) * 0.08; if (k === activeK) pn.activeSince = t; }
+      const live = k === activeK && settled && pn.u.uReveal.value >= 1 && !reduce;
+      if (live) pn.band = bandAt(Math.max(0, t - pn.activeSince), pn.bands);
+      else { pn.band += (0 - pn.band) * 0.08; if (pn.band < 0.0005) pn.band = 0; if (k === activeK) pn.activeSince = t; }
       pn.u.uScroll.value = pn.bands > 1 ? pn.band / (pn.bands - 1) : 0;
       pn.u.uVel.value = vel;
       pn.u.uBend.value = vel * 0.55;
       if (pn.revealAt > 0) pn.u.uReveal.value = Math.min(1, Math.max(0, (t - pn.revealAt) / 0.8));
+      sBand += pn.band; sFocus += pn.u.uFocus.value; sHover += pn.u.uHover.value; sReveal += pn.u.uReveal.value;
     });
     setActive(best);
-    if (elFill) elFill.style.transform = `scaleX(${pp.toFixed(4)})`;
 
-    renderer.render(scene, camera);
+    // demo mode: until the visitor touches the ring it moves on by itself
+    const onScreen = rr.top < innerHeight * 0.35 && rr.bottom > innerHeight * 0.65;
+    const act = panels[activeK];
+    if (!touched && !reduce && revealed && onScreen && settled && !document.querySelector('.case-modal.open')) {
+      if (act.autoAt < 0) act.autoAt = t + AUTO;
+      else if (t >= act.autoAt) { target = Math.round(target) + 1; act.autoAt = -1; }
+    } else if (act) act.autoAt = -1;
+
+    // draw only when something on screen changed: an idle ring costs nothing
+    const sig = [rot.toFixed(5), camera.position.x.toFixed(3), camera.position.y.toFixed(3), camera.position.z.toFixed(3),
+      sBand.toFixed(4), sFocus.toFixed(3), sHover.toFixed(3), sReveal.toFixed(3), vel.toFixed(3), loadedCount, barsVersion, sizeKey].join('|');
+    if (sig !== lastSig) {
+      lastSig = sig;
+      renderer.render(scene, camera);
+      // weak phone: if frames keep running long, drop the pixel ratio once
+      if (isSmall && dpr > 1) {
+        slowFrames = dt > 0.026 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+        if (slowFrames > 45) { dpr = 1; renderer.setPixelRatio(1); resize(); }
+      }
+    }
     raf = requestAnimationFrame(frame);
   }
   root.classList.remove('no-gl');
