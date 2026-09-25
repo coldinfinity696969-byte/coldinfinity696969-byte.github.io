@@ -725,8 +725,8 @@ body {
   .site-card .case-card__title { font-size: 11px; letter-spacing: .01em; line-height: 1.25; }
   .site-card .case-card__desc { display: none; }
   .site-card--wide .case-card__desc, .site-card--full .case-card__desc { display: block; font-size: 12px; }
-  .site-card .case-card__tag { font-size: 8px; letter-spacing: .1em; }
-  .site-card .case-card__num { bottom: 8px; left: 8px; font-size: 8px; padding: 3px 6px; }
+  .site-card .case-card__tag { font-size: 9px; letter-spacing: .08em; }
+  .site-card .case-card__num { bottom: 8px; left: 8px; font-size: 9px; padding: 3px 6px; }
   .case-modal__stage.tall { aspect-ratio: 3/4; }
 }
 
@@ -1507,6 +1507,21 @@ html, body { overflow-x: clip !important; }
 @media (max-width: 1100px) { .svc-half--viz { height: 250px; padding: 12px; } }
 @media (max-width: 600px) { .svc-half--viz { height: 230px; } }
 @media (prefers-reduced-motion: reduce) { .v-flow { animation: none; } }
+
+/* ============ MOBILE POLISH: footer, finger-sized tap areas ============ */
+.footer { gap: 24px; }
+.footer a { color: inherit; }
+@media (max-width: 600px) {
+  .footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer a { padding: 13px 0; margin: -13px 0; }
+}
+@media (hover: none), (max-width: 900px) {
+  /* small text links get a taller hit area; margins cancel it so nothing moves */
+  .sec-all { padding-block: 13px; margin-top: 3px; margin-bottom: -13px; }
+  .tools__all { padding-block: 13px; margin-block: -13px; }
+  .stat--link a { padding-block: 14px; margin-block: -14px; }
+  .bar__logo { padding-block: 12px; margin-block: -12px; }
+}
 </style>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js" crossorigin>
 </head>
@@ -2410,6 +2425,15 @@ html, body { overflow-x: clip !important; }
   try {
     const wrap = document.getElementById('casesWrap');
     if (!wrap) return;
+    // phones swipe this slider: fetch its covers when the section is near, not on the first swipe
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => {
+        if (!es.some(e => e.isIntersecting)) return;
+        wrap.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
+        io.disconnect();
+      }, { rootMargin: '600px 0px' });
+      io.observe(wrap);
+    }
     const cardW = () => (wrap.querySelector('.case-card')?.offsetWidth + 16) || 400;
     const prev = document.getElementById('casesPrev');
     const next = document.getElementById('casesNext');
