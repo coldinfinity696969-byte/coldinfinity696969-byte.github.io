@@ -68,6 +68,9 @@ html.seam-on .svc-section::before {
           mask-image: linear-gradient(180deg, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);
 }
 
+/* the main page opens services with a circle over a #111 veil; here the feathered backdrop above does that job */
+html.seam-on .svc-veil { display: none !important; }
+
 /* chapter rail */
 .seam-rail { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 10px; }
 .seam-rail a { position: relative; display: flex; align-items: center; justify-content: center; width: 14px; height: 16px; color: rgba(255,255,255,.5); transition: color .35s; }

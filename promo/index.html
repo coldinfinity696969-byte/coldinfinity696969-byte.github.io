@@ -5,9 +5,9 @@
 <meta name="robots" content="noindex" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Никита Ульянов — AI-специалист: маркетинг, дизайн, видео, сайты</title>
-<meta name="description" content="AI-специалист полного цикла. Маркетинг без отдела, видео без студии, сайты без агентства. Для предпринимателей, компаний и блогеров." />
+<meta name="description" content="Никита Ульянов: сайты на коде, нейровидео, AI-аватары и маркетинг на нейросетях для бизнеса и блогеров. Кейсы с цифрами и 11 живых сайтов." />
 <meta property="og:title" content="Никита Ульянов — AI-специалист" />
-<meta property="og:description" content="Сайты, нейровидео, AI-аватары и маркетинг на нейросетях. Один человек вместо команды." />
+<meta property="og:description" content="Сайты на коде, нейровидео, AI-аватары и маркетинг на нейросетях. Кейсы с цифрами и 11 живых сайтов." />
 <meta property="og:image" content="https://coldinfinity696969-byte.github.io/assets/nikita.webp?v=4" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://coldinfinity696969-byte.github.io/assets/nikita.webp?v=4" />
@@ -183,12 +183,6 @@ body {
     rgba(0,0,0,.25) 100%
   );
 }
-.hero__tag {
-  font-family: var(--mono);
-  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--ink-3); margin-bottom: 28px;
-  position: relative; z-index: 1;
-}
 .hero__title {
   font-family: var(--display);
   font-weight: 800;
@@ -246,10 +240,8 @@ body {
   background-size:54px 54px;
   -webkit-mask-image: radial-gradient(ellipse 85% 70% at 28% 62%, #000 28%, transparent 78%);
           mask-image: radial-gradient(ellipse 85% 70% at 28% 62%, #000 28%, transparent 78%);
-  animation: heroGridPan 22s linear infinite;
   opacity:.75;
 }
-@keyframes heroGridPan{ from{background-position:0 0, 0 0;} to{background-position:54px 54px, 54px 54px;} }
 
 .hero__glow{
   position:absolute; z-index:0; pointer-events:none;
@@ -282,7 +274,7 @@ body {
 @media(max-width:1100px){ .hero__cutout{ display:none; } }
 
 @media (prefers-reduced-motion: reduce){
-  .hero__grid, .hero__glow{ animation:none; }
+  .hero__glow{ animation:none; }
   .hero__cutout{ transition:none; }
 }
 
@@ -301,8 +293,8 @@ body {
   position:absolute; inset:0; z-index:0; pointer-events:none;
   width:100%; height:100%;
   opacity:.72; mix-blend-mode:screen;
-  -webkit-mask-image:linear-gradient(95deg, #000 0%, #000 34%, transparent 64%);
-          mask-image:linear-gradient(95deg, #000 0%, #000 34%, transparent 64%);
+  -webkit-mask-image:linear-gradient(95deg, #000 0%, #000 40%, transparent 70%);
+          mask-image:linear-gradient(95deg, #000 0%, #000 40%, transparent 70%);
 }
 @media(max-width:600px){
   .hero-matrix{ opacity:.38;
@@ -423,21 +415,8 @@ body {
   background: #f8f8f8;
   overflow: hidden;
 }
-/* bg decor top-right */
-.svc-bg-decor {
-  position: absolute;
-  top: 18px; right: var(--gutter);
-  width: min(46%, 560px); height: 300px;
-  pointer-events: none; z-index: 0; opacity: .5;
-}
-.svc-bg-decor svg { width:100%; height:100%; }
 .svc-section .sec-head { position: relative; z-index: 1; }
 .sec-title-green { color: var(--green-dark); }
-.sec-subtitle {
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(80,150,0,.65); margin-top: 8px;
-}
 
 /* GRID */
 /* ============ SERVICES ============ */
@@ -481,16 +460,6 @@ body {
   box-shadow: 0 12px 46px rgba(80,190,0,.22), inset 0 0 0 1px rgba(120,225,0,.22);
   transform: translateY(-4px);
 }
-/* Green shimmer bottom bar */
-.svc-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--green-dark), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 3s linear infinite;
-  opacity: .55;
-}
 
 .svc-top {
   display: flex; align-items: center; justify-content: space-between;
@@ -533,16 +502,6 @@ body {
   letter-spacing: -.02em; text-transform: uppercase;
   color: #111; line-height: 1;
 }
-.svc-sub {
-  display: inline-block;
-  font-family: var(--mono); font-size: 9.5px;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: #666;
-  background: #f0f0f0;
-  border-radius: 100px;
-  padding: 3px 10px;
-  margin-top: -2px;
-}
 .svc-desc { font-size: 13px; line-height: 1.55; color: #444; flex: 1; }
 
 /* Footer */
@@ -552,25 +511,18 @@ body {
   border-top: 1px solid rgba(0,100,0,.1);
   margin-top: auto;
 }
-.svc-arr {
-  font-family: var(--mono); font-size: 17px;
-  color: rgba(60,160,0,.7);
-  transition: transform .3s, color .3s;
-  cursor: pointer;
+/* link to the work that shows this service */
+.svc-go {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 28px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #3f7d00;
+  transition: color .25s;
 }
-.svc-card:hover .svc-arr { transform: translateX(5px); color: var(--green-dark); }
-.svc-status {
-  font-family: var(--mono); font-size: 9px;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(0,120,0,.65);
-  display: flex; align-items: center; gap: 5px;
-}
-.svc-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #4a9000;
-  box-shadow: 0 0 7px rgba(74,144,0,.8);
-  animation: glowPulse 1.8s ease-in-out infinite;
-}
+.svc-go .i-arr { transition: transform .3s var(--ease); }
+.svc-go:hover { color: #1f4a00; }
+.svc-go:hover .i-arr, .svc-card:hover .svc-go .i-arr { transform: translateX(5px); }
+.svc-go:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 4px; border-radius: 3px; }
 
 /* BIG card (automation) */
 .svc-card--big { padding: 0; flex-direction: row; }
@@ -728,7 +680,9 @@ body {
   .site-card--wide .case-card__desc, .site-card--full .case-card__desc { display: block; font-size: 12px; }
   .site-card .case-card__tag { font-size: 9px; letter-spacing: .08em; }
   .site-card .case-card__num { bottom: 8px; left: 8px; font-size: 9px; padding: 3px 6px; }
-  .case-modal__stage.tall { aspect-ratio: 3/4; }
+  .case-modal { padding: 12px; }
+  .case-modal__box { max-height: calc(100vh - 24px); max-height: calc(100svh - 24px); }
+  .case-modal__stage { --mh: 60svh; }
 }
 
 /* ---- Case modal ---- */
@@ -740,15 +694,42 @@ body {
   opacity:0; visibility:hidden; transition:opacity .35s var(--ease), visibility .35s;
 }
 .case-modal.open{ opacity:1; visibility:visible; }
+/* the box grows out of the card that was clicked (--ox/--oy/--os are set by the script) and shrinks back into it */
 .case-modal__box{
-  position:relative; width:min(760px,100%); max-height:88vh; overflow:auto;
+  position:relative; width:min(820px,100%); max-height:calc(100vh - 48px); max-height:calc(100svh - 48px);
+  overflow:auto; overscroll-behavior:contain;
   background:var(--card); border:1px solid var(--line-2); border-radius:14px;
-  transform:translateY(24px) scale(.98); transition:transform .4s var(--ease);
+  opacity:0; transform:translate3d(var(--ox,0px), var(--oy,24px), 0) scale(var(--os,.96));
+  transition:transform .55s var(--ease), opacity .3s ease;
 }
-.case-modal.open .case-modal__box{ transform:translateY(0) scale(1); }
-.case-modal__stage{ width:100%; aspect-ratio:16/9; background:#0d0d0d; border-radius:14px 14px 0 0; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.case-modal__stage img, .case-modal__stage video{ width:100%; height:100%; object-fit:cover; display:block; }
-.case-modal__stage img.contain, .case-modal__stage video.contain{ object-fit:contain; }
+.case-modal.open .case-modal__box{ opacity:1; transform:none; }
+/* media: the frame takes the exact proportions of the current picture or video (--ar from the script), nothing is cropped */
+.case-modal__stage{
+  --mh:min(64vh, 640px);
+  display:flex; align-items:center; justify-content:center; min-height:140px;
+  background:#0b0b0b; border-radius:14px 14px 0 0; overflow:hidden;
+}
+.case-modal__frame{
+  width:min(100%, calc(var(--mh) * var(--ar, 1.7778))); aspect-ratio:var(--ar, 1.7778);
+  opacity:0; transition:opacity .3s ease;
+}
+.case-modal__frame.is-ready{ opacity:1; }
+.case-modal__frame img, .case-modal__frame video{ width:100%; height:100%; object-fit:contain; display:block; }
+/* tall media on a wide screen: picture on the left at full height, text on the right */
+@media (min-width:900px){
+  .case-modal--side .case-modal__box{
+    --side-h:min(calc(100vh - 170px), 760px); --side-w:calc(var(--side-h) * var(--side-ar, .5625));
+    width:auto; max-width:100%; overflow:hidden;
+    display:grid; grid-template-columns:auto 400px; grid-template-rows:auto auto;
+  }
+  .case-modal--side .case-modal__stage{
+    --mh:var(--side-h);
+    grid-column:1; grid-row:1; width:var(--side-w); height:var(--side-h);
+    border-radius:14px 0 0 0;
+  }
+  .case-modal--side .case-modal__thumbs{ grid-column:1; grid-row:2; width:var(--side-w); }
+  .case-modal--side .case-modal__body{ grid-column:2; grid-row:1 / 3; contain:size; overflow:auto; overscroll-behavior:contain; padding-top:64px; }
+}
 .case-modal__thumbs{ display:flex; gap:8px; padding:12px clamp(14px,3vw,20px); overflow-x:auto; background:#0d0d0d; }
 .case-modal__thumbs::-webkit-scrollbar{ height:0; }
 .case-modal__thumb{ flex:0 0 auto; width:74px; height:46px; border-radius:6px; overflow:hidden; cursor:pointer; border:1px solid var(--line-2); opacity:.5; transition:opacity .2s, border-color .2s; position:relative; }
@@ -792,8 +773,7 @@ body {
   position: relative;
   transition: background .35s;
 }
-.process-step:last-child { border-right: none; }
-.process-step:hover { background: var(--card); }
+.process-step:nth-child(4) { border-right: none; }
 .process-step__num {
   font-family: var(--display); font-weight: 800;
   font-size: 56px; line-height: .9; letter-spacing: -.04em;
@@ -805,12 +785,6 @@ body {
   color: var(--hi); margin-bottom: 12px;
 }
 .process-step__desc { font-size: 13px; line-height: 1.5; color: var(--ink-2); }
-.process-step__arr {
-  display: block; margin-top: 20px;
-  color: var(--ink-3); font-size: 20px;
-  transition: color .25s, transform .25s;
-}
-.process-step:hover .process-step__arr { color: var(--green); transform: translateX(4px); }
 @media(max-width:900px){
   .process-grid{grid-template-columns:repeat(2,1fr);}
   .process-step:nth-child(2){border-right:none;}
@@ -830,14 +804,15 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../assets/img-02.webp');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.18;
+  background-image:
+    radial-gradient(60% 90% at 72% 50%, rgba(192,255,51,.07), transparent 70%),
+    linear-gradient(rgba(192,255,51,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(192,255,51,.045) 1px, transparent 1px);
+  background-size: auto, 54px 54px, 54px 54px;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(90deg, transparent, black 40%, black 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 40%, black 100%);
+  mask-image: linear-gradient(90deg, transparent, black 45%, black 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 45%, black 100%);
 }
 .tools > * { position: relative; z-index: 1; }
 .tools__title {
@@ -862,12 +837,6 @@ body {
 }
 .tool-tag:hover { border-color: var(--green); color: var(--green); }
 .tool-tag--active { border-color: var(--green); color: var(--green); }
-.tools__all {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--green);
-}
-.tools__all::after {content: '→';}
 @media(max-width:860px){.tools{grid-template-columns:1fr;}}
 
 /* ============ CONTACT ============ */
@@ -891,7 +860,7 @@ body {
 .contact__title .green { color: var(--green); }
 .contact__btns { display: flex; gap: 14px; flex-wrap: wrap; }
 .contact__photos {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; max-width: 460px; justify-self: end; width: 100%;
 }
 .contact__photos img {
   width: 100%; aspect-ratio: 2/3; object-fit: cover;
@@ -1018,7 +987,7 @@ body {
   align-self: stretch;
   min-height: 500px;
   object-fit: cover;
-  object-position: center top;
+  object-position: 0 30%;
   border-radius: 0;
   display: block;
   filter: brightness(0.95) saturate(1.05);
@@ -1055,7 +1024,7 @@ body {
 }
 @media(max-width:900px) {
   .about-section { grid-template-columns: 1fr; padding: 0 var(--gutter); }
-  .about-visual { min-height: 300px; clip-path: none; margin-left: 0; margin-right: 0; }
+  .about-visual { min-height: 300px; max-height: 360px; clip-path: none; margin-left: 0; margin-right: 0; object-position: 0 24%; }
   .about-top { padding-top: 48px; }
   .about-cols { grid-template-columns: 1fr; gap: 24px; }
 }
@@ -1127,114 +1096,40 @@ body {
   position: relative;
   overflow: hidden;
 }
-.process-light::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('../assets/img-03.webp');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.12;
-  z-index: 0;
-  pointer-events: none;
-}
 .process-light > * { position: relative; z-index: 1; }
 .process-light .sec-label { color: #555; }
 .process-light .sec-title { color: var(--hi); }
 .process-light .sec-desc { color: #888; }
 .process-light .process-grid { border-color: #222; }
 .process-light .process-step { border-right-color: #222; background: #111; }
-.process-light .process-step:hover { background: #161616; }
 .process-light .process-step__title { color: var(--hi); }
 .process-light .process-step__desc { color: #888; }
-.process-light .process-step__arr { color: #444; }
-.process-light .process-step:hover .process-step__arr { color: var(--green); }
 
-
-/* ---- Process: moving green light beam ---- */
-.process-grid {
-  position: relative;
-  overflow: hidden;
+/* ---- Process follows the scroll: the rail fills 01 → 04, each step lights up when the rail reaches it ---- */
+.process-grid { position: relative; }
+.process-rail {
+  position: absolute; left: 0; right: 0; top: 0; height: 2px; z-index: 3;
+  background: rgba(255,255,255,.07); pointer-events: none;
 }
-.process-grid::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -260px;
-  width: 320px; height: 100%;
-  background: radial-gradient(ellipse at center, rgba(192,255,51,0.13) 0%, transparent 70%);
-  animation: scanLight 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-  pointer-events: none;
-  z-index: 0;
+.process-rail i {
+  display: block; width: 100%; height: 100%;
+  background: var(--green); box-shadow: 0 0 14px rgba(192,255,51,.55);
+  transform-origin: 0 50%; transform: scaleX(0);
 }
-@keyframes scanLight {
-  0%   { left: -260px; }
-  45%  { left: calc(100% - 60px); }
-  55%  { left: calc(100% - 60px); }
-  100% { left: -260px; }
-}
-
-/* Sequential number glow: 01→02→03→04 */
-.process-step { position: relative; z-index: 1; }
-.process-step:nth-child(1) .process-step__num {
-  animation: numGlow 5s 0s ease-in-out infinite;
-}
-.process-step:nth-child(2) .process-step__num {
-  animation: numGlow 5s 1.1s ease-in-out infinite;
-}
-.process-step:nth-child(3) .process-step__num {
-  animation: numGlow 5s 2.2s ease-in-out infinite;
-}
-.process-step:nth-child(4) .process-step__num {
-  animation: numGlow 5s 3.3s ease-in-out infinite;
-}
-@keyframes numGlow {
-  0%   { text-shadow: none; color: var(--green); }
-  8%   { text-shadow: 0 0 20px rgba(192,255,51,1), 0 0 50px rgba(192,255,51,0.6), 0 0 90px rgba(192,255,51,0.3); color: #d8ff70; }
-  22%  { text-shadow: 0 0 20px rgba(192,255,51,.6), 0 0 40px rgba(192,255,51,0.2); color: var(--green); }
-  100% { text-shadow: none; color: var(--green); }
-}
-
-/* Also animate bottom border of active step */
-.process-step:nth-child(1) { animation: stepHighlight 5s 0s ease-in-out infinite; }
-.process-step:nth-child(2) { animation: stepHighlight 5s 1.1s ease-in-out infinite; }
-.process-step:nth-child(3) { animation: stepHighlight 5s 2.2s ease-in-out infinite; }
-.process-step:nth-child(4) { animation: stepHighlight 5s 3.3s ease-in-out infinite; }
-@keyframes stepHighlight {
-  0%, 100% { background: #111; border-color: #222; }
-  8%, 18%  { background: rgba(192,255,51,0.04); border-color: rgba(192,255,51,0.25); }
-  30%      { background: #111; border-color: #222; }
-}
-
-
-/* ============ PROCESS RUNNING LIGHT ============ */
-.process-step {
-  transition: background .5s ease;
-  position: relative;
-}
-.process-step::after {
-  content: '';
-  position: absolute;
-  top: -1px; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--green) 30%, var(--green) 70%, transparent 100%);
-  box-shadow: 0 0 20px var(--green), 0 0 50px rgba(192,255,51,.45);
-  opacity: 0;
-  transition: opacity .45s ease;
-  pointer-events: none;
-}
-.process-step.lit::after { opacity: 1; }
-.process-step.lit {
-  background: rgba(192,255,51,.05) !important;
-}
-.process-light .process-step.lit {
-  background: rgba(192,255,51,.07) !important;
-}
+.process-grid.is-vertical .process-rail { right: auto; bottom: 0; width: 2px; height: auto; }
+.process-grid.is-vertical .process-rail i { transform-origin: 50% 0; transform: scaleY(0); }
+.process-step { transition: background .5s ease; }
+.process-step__num { color: rgba(192,255,51,.28); transition: color .5s ease, text-shadow .5s ease; }
+.process-step__title, .process-step__desc { transition: color .5s ease; }
+.process-light .process-step:not(.lit) .process-step__title { color: #7a7a7a; }
+.process-light .process-step:not(.lit) .process-step__desc { color: #5c5c5c; }
+.process-light .process-step.lit { background: #131610; }
 .process-step.lit .process-step__num {
-  text-shadow:
-    0 0 20px rgba(192,255,51,.9),
-    0 0 50px rgba(192,255,51,.5),
-    0 0 90px rgba(192,255,51,.25);
-  transition: text-shadow .4s ease;
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(192,255,51,.7), 0 0 44px rgba(192,255,51,.3);
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-rail { display: none; }
 }
 
 
@@ -1286,14 +1181,14 @@ body {
 .format-card__list li { position: relative; padding-left: 24px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
 .format-card__list li::before { content: ''; position: absolute; left: 0; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(192,255,51,.6); }
 .format-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); margin-top: auto; }
-.format-card__price { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--green); }
-.format-card__arr {
-  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line-2); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center; color: var(--ink-2);
-  font-size: 16px; transition: background .25s, color .25s, border-color .25s, transform .25s;
+.format-card__cta {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 18px;
+  border: 1px solid var(--line-2); border-radius: 100px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2);
+  transition: background .25s, color .25s, border-color .25s;
 }
-.format-card:hover .format-card__arr { border-color: var(--green); color: var(--green); }
-.format-card__arr:hover { background: var(--green); color: #000; }
+.format-card:hover .format-card__cta { border-color: var(--green); color: var(--green); }
+.format-card__cta:hover { background: var(--green); color: #000; }
 @media(max-width:900px){ .formats-grid { grid-template-columns: 1fr; } }
 
 /* ============ MOBILE OVERRIDES (placed last to win the cascade) ============ */
@@ -1301,7 +1196,6 @@ body {
   .hero__bg { background-image: url('../assets/nikita-mobile.webp?v=4'); background-position: 70% 18%; }
   .hero__bg::after { background: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.12) 30%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.96) 100%); }
   .hero { min-height: 100svh; padding: 88px var(--gutter) 48px; justify-content: flex-end; }
-  .hero__tag { display: none; }       /* free vertical space on mobile */
   .hero__copy { display: none; }      /* keep face open; role + buttons carry the message */
   .hero__title { margin-bottom: 20px; }
   .hero__body { margin-top: 4px; }
@@ -1343,16 +1237,13 @@ body {
   width: min(220px, 52vw); height: 2px;
   background: var(--line-2); border-radius: 2px; overflow: hidden;
 }
+/* no fake percentages: a plain running line until the fonts and the first photo are ready */
 .pl-bar__fill {
-  width: 0%; height: 100%;
-  background: linear-gradient(90deg, var(--green-dark), var(--green));
-  box-shadow: 0 0 12px var(--green-glow);
-  transition: width .3s var(--ease);
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  animation: plRun 1.1s var(--ease) infinite;
 }
-.pl-pct {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: .2em; color: var(--ink-2);
-}
+@keyframes plRun { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
 
 /* ============ ICONS: SVG instead of keyboard glyphs ============ */
 :root {
@@ -1360,7 +1251,7 @@ body {
   --i-tg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 4 3 11l6 2.5M21 4l-4 16-8-6.5M21 4 9 13.5V19l3-3.2'/%3E%3C/svg%3E");
 }
 .i-arr, .i-tg,
-.bar__cta::after, .stat--link a::after, .sec-all::after, .case-modal__link::after, .tools__all::after {
+.bar__cta::after, .stat--link a::after, .sec-all::after, .case-modal__link::after {
   content: ''; display: inline-block; flex-shrink: 0;
   width: 1.15em; height: 1.15em; vertical-align: -.2em;
   background-color: currentColor;
@@ -1369,7 +1260,7 @@ body {
 }
 .i-tg { -webkit-mask-image: var(--i-tg); mask-image: var(--i-tg); }
 .i-arr--left { transform: scaleX(-1); }
-.cases-btn .i-arr, .format-card__arr .i-arr { width: 18px; height: 18px; }
+.cases-btn .i-arr { width: 18px; height: 18px; }
 .case-card__expand svg, .case-modal__close svg { display: block; }
 
 /* keyboard focus */
@@ -1388,7 +1279,7 @@ body {
 .svc-card > *, .case-card > * { position: relative; z-index: 2; }
 
 @media (prefers-reduced-motion: reduce) {
-  .pl-logo-dot { animation: none; }
+  .pl-logo-dot, .pl-bar__fill { animation: none; }
   .svc-card::before, .case-card::before { display: none; }
 }
 
@@ -1533,7 +1424,6 @@ html, body { overflow-x: clip !important; }
 @media (hover: none), (max-width: 900px) {
   /* small text links get a taller hit area; margins cancel it so nothing moves */
   .sec-all { padding-block: 13px; margin-top: 3px; margin-bottom: -13px; }
-  .tools__all { padding-block: 13px; margin-block: -13px; }
   .stat--link a { padding-block: 14px; margin-block: -14px; }
   .bar__logo { padding-block: 12px; margin-block: -12px; }
 }
@@ -1549,10 +1439,24 @@ html, body { overflow-x: clip !important; }
   .bar.scrolled { background: rgba(10,10,10,.96); }
   .case-card__num { background: rgba(10,10,10,.82); }
   .case-modal { background: rgba(5,5,5,.92); }
-  .hero__grid { animation: none; }                            /* background-position = whole-hero repaint every frame */
-  .process-grid::before { animation: none; opacity: 0; }      /* animated left = layout every frame */
-  .process-step, .process-step .process-step__num { animation: none !important; }
 }
+
+/* ============ FLOW BETWEEN SECTIONS (assets/flow.js) ============ */
+/* headings rise word by word from under a mask; the padding keeps Й and descenders inside the mask */
+.js-words .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .12em .05em .16em; margin: -.12em -.05em -.16em; }
+.js-words .w > span { display: inline-block; transform: translate3d(0, 135%, 0); transition: transform 1s var(--ease); }
+.js-words.words-in .w > span { transform: none; }
+/* services: dark veil with a growing hole, drawn only while the chapter scrolls in */
+.svc-veil { position: absolute; left: 0; right: 0; top: 0; height: 100vh; z-index: 6; pointer-events: none; display: none; }
+.svc-veil.on { display: block; }
+/* wire from the last service card into the cases */
+.flow-wire { position: absolute; left: 0; width: 100%; z-index: 4; pointer-events: none; overflow: visible; }
+@media (max-width: 700px) { .flow-chip { display: none; } }   /* no room beside the wire on phones */
+.case-card { transition: border-color .35s, transform .35s, box-shadow .45s; }
+.case-card.is-ping { border-color: var(--green); box-shadow: 0 0 0 3px rgba(192,255,51,.25), 0 18px 50px rgba(120,200,0,.16); }
+/* contact: one button and the handle */
+.contact__btns { align-items: center; }
+.contact__handle { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
 
 /* ============ SEAMLESS MODE (promo variant, promo/seamless.js) ============ */
 html.lenis, html.lenis body { height: auto; }
@@ -1590,6 +1494,9 @@ html.seam-on .svc-section::before {
           mask-image: linear-gradient(180deg, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);
 }
 
+/* the main page opens services with a circle over a #111 veil; here the feathered backdrop above does that job */
+html.seam-on .svc-veil { display: none !important; }
+
 /* chapter rail */
 .seam-rail { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 10px; }
 .seam-rail a { position: relative; display: flex; align-items: center; justify-content: center; width: 14px; height: 16px; color: rgba(255,255,255,.5); transition: color .35s; }
@@ -1614,9 +1521,9 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <!-- ============ PRELOADER ============ -->
 <div id="preloader" role="status" aria-label="Загрузка">
   <div class="pl-logo"><span class="pl-logo-dot"></span>ULYANOV</div>
-  <div class="pl-bar"><div class="pl-bar__fill" id="plFill"></div></div>
-  <div class="pl-pct" id="plPct">0%</div>
+  <div class="pl-bar"><div class="pl-bar__fill"></div></div>
 </div>
+<script>try { if (sessionStorage.getItem('seen')) document.getElementById('preloader').remove(); } catch (e) {}</script>
 
 <div class="grain"></div>
 <div class="seam-glow" id="seamGlow" aria-hidden="true"></div>
@@ -1665,8 +1572,6 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
   <img class="hero__cutout" id="heroCutout" src="../assets/nikita-cutout.webp?v=1" alt="" aria-hidden="true">
 
-  <div class="hero__tag">AI CONTENT CREATOR &amp; DIGITAL OPERATOR</div>
-
   <h1 class="hero__title">
     НИКИТА<br><span class="green">УЛЬЯНОВ</span>
   </h1>
@@ -1681,8 +1586,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <div>
       <p class="hero__copy">
         Делаю сайты, нейровидео, AI-аватаров и маркетинг<br>
-        на нейросетях: от идеи до запуска.<br>
-        <strong>Один человек — вместо команды.</strong>
+        на нейросетях для бизнеса и блогеров.
       </p>
       <div class="hero__btns">
         <a href="#contact" class="btn-green">ОБСУДИТЬ ПРОЕКТ <i class="i-arr" aria-hidden="true"></i></a>
@@ -1732,8 +1636,8 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span>AI-КОНТЕНТ</span><span>НЕЙРОВИДЕО</span><span>AI-АВАТАРЫ</span><span>PITCH DECKS</span><span>ЛЕНДИНГИ</span><span>БРЕНДИНГ</span><span>АВТОМАТИЗАЦИЯ</span><span>СТРАТЕГИЯ</span>
-    <span>AI-КОНТЕНТ</span><span>НЕЙРОВИДЕО</span><span>AI-АВАТАРЫ</span><span>PITCH DECKS</span><span>ЛЕНДИНГИ</span><span>БРЕНДИНГ</span><span>АВТОМАТИЗАЦИЯ</span><span>СТРАТЕГИЯ</span>
+    <span>AI-КОНТЕНТ</span><span>НЕЙРОВИДЕО</span><span>AI-АВАТАРЫ</span><span>ИНВЕСТ-ПРЕЗЕНТАЦИИ</span><span>ЛЕНДИНГИ</span><span>БРЕНДИНГ</span><span>АВТОМАТИЗАЦИЯ</span><span>СТРАТЕГИЯ</span>
+    <span>AI-КОНТЕНТ</span><span>НЕЙРОВИДЕО</span><span>AI-АВАТАРЫ</span><span>ИНВЕСТ-ПРЕЗЕНТАЦИИ</span><span>ЛЕНДИНГИ</span><span>БРЕНДИНГ</span><span>АВТОМАТИЗАЦИЯ</span><span>СТРАТЕГИЯ</span>
   </div>
 </div>
 
@@ -1741,11 +1645,11 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <div class="stats stats-light" id="about">
   <div class="stat">
     <div class="stat__num" data-target="8" data-suffix="">0</div>
-    <div class="stat__label">ЛЕТ ОПЫТА<br>В AI И ДИЗАЙНЕ</div>
+    <div class="stat__label">ЛЕТ В ДИЗАЙНЕ<br>И МАРКЕТИНГЕ</div>
   </div>
   <div class="stat">
     <div class="stat__num" data-target="500" data-suffix="+">0</div>
-    <div class="stat__label">РЕАЛИЗОВАННЫХ<br>ПРОЕКТОВ</div>
+    <div class="stat__label">РОЛИКОВ, МАКЕТОВ<br>И САЙТОВ</div>
   </div>
   <div class="stat">
     <div class="stat__num" data-target="10" data-suffix="+">0</div>
@@ -1762,20 +1666,20 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 
 <!-- ============ ABOUT ============ -->
 <section class="about-section" id="about-text">
-  <img class="about-visual" src="../assets/img-04.webp" alt="Никита Ульянов за работой" loading="lazy"/>
+  <img class="about-visual" src="../assets/img-work.webp" alt="Никита Ульянов за работой" loading="lazy"/>
   <div class="about-top">
     <h2 class="about-headline">Один человек —<br><span class="about-headline-green">вместо команды</span></h2>
     <div class="sec-label" style="color:#888">/ ОБО МНЕ</div>
   </div>
   <div class="about-cols">
     <div class="about-col">
-      <p>Я — <strong>AI-специалист полного цикла</strong>. Закрываю задачи маркетинга, дизайна, видео и веб-разработки — один, на современных AI-инструментах.</p>
+      <p>Я <strong>AI-специалист</strong>: делаю маркетинг, дизайн, видео и сайты сам, с помощью нейросетей. Вы общаетесь с тем, кто делает работу, без менеджеров.</p>
     </div>
     <div class="about-col">
-      <p>За 8 лет прошёл путь от дизайнера до человека, который <strong>в одиночку закрывал</strong> функционал маркетинг-отдела, видео-продакшна и контент-фабрики.</p>
+      <p>8 лет в дизайне и маркетинге. С 2022 года <strong>веду весь маркетинг</strong> дилера сельхозтехники «Агро-Мастер»: видео, соцсети, наружка, полиграфия, выставки и сайт.</p>
     </div>
     <div class="about-col">
-      <p>Параллельно — фриланс: инвест-презентации, AI-аватары для брендов, нейровидео, лендинги и AI-стратегии.</p>
+      <p>Параллельно беру проекты: инвест-презентации, AI-аватары, клипы и промо, сайты и автоматизацию заявок.</p>
     </div>
   </div>
 </section>
@@ -1783,41 +1687,13 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <!-- ============ SERVICES ============ -->
 <section class="section svc-section" id="services">
 
-  <!-- Decorative HUD top-right -->
-  <div class="svc-bg-decor" aria-hidden="true">
-    <svg viewBox="0 0 620 300" fill="none" preserveAspectRatio="xMaxYMin meet">
-      <g stroke="#9aa39a" stroke-width="1">
-        <!-- circuit trace with elbow + node -->
-        <path d="M620 40 H470 a8 8 0 0 1-8 8 V70 a8 8 0 0 1-8 8 H360"/>
-        <path d="M620 96 H540 l-14 14 H470"/>
-        <circle cx="360" cy="78" r="3.5" fill="#8fce2e" stroke="none"/>
-        <circle cx="470" cy="124" r="3" fill="#8fce2e" stroke="none"/>
-      </g>
-      <!-- chevrons -->
-      <g fill="none" stroke="#8fce2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
-        <path d="M398 150 l10 9 -10 9"/>
-        <path d="M414 150 l10 9 -10 9"/>
-        <path d="M430 150 l10 9 -10 9"/>
-        <path d="M446 150 l10 9 -10 9"/>
-      </g>
-      <!-- dot matrix -->
-      <defs><pattern id="svcDots" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#aab0aa"/></pattern></defs>
-      <rect x="300" y="206" width="150" height="78" fill="url(#svcDots)" opacity=".85"/>
-      <g stroke="#9aa39a" stroke-width="1">
-        <rect x="500" y="150" width="110" height="58" rx="4"/>
-        <path d="M500 168 H610 M500 186 H610 M536 150 V208 M572 150 V208"/>
-      </g>
-    </svg>
-  </div>
-
   <div class="sec-head">
     <div>
       <div class="sec-label">01 / УСЛУГИ</div>
       <h2 class="sec-title" style="color:#111">ЧТО <span style="color:var(--green-dark)">Я</span> ДЕЛАЮ</h2>
-      <div class="sec-subtitle">AI-POWERED GROWTH SYSTEM</div>
     </div>
     <div>
-      <p class="sec-desc">Стратегия, контент, автоматизация и сайты связаны в одну систему: результат одного блока сразу становится задачей для следующего.</p>
+      <p class="sec-desc">Можно заказать одно направление или всё сразу: тогда стратегия, контент, сайт и автоматизация работают как один конвейер.</p>
       <a href="#formats" class="sec-all">ФОРМАТЫ РАБОТЫ</a>
     </div>
   </div>
@@ -1828,34 +1704,31 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   <article class="svc-card svc-card--sm" id="svcCard1">
     <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="21"/><line x1="3" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="21" y2="12"/></svg></div>
     <h3 class="svc-name">AI-СТРАТЕГИЯ</h3>
-    <span class="svc-sub">STRATEGY CORE</span>
-    <p class="svc-desc">Аудит процессов, стратегия и подбор AI-инструментов под цели бизнеса.</p>
+    <p class="svc-desc">Аудит процессов, план и подбор AI-инструментов под цели бизнеса.</p>
     <div class="svc-viz svc-viz--small" data-viz="radar" aria-hidden="true"></div>
-    <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+    <div class="svc-foot"><a class="svc-go" href="#cases" data-case="sos">Кейс: инвест-пакет SOS <i class="i-arr" aria-hidden="true"></i></a></div>
   </article>
 
   <article class="svc-card svc-card--sm" id="svcCard2">
     <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10.5l6-3.5v10l-6-3.5z" stroke-linejoin="round"/></svg></div>
     <h3 class="svc-name">AI-КОНТЕНТ</h3>
-    <span class="svc-sub">CONTENT ENGINE</span>
-    <p class="svc-desc">Видео, AI-аватары, фото, графика и визуальные системы для бренда.</p>
+    <p class="svc-desc">Видео, AI-аватары, фото и графика для бренда.</p>
     <div class="svc-viz svc-viz--small" data-viz="gen" aria-hidden="true"></div>
-    <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+    <div class="svc-foot"><a class="svc-go" href="#cases" data-case="timur">Кейс: AI-инфлюенсер BAD.TIMUR <i class="i-arr" aria-hidden="true"></i></a></div>
   </article>
 
   <article class="svc-card svc-card--big" id="svcCard4">
     <div class="svc-half svc-half--text">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
       <h3 class="svc-name">AI-АВТОМАТИЗАЦИЯ</h3>
-      <span class="svc-sub">AUTOMATION CORE</span>
-      <p class="svc-desc">Автоматизация контента, воронки, публикации и бизнес-процессов.</p>
+      <p class="svc-desc">Заявки, запись клиентов, публикации и отчёты идут сами, без ручной рутины.</p>
       <div class="svc-stats">
-        <div><small>ЗАПИСЬ КЛИЕНТОВ</small><strong>ИИ-ЧАТ</strong></div>
+        <div><small>ЗАПИСЬ КЛИЕНТОВ</small><strong>AI-ЧАТ</strong></div>
         <div><small>ЗАЯВКИ С САЙТА</small><strong>В TG</strong></div>
         <div><small>АНАЛИТИК 1С</small><strong>УНФ</strong></div>
         <div><small>КОНТЕНТ</small><strong>ПОТОК</strong></div>
       </div>
-      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <div class="svc-foot"><a class="svc-go" href="#cases" data-case="automation">Кейс: Запись ИИ и аналитик 1С <i class="i-arr" aria-hidden="true"></i></a></div>
     </div>
     <div class="svc-half svc-half--img svc-half--viz">
       <div class="svc-viz" data-viz="auto" aria-hidden="true"></div>
@@ -1866,10 +1739,10 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <div class="svc-half svc-half--text">
       <div class="svc-wide-row">
         <div class="svc-icon svc-icon--sm"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14l2.5 2.5L8 19" stroke-linecap="round"/></svg></div>
-        <div><h3 class="svc-name">AI-САЙТЫ</h3><span class="svc-sub">WEB ENGINE</span></div>
+        <h3 class="svc-name">AI-САЙТЫ</h3>
       </div>
-      <p class="svc-desc">Лендинги, сайты-портфолио, прототипы и веб-приложения на современных стеках.</p>
-      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <p class="svc-desc">Лендинги, сайты-визитки, 3D-сайты на Three.js и веб-приложения. Код, без конструкторов.</p>
+      <div class="svc-foot"><a class="svc-go" href="#sites">11 сайтов в разделе ниже <i class="i-arr" aria-hidden="true"></i></a></div>
     </div>
     <div class="svc-half svc-half--img svc-half--viz">
       <div class="svc-viz" data-viz="code" aria-hidden="true"></div>
@@ -1880,10 +1753,10 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <div class="svc-half svc-half--text">
       <div class="svc-wide-row">
         <div class="svc-icon svc-icon--sm"><svg viewBox="0 0 24 24"><path d="M3 19V9l5-5 5 5V5l5 4v10H3z" stroke-linejoin="round"/><rect x="9" y="14" width="3" height="5"/></svg></div>
-        <div><h3 class="svc-name">КОНТЕНТ ЗАВОД</h3><span class="svc-sub">CONTENT FACTORY</span></div>
+        <h3 class="svc-name">КОНТЕНТ-ЗАВОД</h3>
       </div>
-      <p class="svc-desc">Полный цикл производства контента на постоянной основе для брендов и экспертов.</p>
-      <div class="svc-foot"><span class="svc-arr"><i class="i-arr" aria-hidden="true"></i></span><span class="svc-status"><b class="svc-dot"></b>STATUS: ACTIVE</span></div>
+      <p class="svc-desc">Контент каждый месяц: план, ролики, посты и публикация по графику.</p>
+      <div class="svc-foot"><a class="svc-go" href="#cases" data-case="am">Кейс: маркетинг Агро-Мастер <i class="i-arr" aria-hidden="true"></i></a></div>
     </div>
     <div class="svc-half svc-half--img svc-half--viz">
       <div class="svc-viz" data-viz="factory" aria-hidden="true"></div>
@@ -1909,7 +1782,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <div class="case-card" data-case="timur">
       <div class="case-card__thumb">
         <div class="case-card__num">01</div>
-        <img src="../assets/portfolio/timur-portrait.webp" alt="bad.timur — AI-инфлюенсер" style="object-position:center 15%" loading="lazy" decoding="async"/>
+        <img src="../assets/portfolio/timur-portrait.webp" alt="bad.timur — AI-инфлюенсер" style="object-position:center 30%" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">BAD.TIMUR</h3>
@@ -1973,19 +1846,19 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">OSMINOG / ЛЕНДИНГ</h3>
-        <p class="case-card__desc">Премиальный лендинг веб-студии под ключ: 3 версии под ниши, видео-hero с осьминогом, 20 живых кейсов, кастомный код.</p>
-        <span class="case-card__tag">ПРЕМИУМ-ВЕБ</span>
+        <p class="case-card__desc">Лендинг веб-студии на чистом коде: три версии под ниши, видео с осьминогом на первом экране, 20 живых кейсов.</p>
+        <span class="case-card__tag">ЛЕНДИНГ</span>
       </div>
     </div>
 
     <div class="case-card" data-case="automation">
       <div class="case-card__thumb">
         <div class="case-card__num">07</div>
-        <img src="../assets/portfolio/web-zapis-t.webp" alt="Запись ИИ — ИИ-администратор записи" loading="lazy" decoding="async"/>
+        <img src="../assets/portfolio/web-zapis-t.webp" alt="Запись ИИ — AI-администратор записи" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">AI-АВТОМАТИЗАЦИЯ</h3>
-        <p class="case-card__desc">Два рабочих инструмента: ИИ-администратор записи клиентов и ИИ-аналитик для внедренца 1С:УНФ.</p>
+        <p class="case-card__desc">Два рабочих инструмента: AI-администратор записи клиентов и AI-аналитик для внедренца 1С:УНФ.</p>
         <span class="case-card__tag">ИНСТРУМЕНТЫ</span>
       </div>
     </div>
@@ -1999,18 +1872,6 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         <h3 class="case-card__title">AI-ФОТО / СНЯТО</h3>
         <p class="case-card__desc">Фото машины с телефона превращается в кадр уровня дилерского каталога. Реальный пример на VW Tiguan.</p>
         <span class="case-card__tag">ДО / ПОСЛЕ</span>
-      </div>
-    </div>
-
-    <div class="case-card" data-case="brand">
-      <div class="case-card__thumb">
-        <div class="case-card__num">09</div>
-        <img src="../assets/portfolio/cover-brand.webp" alt="Брендинг" loading="lazy" decoding="async"/>
-      </div>
-      <div class="case-card__body">
-        <h3 class="case-card__title">БРЕНДИНГ</h3>
-        <p class="case-card__desc">Логотип, фирменный стиль и носители — целостная айдентика с нуля.</p>
-        <span class="case-card__tag">ДИЗАЙН</span>
       </div>
     </div>
   </div>
@@ -2054,7 +1915,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">OSMINOG</h3>
-        <p class="case-card__desc">Премиальный лендинг веб-студии: видео на первом экране, 20 кейсов с фильтром, три версии под рекламу.</p>
+        <p class="case-card__desc">Лендинг веб-студии: видео на первом экране, 20 кейсов с фильтром, три версии под рекламу.</p>
         <span class="case-card__tag">ВЕБ-СТУДИЯ</span>
       </div>
     </div>
@@ -2146,11 +2007,11 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
     <div class="case-card site-card" data-case="w-zapis">
       <div class="case-card__thumb">
         <div class="case-card__num">ДЕМО</div>
-        <img src="../assets/portfolio/web-zapis-t.webp" alt="Запись ИИ — ИИ-администратор записи" loading="lazy" decoding="async"/>
+        <img src="../assets/portfolio/web-zapis-t.webp" alt="Запись ИИ — AI-администратор записи" loading="lazy" decoding="async"/>
       </div>
       <div class="case-card__body">
         <h3 class="case-card__title">ЗАПИСЬ ИИ</h3>
-        <p class="case-card__desc">ИИ-администратор записи для салонов, барбершопов и автосервисов: диалог в чате и запись в календарь.</p>
+        <p class="case-card__desc">AI-администратор записи для салонов, барбершопов и автосервисов: диалог в чате и запись в календарь.</p>
         <span class="case-card__tag">ВЕБ-ПРИЛОЖЕНИЕ</span>
       </div>
     </div>
@@ -2174,36 +2035,33 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   <div class="sec-head">
     <div>
       <div class="sec-label">04 / ПРОЦЕСС</div>
-      <h2 class="sec-title">ПРОЗРАЧНЫЙ ПРОЦЕСС<br><span style="color:var(--green)">БЕЗ СЮРПРИЗОВ</span></h2>
+      <h2 class="sec-title">ОТ БРИФА<br><span style="color:var(--green)">ДО СДАЧИ</span></h2>
     </div>
     <p class="sec-desc" style="align-self:end">Без лишних созвонов. Задачу, сроки и цену фиксирую письменно, апдейты присылаю в Telegram.</p>
   </div>
 
-  <div class="process-grid">
+  <div class="process-grid" id="processGrid">
     <div class="process-step">
       <div class="process-step__num">01</div>
-      <h3 class="process-step__title">ЗНАКОМСТВО</h3>
-      <p class="process-step__desc">Понимаю задачу, цели и контекст бизнеса. Бриф за 30 минут — бесплатно.</p>
-      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
+      <h3 class="process-step__title">БРИФ</h3>
+      <p class="process-step__desc">Разбираем задачу за 30 минут: что нужно, к какому сроку и какие примеры нравятся. Бесплатно.</p>
     </div>
     <div class="process-step">
       <div class="process-step__num">02</div>
-      <h3 class="process-step__title">СТРАТЕГИЯ</h3>
-      <p class="process-step__desc">Предлагаю план, подход и инструменты. Оценка за 1 день — фикс или диапазон.</p>
-      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
+      <h3 class="process-step__title">ОЦЕНКА</h3>
+      <p class="process-step__desc">В течение дня присылаю план, сроки и цену: фикс или вилку.</p>
     </div>
     <div class="process-step">
       <div class="process-step__num">03</div>
-      <h3 class="process-step__title">РЕАЛИЗАЦИЯ</h3>
-      <p class="process-step__desc">Создаю контент и систему, держу в курсе. Регулярные апдейты в TG-чате.</p>
-      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
+      <h3 class="process-step__title">РАБОТА</h3>
+      <p class="process-step__desc">Делаю по этапам и показываю промежуточные версии в Telegram-чате.</p>
     </div>
     <div class="process-step">
       <div class="process-step__num">04</div>
-      <h3 class="process-step__title">РЕЗУЛЬТАТ</h3>
-      <p class="process-step__desc">Получаете результат и поддержку. Правки и доработки — по договорённости.</p>
-      <span class="process-step__arr"><i class="i-arr" aria-hidden="true"></i></span>
+      <h3 class="process-step__title">СДАЧА</h3>
+      <p class="process-step__desc">Отдаю готовый результат и исходники. Доработки сверх задачи обсуждаем отдельно.</p>
     </div>
+    <div class="process-rail" aria-hidden="true"><i></i></div>
   </div>
 </section>
 
@@ -2211,7 +2069,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <div class="tools" id="tools">
   <div>
     <div class="sec-label">05 / ИНСТРУМЕНТЫ</div>
-    <h2 class="tools__title">AI-ИНСТРУМЕНТЫ,<br>КОТОРЫЕ<br>ИСПОЛЬЗУЮ</h2>
+    <h2 class="tools__title">ИНСТРУМЕНТЫ,<br>С КОТОРЫМИ<br>РАБОТАЮ</h2>
   </div>
   <div class="tools__right">
     <div class="tools__list">
@@ -2228,10 +2086,9 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       <span class="tool-tag">ChatGPT</span>
       <span class="tool-tag">Figma</span>
       <span class="tool-tag">Notion</span>
-      <span class="tool-tag">Webflow</span>
+      <span class="tool-tag">Three.js</span>
       <span class="tool-tag">Suno</span>
     </div>
-    <a href="#contact" class="tools__all">ОБСУДИТЬ ЗАДАЧУ</a>
   </div>
 </div>
 
@@ -2243,7 +2100,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       <h2 class="sec-title">КАК СО МНОЙ<br>РАБОТАЮТ</h2>
     </div>
     <div>
-      <p class="sec-desc">Три формата под разные задачи. Точную стоимость рассчитываю индивидуально после короткого брифа — без шаблонных прайсов.</p>
+      <p class="sec-desc">Цену называю после брифа: фикс или вилку, в течение дня.</p>
       <a href="#contact" class="sec-all">ОБСУДИТЬ ЗАДАЧУ</a>
     </div>
   </div>
@@ -2254,12 +2111,11 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       <h3 class="format-card__title">Разовый проект</h3>
       <p class="format-card__sub">Конкретная задача под ключ</p>
       <ul class="format-card__list">
-        <li>Лендинг, презентация, серия видео или брендинг</li>
-        <li>Бриф, концепция и полная реализация</li>
-        <li>Правки и доработки — по договорённости</li>
-        <li>Исходники передаю вам</li>
+        <li>Лендинг, презентация, клип или серия роликов</li>
+        <li>От брифа и концепции до готового результата</li>
+        <li>Исходники остаются у вас</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">Расчёт после брифа</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
+      <div class="format-card__foot"><a href="#contact" class="format-card__cta">Обсудить <i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
 
     <article class="format-card format-card--feat">
@@ -2267,12 +2123,11 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       <h3 class="format-card__title">Контент на потоке</h3>
       <p class="format-card__sub">Ежемесячное производство</p>
       <ul class="format-card__list">
-        <li>Контент-план под цели бренда</li>
-        <li>Видео, посты и графика на регулярной основе</li>
-        <li>Ведение, апдейты и отчётность</li>
-        <li>Приоритетная поддержка</li>
+        <li>Контент-план на месяц</li>
+        <li>Ролики, посты и графика по графику</li>
+        <li>Публикация и отчёт за месяц</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">По запросу, помесячно</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
+      <div class="format-card__foot"><a href="#contact" class="format-card__cta">Обсудить <i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
 
     <article class="format-card">
@@ -2280,12 +2135,12 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       <h3 class="format-card__title">AI-стратегия и консалтинг</h3>
       <p class="format-card__sub">Система и обучение</p>
       <ul class="format-card__list">
-        <li>Аудит процессов и точек роста</li>
+        <li>Разбор процессов: что можно отдать нейросетям</li>
         <li>Подбор AI-инструментов под задачи</li>
-        <li>Настройка автоматизаций и воронок</li>
-        <li>Обучение команды работе с AI</li>
+        <li>Автоматизация заявок, записи и отчётов</li>
+        <li>Обучение команды</li>
       </ul>
-      <div class="format-card__foot"><span class="format-card__price">Индивидуально</span><a href="#contact" class="format-card__arr" aria-label="обсудить"><i class="i-arr" aria-hidden="true"></i></a></div>
+      <div class="format-card__foot"><a href="#contact" class="format-card__cta">Обсудить <i class="i-arr" aria-hidden="true"></i></a></div>
     </article>
   </div>
 </section>
@@ -2305,36 +2160,28 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 
   <div class="faq-list">
     <div class="faq-item">
-      <button class="faq-q"><span>Сколько стоит работа?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Зависит от задачи и объёма. После короткого брифа в течение одного дня даю оценку и вилку по цене — бесплатно и без обязательств.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>Сколько стоит работа?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Зависит от задачи и объёма. После брифа в течение дня называю цену: фикс или вилку. Бриф бесплатный и ни к чему не обязывает.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>Сколько времени занимает проект?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>От нескольких дней до пары недель — зависит от объёма. Точные сроки фиксирую письменно до старта, чтобы всё было прозрачно.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>Сколько времени занимает проект?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>От нескольких дней до пары недель, в зависимости от объёма. Срок фиксирую письменно до старта.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>Как строится работа?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Бриф (30 минут, бесплатно), затем стратегия и оценка, реализация с регулярными апдейтами в TG-чате, в конце результат и поддержка.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>Вы правда работаете один?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Да, всё делаю сам: маркетинг, дизайн, видео и сайты. Вы общаетесь напрямую с исполнителем, без менеджеров и пересказов.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>Вы правда работаете один?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Да. Закрываю маркетинг, дизайн, видео и сайты на современных AI-инструментах — один человек вместо целой команды и без потери качества.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>А если понадобятся правки?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Показываю работу по этапам, поэтому крупные правки ловим рано. Правки в рамках задачи входят в работу, доработки сверх неё обсуждаем отдельно.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>А если понадобятся правки?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Работаю итерациями и согласовываю каждый этап, поэтому финал получается без сюрпризов. Доработки сверх согласованной задачи — по договорённости.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>Как происходит оплата?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Обычно предоплата или оплата по этапам. Условия фиксируем до начала работы.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q"><span>С какими задачами ко мне приходят?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>AI-контент и нейровидео, аватары, презентации (pitch decks), лендинги и сайты, брендинг и автоматизация процессов.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q"><span>Как происходит оплата?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>По договорённости — обычно предоплата или поэтапная оплата по ходу проекта. Все условия проговариваем до начала работы.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q"><span>Как начать?</span><i class="faq-ic"></i></button>
-      <div class="faq-a"><p>Напишите в Telegram <a href="https://t.me/Cold_69" target="_blank" rel="noopener" style="color:var(--green)">@Cold_69</a> — за 30 минут разберём задачу, и я предложу решение.</p></div>
+      <button class="faq-q" type="button" aria-expanded="false"><span>Как начать?</span><i class="faq-ic"></i></button>
+      <div class="faq-a"><p>Напишите в Telegram <a href="https://t.me/Cold_69" target="_blank" rel="noopener" style="color:var(--green)">@Cold_69</a>: коротко опишите задачу, и за 30 минут разберём её вместе.</p></div>
     </div>
   </div>
 </section>
@@ -2342,20 +2189,18 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <!-- ============ CONTACT ============ -->
 <section class="contact" id="contact">
   <div class="contact__left reveal">
-    <div class="contact__label">08 / ДАВАЙТЕ РАБОТАТЬ</div>
+    <div class="contact__label">08 / КОНТАКТЫ</div>
     <h2 class="contact__title">
-      ДАВАЙТЕ СОЗДАДИМ<br>
-      ВАШ <span class="green">СЛЕДУЮЩИЙ<br>ПРОЕКТ</span>
+      РАССКАЖИТЕ<br>О ЗАДАЧЕ —<br><span class="green">ОЦЕНЮ<br>ЗА ДЕНЬ</span>
     </h2>
     <div class="contact__btns">
-      <a href="https://t.me/Cold_69" class="btn-green" target="_blank" rel="noopener">ОБСУДИТЬ ПРОЕКТ <i class="i-arr" aria-hidden="true"></i></a>
-      <a href="https://t.me/Cold_69" class="btn-ghost" target="_blank" rel="noopener">НАПИСАТЬ В TELEGRAM <i class="i-tg" aria-hidden="true"></i></a>
+      <a href="https://t.me/Cold_69" class="btn-green" target="_blank" rel="noopener">НАПИСАТЬ В TELEGRAM <i class="i-tg" aria-hidden="true"></i></a>
+      <span class="contact__handle">@Cold_69 · отвечаю лично</span>
     </div>
   </div>
   <div class="contact__photos">
     <img src="../assets/img-13.webp" alt="Никита Ульянов" style="object-position:center 20%" loading="lazy"/>
-    <img src="../assets/img-14.webp" alt="Никита Ульянов за работой" style="object-position:center 20%" loading="lazy"/>
-    <img src="../assets/img-15.webp" alt="Никита Ульянов портрет" style="object-position:center 15%" loading="lazy"/>
+    <img src="../assets/img-15.webp" alt="Никита Ульянов, портрет" style="object-position:center 15%" loading="lazy"/>
   </div>
 </section>
 
@@ -2380,7 +2225,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <span>© 2026 НИКИТА УЛЬЯНОВ</span>
-  <span>AI CONTENT CREATOR & DIGITAL OPERATOR</span>
+  <span>AI-СПЕЦИАЛИСТ: МАРКЕТИНГ, ДИЗАЙН, ВИДЕО, САЙТЫ</span>
   <a href="https://t.me/Cold_69" target="_blank" rel="noopener">TELEGRAM @COLD_69</a>
 </footer>
 
@@ -2388,37 +2233,31 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 /* Each block isolated in its own IIFE so one failure never blocks the others */
 
 /* ============ PRELOADER ============ */
+/* Waits for real things only: the fonts and the hero photo (at most 2.5 s), and shows once per visit. */
 (function() {
   try {
     const pre = document.getElementById('preloader');
-    if (!pre) return;
-    const fill = document.getElementById('plFill');
-    const pct = document.getElementById('plPct');
-    let p = 0, done = false;
-    const set = v => { p = Math.min(100, v); if (fill) fill.style.width = p + '%'; if (pct) pct.textContent = Math.round(p) + '%'; };
-
-    // Simulated progress that keeps moving, then snaps to 100 on real load
-    const tick = setInterval(() => {
-      if (done) return;
-      const step = p < 70 ? 4 + Math.random() * 8 : (p < 92 ? 1 + Math.random() * 3 : 0.4);
-      set(p + step);
-    }, 130);
-
+    let done = false;
     function finish() {
       if (done) return; done = true;
-      clearInterval(tick);
-      set(100);
-      setTimeout(() => {
-        pre.classList.add('done');
-        document.body.style.overflow = '';
-      }, 350);
+      document.body.style.overflow = '';
+      if (pre) pre.classList.add('done');
+      document.documentElement.classList.add('is-ready');
+      document.dispatchEvent(new Event('site:ready'));
+      try { sessionStorage.setItem('seen', '1'); } catch (e) {}
+      if (pre) setTimeout(() => pre.remove(), 700);
     }
-    // lock scroll while loading
+    if (!pre) { finish(); return; }
     document.body.style.overflow = 'hidden';
-    window.addEventListener('load', () => setTimeout(finish, 300));
-    // hard safety net so the site never gets stuck behind the loader
-    setTimeout(finish, 4500);
-  } catch(e) { console.warn('preloader:', e); }
+    // the hero photo the stylesheet picked for this screen (desktop or phone crop)
+    const bg = document.querySelector('.hero__bg');
+    const m = bg && /url\(["']?([^"')]+)["']?\)/.exec(getComputedStyle(bg).backgroundImage);
+    const waits = [];
+    if (m) { const photo = new Image(); photo.src = m[1]; if (photo.decode) waits.push(photo.decode().catch(() => {})); }
+    if (document.fonts && document.fonts.ready) waits.push(document.fonts.ready);
+    Promise.all(waits).then(() => setTimeout(finish, 150));
+    setTimeout(finish, 2500);
+  } catch(e) { console.warn('preloader:', e); document.body.style.overflow = ''; }
 })();
 
 /* ============ CURSOR SPOTLIGHT on cards ============ */
@@ -2468,35 +2307,21 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 })();
 
 /* ============ NAV ACTIVE ============ */
+/* the link of the section that crosses the middle of the screen is lit (works for sections taller than the screen too) */
 (function() {
   try {
-    const sections = document.querySelectorAll('section[id], div[id]');
-    const navLinks = document.querySelectorAll('.bar__nav a');
-    if (!sections.length) return;
+    const links = [...document.querySelectorAll('.bar__nav a[href^="#"]')];
+    const map = new Map();
+    links.forEach(a => { const el = document.querySelector(a.getAttribute('href')); if (el) map.set(el, a); });
+    if (!map.size || !('IntersectionObserver' in window)) return;
+    const inside = new Set();
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          navLinks.forEach(a => a.classList.remove('active'));
-          const link = document.querySelector('.bar__nav a[href="#' + e.target.id + '"]');
-          if (link) link.classList.add('active');
-        }
-      });
-    }, {threshold: 0.4});
-    sections.forEach(s => observer.observe(s));
+      entries.forEach(e => { e.isIntersecting ? inside.add(e.target) : inside.delete(e.target); });
+      links.forEach(a => a.classList.remove('active'));
+      inside.forEach(el => map.get(el).classList.add('active'));
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    map.forEach((a, el) => observer.observe(el));
   } catch(e) { console.warn('nav active:', e); }
-})();
-
-/* ============ SMOOTH SCROLL (Lenis) — optional, guarded ============ */
-(function() {
-  try {
-    if (typeof Lenis === 'undefined') return; // native scroll fallback
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-    });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-  } catch(e) { console.warn('Lenis init failed:', e); }
 })();
 
 /* ============ REVEAL on SCROLL ============ */
@@ -2533,22 +2358,6 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   } catch(e) { console.warn('cases carousel:', e); }
 })();
 
-
-/* ============ PROCESS RUNNING LIGHT ============ */
-(function() {
-  try {
-    const steps = document.querySelectorAll('.process-step');
-    if (!steps.length) return;
-    let active = 0;
-    steps[0].classList.add('lit');
-    setInterval(() => {
-      steps[active].classList.remove('lit');
-      active = (active + 1) % steps.length;
-      steps[active].classList.add('lit');
-    }, 900);
-  } catch(e) { console.warn('running light:', e); }
-})();
-
 /* ============ HERO PARALLAX ============ */
 (function() {
   try {
@@ -2571,79 +2380,51 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 /* ============ HERO ROLE MORPHER (TEXT SCRAMBLE) ============ */
 (function() {
   try {
-    const roles = [
-      'AI-СПЕЦИАЛИСТ','AI-МАРКЕТОЛОГ','AI-ДИЗАЙНЕР','AI-ВИДЕОГРАФ',
-      'AI-СТРАТЕГ','ПРОМПТ-ИНЖЕНЕР','КРЕАТИВНЫЙ ТЕХНОЛОГ',
-      'AI-КОНСУЛЬТАНТ','НЕЙРО-ХУДОЖНИК','ВАЙБ-КОДЕР'
-    ];
+    const roles = ['AI-СПЕЦИАЛИСТ', 'AI-МАРКЕТОЛОГ', 'AI-ВИДЕОГРАФ', 'ВЕБ-РАЗРАБОТЧИК'];
     const el = document.getElementById('heroRole');
+    const hero = document.getElementById('home');
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;   // the first role stays as written
 
-    const chars = '!<>-_\\\\/[]{}=+*^?#АБВГДЕ01';
-    let frame, frameReq, queue = [], resolve;
-
+    const chars = '<>-_/[]{}=+*^?#АБВГДЕ01';
+    let frameReq = 0, frame = 0, queue = [];
     function setText(newText) {
       const oldText = el.textContent;
       const length = Math.max(oldText.length, newText.length);
-      const p = new Promise(r => resolve = r);
       queue = [];
       for (let i = 0; i < length; i++) {
-        const from = oldText[i] || '';
-        const to = newText[i] || '';
         const start = Math.floor(Math.random() * 20);
-        const end = start + Math.floor(Math.random() * 20) + 10;
-        queue.push({ from, to, start, end, char: '' });
+        queue.push({ from: oldText[i] || '', to: newText[i] || '', start: start, end: start + 10 + Math.floor(Math.random() * 20), char: '' });
       }
       cancelAnimationFrame(frameReq);
       frame = 0;
       update();
-      return p;
     }
     function update() {
       let output = '', complete = 0;
       for (let i = 0; i < queue.length; i++) {
-        let { from, to, start, end, char } = queue[i];
-        if (frame >= end) { complete++; output += to; }
-        else if (frame >= start) {
-          if (!char || Math.random() < 0.28) {
-            char = chars[Math.floor(Math.random() * chars.length)];
-            queue[i].char = char;
-          }
-          output += '<span style="color:var(--ink-2)">' + char + '</span>';
-        } else { output += from; }
+        const q = queue[i];
+        if (frame >= q.end) { complete++; output += q.to; }
+        else if (frame >= q.start) {
+          if (!q.char || Math.random() < 0.28) q.char = chars[Math.floor(Math.random() * chars.length)];
+          output += '<span style="color:var(--ink-2)">' + q.char + '</span>';
+        } else output += q.from;
       }
       el.innerHTML = output;
-      if (complete === queue.length) { if(resolve) resolve(); }
-      else { frameReq = requestAnimationFrame(update); frame++; }
+      if (complete < queue.length) { frameReq = requestAnimationFrame(update); frame++; }
     }
 
-    let i = 0;
-    setText(roles[0]);
-    setInterval(() => {
-      i = (i + 1) % roles.length;
-      setText(roles[i]);
-    }, 2800);
+    // change the role only while the hero is on screen
+    let i = 0, timer = 0, visible = true;
+    const tick = () => { i = (i + 1) % roles.length; setText(roles[i]); };
+    const run = () => { if (!timer) timer = setInterval(tick, 2800); };
+    const stop = () => { clearInterval(timer); timer = 0; };
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : stop(); }).observe(hero);
+    } else run();
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : (visible && run()); });
   } catch(e) { console.warn('role scramble:', e); }
 })();
-
-/* ============ MAGNETIC BUTTONS ============ */
-(function() {
-  try {
-    if (window.matchMedia('(hover: none)').matches) return; // skip touch
-    document.querySelectorAll('.btn-green, .btn-ghost, .bar__cta').forEach(btn => {
-      btn.style.transition = 'transform .25s var(--ease), background .25s, border-color .25s';
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width/2;
-        const y = e.clientY - r.top - r.height/2;
-        btn.style.transform = 'translate(' + (x*0.25) + 'px,' + (y*0.35) + 'px)';
-      });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
-    });
-  } catch(e) { console.warn('magnetic:', e); }
-})();
-
-
 
 /* ============ COUNT-UP ANIMATION ============ */
 (function() {
@@ -2722,15 +2503,8 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       });
     });
 
-    // headings
-    gsap.utils.toArray('.sec-title, .about-headline, .tools__title, .contact__title, .hero__tag').forEach(el => {
-      gsap.from(el, {
-        opacity: 0, y: 30, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 86%', once: true }
-      });
-    });
-    // labels / subtitles slide
-    gsap.utils.toArray('.sec-label, .sec-subtitle, .sec-desc').forEach(el => {
+    // labels / descriptions slide (headings reveal word by word, see HEADINGS)
+    gsap.utils.toArray('.sec-label, .sec-desc').forEach(el => {
       gsap.from(el, {
         opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true }
@@ -2774,59 +2548,100 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   } catch(e){ console.warn('hero contour:', e); }
 })();
 
-/* ============ HERO MATRIX CODE RAIN ============ */
+/* ============ HERO CODE RAIN ============ */
+/* Cyrillic code rain instead of the film katakana: now and then a column spells what I make
+   (САЙТ, ВИДЕО, КЛИП...) from top to bottom. Glyphs behind the name, role, text and buttons are
+   dimmed so the copy always reads; on desktop the rain lights up around the cursor.
+   ~14 fps on one canvas, stops as soon as the hero leaves the screen. */
 (function() {
   try {
     const c = document.getElementById('heroMatrix');
-    if (!c) return;
+    const hero = document.getElementById('home');
+    if (!c || !hero) return;
     const ctx = c.getContext('2d');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // katakana + digits + code symbols + brand letters → "programmer / matrix" feel
-    const charset = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789{}[]()<>/\\=;:+*$#&|!?ULYANOVAI'.split('');
-    let w, h, dpr, fontSize, cols, drops, raf = null, last = 0;
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const GLYPHS = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯ0123456789<>/{}[]=+*#'.split('');
+    const WORDS = ['САЙТ', 'ВИДЕО', 'КЛИП', 'КОД', 'АВАТАР', 'ДИЗАЙН', 'ПРОМПТ', 'ЛЕНДИНГ', 'КОНТЕНТ', 'НЕЙРОСЕТЬ', '3D', 'ИИ', 'ULYANOV'];
+    const BODY = 'rgba(150,220,40,0.92)', HEAD = '#ccff66', WORD = '#e6ffa6';
+    let w = 0, h = 0, fs = 18, cols = 0, drops = [], zones = [], raf = null, last = 0, mx = -1e4, my = -1e4;
 
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // text boxes of the copy, in canvas coordinates: glyphs inside them are drawn faint
+    function measureZones() {
+      const r0 = c.getBoundingClientRect();
+      const boxes = [];
+      ['.hero__title', '.hero__role', '.hero__copy'].forEach(sel => {
+        const el = hero.querySelector(sel);
+        if (!el || !el.offsetParent) return;
+        const range = document.createRange(); range.selectNodeContents(el);
+        [...range.getClientRects()].forEach(r => { if (r.width > 2) boxes.push(r); });
+      });
+      hero.querySelectorAll('.hero__btns a').forEach(el => boxes.push(el.getBoundingClientRect()));
+      zones = boxes.map(r => [r.left - r0.left - 16, r.top - r0.top - 12, r.right - r0.left + 16, r.bottom - r0.top + 12]);
+    }
+    const inZone = (x, y) => { for (let i = 0; i < zones.length; i++) { const z = zones[i]; if (x > z[0] && x < z[2] && y > z[1] && y < z[3]) return true; } return false; };
+    const drop = first => ({ y: first ? Math.random() * -60 : Math.random() * -18, word: Math.random() < 0.2 ? WORDS[(Math.random() * WORDS.length) | 0] : '', k: 0 });
+
+    function resize() {
       w = c.clientWidth; h = c.clientHeight;
-      c.width = w * dpr; c.height = h * dpr;
+      const dpr = Math.min(window.devicePixelRatio || 1, w < 700 ? 1.5 : 2);
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      fontSize = 19;
-      cols = Math.ceil(w / fontSize);
-      drops = Array.from({length: cols}, () => Math.random() * -60);
+      fs = w < 600 ? 16 : 19;
+      cols = Math.ceil(w / fs);
+      drops = Array.from({ length: cols }, () => drop(true));
       ctx.clearRect(0, 0, w, h);
+      measureZones();
     }
-    function frame(t){
-      raf = requestAnimationFrame(frame);
-      if (t - last < 70) return;   // ~14fps, lighter on CPU
-      last = t;
-      ctx.fillStyle = 'rgba(8,10,8,0.075)';     // trailing fade (lower = longer streaks)
+    function draw() {
+      ctx.fillStyle = 'rgba(8,10,8,0.075)';          // trailing fade: older glyphs sink into the dark
       ctx.fillRect(0, 0, w, h);
-      ctx.font = '600 ' + fontSize + 'px monospace';
-      for (let i = 0; i < cols; i++){
-        const ch = charset[(Math.random() * charset.length) | 0];
-        const x = i * fontSize, y = drops[i] * fontSize;
-        ctx.fillStyle = Math.random() > 0.82 ? '#ccff66' : 'rgba(150,220,40,0.92)';  // bright heads + green
+      ctx.font = '600 ' + fs + 'px "JetBrains Mono", monospace';
+      for (let i = 0; i < cols; i++) {
+        const d = drops[i], x = i * fs, y = d.y * fs;
+        let ch, col;
+        if (d.k < d.word.length) { ch = d.word[d.k++]; col = WORD; }
+        else { ch = GLYPHS[(Math.random() * GLYPHS.length) | 0]; col = Math.random() > 0.82 ? HEAD : BODY; }
+        let a = 1;
+        if (inZone(x + fs * 0.5, y - fs * 0.4)) a = 0.13;
+        else if (fine) {
+          const dx = x - mx, dy = y - my;
+          if (dx * dx + dy * dy < 13000) col = '#f2ffd0';
+        }
+        ctx.globalAlpha = a; ctx.fillStyle = col;
         ctx.fillText(ch, x, y);
-        if (y > h && Math.random() > 0.975) drops[i] = Math.random() * -18;
-        drops[i] += 1;
+        if (y > h && Math.random() > 0.975) drops[i] = drop(false);
+        d.y += 1;
       }
+      ctx.globalAlpha = 1;
     }
-    function start(){ if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
-    function stop(){ if (raf) { cancelAnimationFrame(raf); raf = null; } }
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      if (t - last < 70) return;                      // ~14 fps is enough for rain and cheap on phones
+      last = t;
+      draw();
+    }
+    function start() { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
     resize();
-    if (reduce){ // static sparse frame, no animation
-      ctx.font = '600 16px monospace'; ctx.fillStyle = 'rgba(150,220,40,0.5)';
-      for (let i = 0; i < cols; i++) ctx.fillText(charset[(Math.random()*charset.length)|0], i*16, (Math.random()*h)|0);
+    if (reduce) {                                     // one still frame, no motion
+      for (let n = 0; n < 24; n++) draw();
       return;
     }
-    window.addEventListener('resize', () => { stop(); resize(); start(); }, {passive:true});
+    let rt = 0;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { stop(); resize(); start(); }, 150); }, { passive: true });
+    if (fine) hero.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; }, { passive: true });
+    hero.addEventListener('pointerleave', () => { mx = my = -1e4; });
+    // the copy moves while the headline reveals and when fonts arrive: measure again then
+    const remeasure = () => setTimeout(measureZones, 1300);
+    if (document.documentElement.classList.contains('is-ready')) remeasure(); else document.addEventListener('site:ready', remeasure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureZones);
     start();
-    const hero = document.getElementById('home');
-    if (hero && 'IntersectionObserver' in window){
-      new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), {threshold:0}).observe(hero);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { threshold: 0 }).observe(hero);
     }
-  } catch(e){ console.warn('hero matrix:', e); }
+  } catch(e) { console.warn('hero rain:', e); }
 })();
 
 /* ============ FAQ ACCORDION ============ */
@@ -2834,7 +2649,10 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   try {
     document.querySelectorAll('.faq-item').forEach(item => {
       const q = item.querySelector('.faq-q');
-      if (q) q.addEventListener('click', () => item.classList.toggle('open'));
+      if (q) q.addEventListener('click', () => {
+        const open = item.classList.toggle('open');
+        q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
     });
   } catch(e) { console.warn('faq:', e); }
 })();
@@ -2844,6 +2662,7 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
   try {
     const modal = document.getElementById('caseModal');
     if (!modal) return;
+    const box = modal.querySelector('.case-modal__box');
     const cards = document.querySelectorAll('.case-card');
     const stage = document.getElementById('caseStage');
     const thumbs = document.getElementById('caseThumbs');
@@ -2867,16 +2686,16 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         link: { url: 'https://t.me/bad_timur69', text: 'Профиль в Telegram' },
         media: [
           { t:'video', src:'timur-loop.mp4', poster:'timur-cover.webp' },
-          { t:'img', src:'timur-portrait.webp', fit:'contain' },
-          { t:'img', src:'timur-profile.webp', fit:'contain' },
-          { t:'img', src:'timur-1.webp', fit:'contain' },
-          { t:'img', src:'timur-2.webp', fit:'contain' }
+          { t:'img', src:'timur-portrait.webp' },
+          { t:'img', src:'timur-profile.webp' },
+          { t:'img', src:'timur-1.webp' },
+          { t:'img', src:'timur-2.webp' }
         ]
       },
       video: {
         num: '02', title: 'Видео-продакшн', sub: 'AI-клип / нейровидео / промо',
-        desc: '«Cold Infinity» — авторский AI-музыкальный клип: концепт и сюжет мои, музыка написана в Suno, монтаж мой. Плюс промо-ролики и нейровидео под задачи бренда: спорт, техника, реклама. От идеи и сценария до финального монтажа.',
-        results: [['1:33','хронометраж клипа'],['Suno','AI-музыка'],['1080p','кинокачество']],
+        desc: '«Cold Infinity» — авторский AI-музыкальный клип: концепт и сюжет мои, музыка написана в Suno, монтаж мой. Плюс промо-ролики и нейровидео под задачи бренда: спорт, техника, реклама.',
+        results: [['1:33','длина клипа'],['4','промо-ролика']],
         tags: ['AI-клип','нейровидео','музыка Suno','монтаж'],
         media: [
           { t:'video', src:'coldinfinity.mp4', poster:'coldinfinity-cover.webp', sound:true },
@@ -2888,11 +2707,11 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       },
       singer: {
         num: '03', title: '1213 — AI-клип', sub: 'AI вместо съёмки / липсинк / Seedance 2.5',
-        desc: 'Артист 1213 не хотел сниматься в реальном клипе — сделали видео полностью на нейросетях. Разработал визуальный образ артиста и оживил его как поющий AI-аватар с точным липсинком под трек. Генерация видео — Seedance 2.5; чёрно-белая стилизация с сюрреалистичным окружением и переходами в графику. Цельный клип от концепта до финала.',
-        results: [['0','съёмочных дней'],['Seedance 2.5','генерация видео'],['липсинк','точная синхра']],
+        desc: 'Артист 1213 не хотел сниматься в реальном клипе — сделали видео полностью на нейросетях. Разработал визуальный образ артиста и оживил его как поющий AI-аватар с точным липсинком под трек. Генерация видео — Seedance 2.5; чёрно-белая стилизация с сюрреалистичным окружением и переходами в графику.',
+        results: [],
         tags: ['AI вместо съёмки','липсинк','Seedance 2.5','разработка образа'],
         media: [
-          { t:'video', src:'singer-clip.mp4', poster:'singer-clip-cover.webp', sound:true, fit:'contain' }
+          { t:'video', src:'singer-clip.mp4', poster:'singer-clip-cover.webp', sound:true }
         ]
       },
       sos: {
@@ -2908,8 +2727,8 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       am: {
         num: '05', title: 'Агро-Мастер', sub: 'Маркетинг под ключ / с 2022',
         desc: 'Комплексный маркетинг дилера сельхозтехники «Агро-Мастер» с 2022 года — не только дизайн. Видеопродакшн и монтаж роликов о технике, ведение соцсетей и рассылок (Telegram/WhatsApp), YouTube-канал, наружная реклама под бренды JACTO и YTO, полиграфия (каталоги, листовки, буклеты, упаковка-мерч), оформление выставочных стендов («Сибирская аграрная неделя» и др.), поддержка и наполнение сайта, товарный фид для поиска в Яндекс/Google. Последние годы — переход на нейросети в контенте.',
-        results: [['с 2022','маркетинг компании'],['360°','видео, SMM, бренд, сайт'],['JACTO / YTO','наружка + полиграфия']],
-        tags: ['маркетинг','видео','SMM','наружка','брендинг'],
+        results: [['с 2022','веду маркетинг компании'],['JACTO / YTO','наружка и полиграфия']],
+        tags: ['маркетинг','видео','SMM','наружка','полиграфия'],
         media: [
           { t:'img', src:'am-billboard-jacto.webp' },
           { t:'img', src:'am-billboard-yto.webp' },
@@ -2920,20 +2739,20 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         ]
       },
       sites: {
-        num: '06', title: 'OSMINOG — Лендинг', sub: 'Премиум-лендинг веб-студии / 3 версии под ниши',
-        desc: 'Премиальный лендинг для веб-студии OSMINOG — полностью кастомный, без конструкторов: тёмный дизайн, видео-hero с 3D-осьминогом, галерея из 20 живых кейсов с фильтром по типам, блоки услуг, команды, гарантий и FAQ. Собрал три версии под контекстную рекламу — основная, под клиники и под интернет-магазины — с плавными анимациями и полным адаптивом. Остальные сайты собраны в блоке «Сайты и лендинги».',
-        results: [['3','версии под ниши'],['20','живых кейсов'],['0','конструкторов — чистый код']],
-        tags: ['лендинг','кастомная вёрстка','видео-hero','адаптив','SEO-ready'],
+        num: '06', title: 'OSMINOG — Лендинг', sub: 'Лендинг веб-студии / 3 версии под ниши',
+        desc: 'Лендинг для веб-студии OSMINOG на чистом коде, без конструкторов: тёмный дизайн, видео с 3D-осьминогом на первом экране, галерея из 20 живых кейсов с фильтром по типам, блоки услуг, команды, гарантий и FAQ. Три версии под контекстную рекламу: основная, для клиник и для интернет-магазинов. Остальные сайты — в блоке «Сайты и лендинги».',
+        results: [['3','версии под ниши'],['20','живых кейсов']],
+        tags: ['лендинг','чистый код','видео на первом экране','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/osminog/', text: 'Открыть лендинг' },
-        media: [ { t:'img', src:'osminog-cover.webp' }, { t:'img', src:'osminog-services.webp' }, { t:'img', src:'osminog-benefits.webp' }, { t:'img', src:'osminog-mobile.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'osminog-cover.webp' }, { t:'img', src:'osminog-services.webp' }, { t:'img', src:'osminog-benefits.webp' }, { t:'img', src:'osminog-mobile.webp' } ]
       },
       automation: {
         num: '07', title: 'AI-автоматизация', sub: 'Запись ИИ / Аналитик 1С:УНФ',
-        desc: 'Два рабочих инструмента. Запись ИИ: демо ИИ-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь, ниши переключаются на лету. Аналитик 1С:УНФ: внедренец описывает процесс клиента, инструмент собирает запрос с методикой и базой знаний по УНФ 3.0 и отправляет его в бесплатный DeepSeek. На выходе разбор по документам и черновик ТЗ, без VPN, ключей и оплаты.',
+        desc: 'Два рабочих инструмента. Запись ИИ: демо AI-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь, ниши переключаются на лету. Аналитик 1С:УНФ: внедренец описывает процесс клиента, инструмент собирает запрос с методикой и базой знаний по УНФ 3.0 и отправляет его в бесплатный DeepSeek. На выходе разбор по документам и черновик ТЗ, без VPN, ключей и оплаты.',
         results: [['2','рабочих инструмента'],['УНФ 3.0','база знаний аналитика'],['без VPN','и без ключей API']],
-        tags: ['ИИ-администратор','онлайн-запись','1С:УНФ','DeepSeek'],
+        tags: ['AI-администратор','онлайн-запись','1С:УНФ','DeepSeek'],
         link: { url: 'https://coldinfinity696969-byte.github.io/zapis-ai/', text: 'Открыть демо Запись ИИ' },
-        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp', fit:'contain', tall:true }, { t:'img', src:'web-unf-d.webp' } ]
+        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp' }, { t:'img', src:'web-unf-d.webp' } ]
       },
       photo: {
         num: '08', title: 'AI-фото: СНЯТО', sub: 'Свой сервис / фото с телефона в студийный кадр',
@@ -2941,115 +2760,163 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         results: [['3','пары до / после'],['VW Tiguan','реальная машина']],
         tags: ['AI-фото','авто','до / после','свой проект'],
         link: { url: 'https://coldinfinity696969-byte.github.io/snyato/', text: 'Открыть сайт СНЯТО' },
-        media: [ { t:'img', src:'snyato-pair-1.webp', fit:'contain' }, { t:'img', src:'snyato-pair-2.webp', fit:'contain' }, { t:'img', src:'snyato-pair-3.webp', fit:'contain' }, { t:'img', src:'web-snyato-d.webp' } ]
+        media: [ { t:'img', src:'snyato-pair-1.webp' }, { t:'img', src:'snyato-pair-2.webp' }, { t:'img', src:'snyato-pair-3.webp' }, { t:'img', src:'web-snyato-d.webp' } ]
       },
       'w-olga': {
         label: 'САЙТ / КЛИЕНТ', title: 'Ольга Калинкина', sub: 'Лендинг / концертный директор, букинг артистов',
         desc: 'Лендинг для концертного директора: организация концертов и букинг артистов на свадьбы, банкеты, корпоративы и частные события. Чёрно-золотой стиль взят с настоящей визитки и прайса клиентки, фото артистов вырезаны из её презентаций. Одно главное действие: написать или позвонить.',
         results: [], tags: ['лендинг','клиент','букинг','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/olga-kalinkina/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-olga-d.webp' }, { t:'img', src:'web-olga-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-olga-d.webp' }, { t:'img', src:'web-olga-m.webp' } ]
       },
       'w-phyto': {
         label: 'САЙТ / КЛИЕНТ', title: 'PhytoClone', sub: 'Лендинг / лаборатория микроклонального размножения',
         desc: 'Сайт лаборатории, которая выращивает редкие комнатные и коллекционные растения из пробирки: без вирусов, вредителей и пересорта. Собран по макету клиента и его реальным фото: банка-фласк, орхидея, монстера, чашка Петри. Структура: обложка, факты, сравнение «с рынка или из пробирки», этапы и подбор растения.',
         results: [], tags: ['лендинг','клиент','по макету клиента','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/phytoclone/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-phytoclone-d.webp' }, { t:'img', src:'web-phytoclone-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-phytoclone-d.webp' }, { t:'img', src:'web-phytoclone-m.webp' } ]
       },
       'w-dom': {
         label: 'КОНЦЕПТ / 3D', title: 'Тёплый бор', sub: 'Концепт 3D-сайта / каркасные дома и бани',
         desc: 'Сайт строительной компании, где дом собирается прямо на экране. При прокрутке в землю вкручиваются сваи: грунт становится прозрачным, видна граница промерзания. Дальше растёт каркас, ложатся кровля и фасад. Стену можно разрезать на шесть слоёв: ползунок утеплителя считает сопротивление теплопередаче и показывает, проходит ли стена норму для Омска. Потом наступает зима, в окнах загорается свет, а в конце дом перестраивается под выбранный проект. Всё на Three.js, дом собран кодом, без готовых 3D-моделей.',
         results: [], tags: ['3D','Three.js','концепт','дом при скролле','расчёт утеплителя'],
         link: { url: 'https://coldinfinity696969-byte.github.io/dom-3d/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-dom-d.webp' }, { t:'img', src:'web-dom-d2.webp' }, { t:'img', src:'web-dom-d3.webp' }, { t:'img', src:'web-dom-d4.webp' }, { t:'img', src:'web-dom-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-dom-d.webp' }, { t:'img', src:'web-dom-d2.webp' }, { t:'img', src:'web-dom-d3.webp' }, { t:'img', src:'web-dom-d4.webp' }, { t:'img', src:'web-dom-m.webp' } ]
       },
       'w-kovriki': {
         label: 'ДЕМО / КЛИЕНТ', title: '3D-коврики', sub: 'Демо сайта / 3D-коврик в браузере',
         desc: 'Демо для мастерской ворсовых автоковриков. Коврик показан в 3D: его можно крутить, а при прокрутке страницы он меняется. Высота ворса растёт ползунком от 5 до 16 мм прямо на модели, цвет ворса и окантовки выбирается образцами. Сделано на Three.js, ворс собран слоями, поэтому разницу в высоте видно наглядно.',
         results: [], tags: ['3D','Three.js','демо','ворс ползунком'],
         link: { url: 'https://coldinfinity696969-byte.github.io/kovriki-3d/', text: 'Открыть демо' },
-        media: [ { t:'img', src:'web-kovriki-d.webp' }, { t:'img', src:'web-kovriki-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-kovriki-d.webp' }, { t:'img', src:'web-kovriki-m.webp' } ]
       },
       'w-steklo': {
         label: 'САЙТ / КЛИЕНТ', title: 'СтеклА', sub: 'Сайт-визитка / стеклянные конструкции, Новосибирск',
         desc: 'Сайт-визитка компании, которая делает душевые, перегородки, перила, козырьки и витрины из закалённого стекла в Новосибирске. Фишка первого экрана: полупрозрачные стеклянные панели с бликами и стеклянные кнопки. Услуги, этапы работы, примеры и быстрые кнопки мессенджеров.',
         results: [], tags: ['сайт-визитка','клиент','стеклянный первый экран','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/steklo/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-steklo-d.webp' }, { t:'img', src:'web-steklo-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-steklo-d.webp' }, { t:'img', src:'web-steklo-m.webp' } ]
       },
       'w-snyato': {
         label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'СНЯТО', sub: 'Лендинг / студийные фото из снимков на телефон',
         desc: 'Лендинг моего сервиса: присылаете обычные фото машины или товара с телефона и получаете кадры уровня дилерского каталога. На первом экране настоящий пример до и после на белом VW Tiguan, дальше ниши, цены и примеры.',
         results: [], tags: ['лендинг','свой проект','AI-фото','до / после'],
         link: { url: 'https://coldinfinity696969-byte.github.io/snyato/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-snyato-d.webp' }, { t:'img', src:'web-snyato-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-snyato-d.webp' }, { t:'img', src:'web-snyato-m.webp' } ]
       },
       'w-taro': {
         label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'NOCTARO', sub: 'Лендинг / таро-расклады',
         desc: 'Лендинг моей таро-практики: расклады на отношения, энергетику и защиту. Тёмная тёплая палитра со свечами и золотом, спокойная подача без запугивания. Главное действие: выбрать расклад и записаться.',
         results: [], tags: ['лендинг','свой проект','тёмная тема','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/taro/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-taro-d.webp' }, { t:'img', src:'web-taro-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-taro-d.webp' }, { t:'img', src:'web-taro-m.webp' } ]
       },
       'w-sayty': {
         label: 'САЙТ / СВОЙ ПРОЕКТ', title: 'Сайты через ИИ', sub: 'Лендинг курса',
         desc: 'Лендинг моего курса о том, как собирать сайты нейросетью так, чтобы они не выглядели шаблоном. Чёрно-красная палитра, полноэкранный первый экран, программа курса и открытое демо без пароля и оплаты.',
         results: [], tags: ['лендинг','свой проект','курс','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/sayty/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-sayty-d.webp' }, { t:'img', src:'web-sayty-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-sayty-d.webp' }, { t:'img', src:'web-sayty-m.webp' } ]
       },
       'w-zapis': {
-        label: 'ДЕМО ПРОДУКТА', title: 'Запись ИИ', sub: 'Веб-приложение / ИИ-администратор записи',
-        desc: 'Демо ИИ-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь. Ниши переключаются на лету.',
-        results: [], tags: ['демо','ИИ-чат','онлайн-запись','веб-приложение'],
+        label: 'ДЕМО ПРОДУКТА', title: 'Запись ИИ', sub: 'Веб-приложение / AI-администратор записи',
+        desc: 'Демо AI-администратора для салонов, барбершопов, автосервисов и клиник. Клиент пишет в чат как живому администратору, бот подбирает услугу и время и ставит запись в календарь. Ниши переключаются на лету.',
+        results: [], tags: ['демо','AI-чат','онлайн-запись','веб-приложение'],
         link: { url: 'https://coldinfinity696969-byte.github.io/zapis-ai/', text: 'Открыть демо' },
-        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp', fit:'contain', tall:true } ]
+        media: [ { t:'img', src:'web-zapis-d.webp' }, { t:'img', src:'web-zapis-m.webp' } ]
       },
       'w-lumora': {
         label: 'САЙТ / КОНЦЕПТ', title: 'Lumora', sub: 'Концепт / сайт студии дизайна',
         desc: 'Концепт сайта студии дизайна и разработки по референсу, полностью на русском. Вступительный лоадер, «жидкое» проявление фото под курсором на первом экране, появление текста по строкам и словам, счётчики, карусель и окно заявки.',
         results: [], tags: ['концепт','анимации','лоадер','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/lumora/', text: 'Открыть сайт' },
-        media: [ { t:'img', src:'web-lumora-d.webp' }, { t:'img', src:'web-lumora-m.webp', fit:'contain', tall:true } ]
-      },
-      brand: {
-        num: '09', title: 'Брендинг', sub: 'Лого / фирстиль / носители',
-        desc: 'Целостная айдентика с нуля: логотип, фирменный стиль, носители и гайдлайны — узнаваемый визуальный язык бренда.',
-        results: [], tags: ['брендинг','логотип','айдентика'],
-        media: [ { t:'img', src:'cover-brand.webp' }, { t:'img', src:'brand-2.webp' }, { t:'img', src:'brand-3.webp' } ]
+        media: [ { t:'img', src:'web-lumora-d.webp' }, { t:'img', src:'web-lumora-m.webp' } ]
       }
     };
 
+    /* ---- proportions: every picture and video is shown whole, in its own shape ---- */
+    const AR = {};                                   // file -> width / height, measured once
+    function measure(m) {
+      const key = m.poster || m.src;
+      if (AR[key]) return Promise.resolve(AR[key]);
+      return new Promise(res => {
+        const im = new Image();
+        im.onload = () => { AR[key] = im.naturalWidth / im.naturalHeight || 16 / 9; res(AR[key]); };
+        im.onerror = () => res(16 / 9);
+        im.src = P + key;
+      });
+    }
+    // warm the first picture of a case while the pointer is on its card, so the modal opens in the right layout
+    cards.forEach(card => {
+      const warm = () => { const d = DATA[card.dataset.case]; if (d) measure(d.media[0]); };
+      card.addEventListener('pointerenter', warm, { passive: true });
+      card.addEventListener('focus', warm);
+      card.addEventListener('touchstart', warm, { passive: true });
+    });
+
+    let shownToken = 0;
     function showMedia(m) {
+      const token = ++shownToken;
       stage.innerHTML = '';
-      stage.classList.toggle('tall', !!m.tall);
+      const frame = document.createElement('div');
+      frame.className = 'case-modal__frame';
+      const ready = ar => {
+        if (token !== shownToken) return;
+        frame.style.setProperty('--ar', ar.toFixed(4));
+        frame.classList.add('is-ready');
+      };
+      const key = m.poster || m.src;
+      if (AR[key]) ready(AR[key]); else measure(m).then(ready);
+      let el;
       if (m.t === 'video') {
-        const v = document.createElement('video');
-        v.src = P + m.src; if (m.poster) v.poster = P + m.poster;
-        v.playsInline = true; v.setAttribute('playsinline','');
+        el = document.createElement('video');
+        el.src = P + m.src; if (m.poster) el.poster = P + m.poster;
+        el.playsInline = true; el.setAttribute('playsinline', '');
         if (m.sound) {
           // featured clip: real player with sound + controls, plays full length once
-          v.controls = true; v.loop = false; v.muted = false; v.preload = 'metadata';
+          el.controls = true; el.loop = false; el.muted = false; el.preload = 'metadata';
         } else {
           // ambient loop: muted autoplay
-          v.muted = true; v.loop = true; v.autoplay = true;
-          v.setAttribute('muted','');
+          el.muted = true; el.loop = true; el.autoplay = true; el.setAttribute('muted', '');
         }
-        if (m.fit === 'contain') v.className = 'contain';
-        stage.appendChild(v);
-        if (!m.sound) v.play().catch(()=>{});
+        el.addEventListener('loadedmetadata', () => { if (el.videoWidth) ready(el.videoWidth / el.videoHeight); });
       } else {
-        const img = document.createElement('img');
-        img.src = P + m.src; img.alt = '';
-        if (m.fit === 'contain') img.className = 'contain';
-        stage.appendChild(img);
+        el = document.createElement('img');
+        el.src = P + m.src; el.alt = '';
+        el.addEventListener('load', () => { if (el.naturalWidth) ready(el.naturalWidth / el.naturalHeight); });
       }
+      frame.appendChild(el);
+      stage.appendChild(frame);
+      if (m.t === 'video' && !m.sound) el.play().catch(() => {});
     }
 
-    function open(id) {
+    /* ---- open / close: the box grows out of the card that was clicked ---- */
+    let tap = null;                                  // last pointer position: origin for cards opened from elsewhere (the showreel)
+    document.addEventListener('pointerdown', e => { tap = { x: e.clientX, y: e.clientY }; }, { capture: true, passive: true });
+    function setOrigin(card) {
+      let r = card ? card.getBoundingClientRect() : null;
+      const visible = r && r.width && r.bottom > 0 && r.top < innerHeight;
+      if (!visible) r = tap ? { left: tap.x - 60, top: tap.y - 40, width: 120, height: 80 } : null;
+      if (!r) { box.style.setProperty('--ox', '0px'); box.style.setProperty('--oy', '24px'); box.style.setProperty('--os', '.96'); return; }
+      const bw = box.offsetWidth || 760;
+      box.style.setProperty('--ox', (r.left + r.width / 2 - innerWidth / 2).toFixed(0) + 'px');
+      box.style.setProperty('--oy', (r.top + r.height / 2 - innerHeight / 2).toFixed(0) + 'px');
+      box.style.setProperty('--os', Math.min(.85, Math.max(.18, r.width / bw)).toFixed(3));
+    }
+    function layout(d) {
+      // a tall first picture on a wide screen: picture left at full height, text right
+      const ar = AR[d.media[0].poster || d.media[0].src];
+      const side = !!ar && ar < .8 && innerWidth >= 900;
+      modal.classList.toggle('case-modal--side', side);
+      if (side) box.style.setProperty('--side-ar', ar.toFixed(4));
+      return !!ar;
+    }
+
+    let openedAt = 0, current = null;
+    function open(id, card) {
       const d = DATA[id]; if (!d) return;
-      elNum.textContent = d.label || ('CASE ' + d.num);
+      current = d;
+      elNum.textContent = d.label || ('КЕЙС ' + d.num);
       elTitle.textContent = d.title;
       elSub.textContent = d.sub || '';
       elDesc.textContent = d.desc || '';
@@ -3059,8 +2926,10 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       else elLink.classList.add('hidden');
       thumbs.innerHTML = '';
       d.media.forEach((m, i) => {
-        const th = document.createElement('div');
+        const th = document.createElement('button');
+        th.type = 'button';
         th.className = 'case-modal__thumb' + (i === 0 ? ' active' : '');
+        th.setAttribute('aria-label', (m.t === 'video' ? 'Видео ' : 'Фото ') + (i + 1));
         const im = document.createElement('img'); im.src = P + (m.poster || m.src); im.alt = '';
         th.appendChild(im);
         if (m.t === 'video') { const vm = document.createElement('span'); vm.className = 'vidmark'; vm.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'; th.appendChild(vm); }
@@ -3071,32 +2940,41 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         thumbs.appendChild(th);
       });
       thumbs.style.display = d.media.length > 1 ? '' : 'none';
+      const known = layout(d);
+      if (!known) measure(d.media[0]).then(() => { if (current === d && performance.now() - openedAt < 450) layout(d); });
       showMedia(d.media[0]);
+      box.scrollTop = 0;
+      setOrigin(card);
+      void box.offsetWidth;                          // start the grow from the card, not from the last state
+      openedAt = performance.now();
       lastFocus = document.activeElement;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      btnClose.focus();
+      btnClose.focus({ preventScroll: true });
     }
     function close() {
+      if (!modal.classList.contains('open')) return;
+      current = null;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      stage.innerHTML = '';
-      if (lastFocus) lastFocus.focus();
+      stage.querySelectorAll('video').forEach(v => v.pause());
+      setTimeout(() => { if (!modal.classList.contains('open')) { stage.innerHTML = ''; shownToken++; } }, 400);
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
     }
     cards.forEach(card => {
       const badge = document.createElement('div');
       badge.className = 'case-card__expand'; badge.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>';
       const thumb = card.querySelector('.case-card__thumb');
       if (thumb) thumb.appendChild(badge);
-      card.addEventListener('click', () => open(card.dataset.case));
+      card.addEventListener('click', () => open(card.dataset.case, card));
       // keyboard: Tab to a card, Enter/Space opens it
       const t = card.querySelector('.case-card__title');
       card.tabIndex = 0; card.setAttribute('role', 'button');
       if (t) card.setAttribute('aria-label', 'Открыть: ' + t.textContent.trim());
       card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card.dataset.case); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card.dataset.case, card); }
       });
     });
     btnClose.addEventListener('click', close);
@@ -3111,10 +2989,12 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
         list[(i + (e.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length].click();
       }
     });
+    window.openCase = open;                           // services links and the showreel open cases through this
   } catch(e) { console.warn('case modal:', e); }
 })();
 </script>
 <script src="../assets/svc/pipeline.js" defer></script>
+<script src="../assets/flow.js" defer></script>
 <script type="module" src="../assets/reel/reel.js"></script>
 <script>
   // if WebGL or the CDN is unavailable, show the static strip instead of an empty stage

@@ -157,7 +157,7 @@
     const orbit = el('circle', { cx: AX, cy: AY, r: AR + 11, fill: 'none', stroke: C.line, 'stroke-width': 1.2, 'stroke-dasharray': '3 6' }, svg);
     const pulse = el('circle', { cx: AX, cy: AY, r: AR, fill: 'none', stroke: C.flow, 'stroke-width': 1.5, opacity: 0 }, svg);
     const core = el('circle', { cx: AX, cy: AY, r: AR, fill: '#f4fae9', stroke: C.flow, 'stroke-width': 2 }, svg);
-    const coreT = txt(svg, AX, AY + 5, 'ИИ', 'v-disp', { 'text-anchor': 'middle', 'font-size': 16 });
+    const coreT = txt(svg, AX, AY + 5, 'AI', 'v-disp', { 'text-anchor': 'middle', 'font-size': 16 });
     txt(svg, AX, AY + AR + 24, 'АГЕНТ', 'v-mono v-mute', { 'text-anchor': 'middle' });
     const logG = el('g', {}, svg);
     const logEls = [txt(logG, 6, 280, '', 'v-mono v-mute'), txt(logG, 6, 294, '', 'v-mono v-ink')];
@@ -180,7 +180,7 @@
     function addLog(t, s) {
       const d = new Date(), hh = n => String(n).padStart(2, '0');
       lines.shift();
-      lines.push(hh(d.getHours()) + ':' + hh(d.getMinutes()) + ':' + hh(d.getSeconds()) + '  ' + (s ? 'чат' : 'форма') + ' / ИИ / TG, CRM, отчёт');
+      lines.push(hh(d.getHours()) + ':' + hh(d.getMinutes()) + ':' + hh(d.getSeconds()) + '  ' + (s ? 'чат' : 'форма') + ' / AI / TG, CRM, отчёт');
       logEls.forEach((e, i) => { e.textContent = lines[i]; });
       logAt = t;
     }
@@ -210,7 +210,7 @@
       pulse.setAttribute('r', (AR + a * 22).toFixed(1));
       pulse.setAttribute('opacity', (t - agentAt < 0.9 ? (1 - a) * 0.6 : 0).toFixed(2));
       core.setAttribute('fill', t - agentAt < 0.5 ? C.lime : '#f4fae9');
-      coreT.textContent = t - agentAt < 0.5 ? '···' : 'ИИ';
+      coreT.textContent = t - agentAt < 0.5 ? '···' : 'AI';
       logG.setAttribute('transform', 'translate(0 ' + ((1 - ease((t - logAt) / 0.35)) * 6).toFixed(1) + ')');
     }
     return {
