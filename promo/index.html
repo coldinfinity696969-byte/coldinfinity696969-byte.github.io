@@ -171,7 +171,9 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+  .hero__bg { transform: scale(1.05); will-change: transform; }
 }
 .hero__bg::after {
   content: '';
@@ -2359,19 +2361,21 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
 })();
 
 /* ============ HERO PARALLAX ============ */
+/* Desktop with a mouse only. On phones the scroll runs on its own thread and a script-driven
+   photo always lags behind it and twitches, so there the photo simply scrolls with the page. */
 (function() {
   try {
     const bg = document.querySelector('.hero__bg');
     if (!bg) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 901px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let raf = null;
     window.addEventListener('scroll', () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
-        const y = window.scrollY;
-        if (y < window.innerHeight) {
-          bg.style.transform = 'translateY(' + (y * 0.25) + 'px) scale(1.05)';
-        }
         raf = null;
+        const y = Math.min(window.scrollY, window.innerHeight);
+        bg.style.transform = 'translate3d(0,' + (y * 0.25).toFixed(1) + 'px,0) scale(1.05)';   // same scale as the resting state: no jump
       });
     }, {passive: true});
   } catch(e) { console.warn('parallax:', e); }
@@ -2630,7 +2634,14 @@ html.seam-light .seam-rail a { color: rgba(0,0,0,.4); }
       return;
     }
     let rt = 0;
-    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { stop(); resize(); start(); }, 150); }, { passive: true });
+    window.addEventListener('resize', () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        // phones fire resize when the address bar hides or shows: the canvas keeps its size, the rain keeps falling
+        if (c.clientWidth === w && Math.abs(c.clientHeight - h) < 2) { measureZones(); return; }
+        stop(); resize(); start();
+      }, 150);
+    }, { passive: true });
     if (fine) hero.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; }, { passive: true });
     hero.addEventListener('pointerleave', () => { mx = my = -1e4; });
     // the copy moves while the headline reveals and when fonts arrive: measure again then
