@@ -707,6 +707,9 @@ body {
 }
 .site-card { flex: none; }
 .site-card--wide { grid-column: span 2; }
+.site-card--full { grid-column: 1 / -1; }
+.site-card--full .case-card__thumb { height: 340px; }
+.site-card--full .case-card__thumb img { object-position: center; }
 .site-card .case-card__thumb { height: 240px; }
 .site-card .case-card__thumb img { object-position: center top; }
 .site-card .case-card__body { padding: 20px 22px 22px; gap: 10px; }
@@ -717,11 +720,11 @@ body {
 @media(max-width:600px){
   .sites-grid { gap: 10px; }
   .site-card .case-card__thumb { height: 118px; }
-  .site-card--wide .case-card__thumb { height: 190px; }
+  .site-card--wide .case-card__thumb, .site-card--full .case-card__thumb { height: 190px; }
   .site-card .case-card__body { padding: 12px 12px 14px; gap: 6px; }
   .site-card .case-card__title { font-size: 11px; letter-spacing: .01em; line-height: 1.25; }
   .site-card .case-card__desc { display: none; }
-  .site-card--wide .case-card__desc { display: block; font-size: 12px; }
+  .site-card--wide .case-card__desc, .site-card--full .case-card__desc { display: block; font-size: 12px; }
   .site-card .case-card__tag { font-size: 8px; letter-spacing: .1em; }
   .site-card .case-card__num { bottom: 8px; left: 8px; font-size: 8px; padding: 3px 6px; }
   .case-modal__stage.tall { aspect-ratio: 3/4; }
@@ -1591,10 +1594,10 @@ html, body { overflow-x: clip !important; }
 
 
 <!-- ============ SHOWREEL ============ -->
-<section class="reel" id="reel" aria-label="Шоурил: 10 сайтов, которые я сделал">
+<section class="reel" id="reel" aria-label="Шоурил: 11 сайтов, которые я сделал">
   <div class="reel__sticky">
     <div class="reel__title" aria-hidden="true">
-      <span class="reel__t1"><b>10</b> САЙТОВ</span>
+      <span class="reel__t1"><b>11</b> САЙТОВ</span>
       <span class="reel__t2"><b>0</b> КОНСТРУКТОРОВ</span>
     </div>
     <canvas class="reel__gl" aria-hidden="true"></canvas>
@@ -1603,20 +1606,20 @@ html, body { overflow-x: clip !important; }
       <span class="reel__hint">ЛИСТАЙТЕ ИЛИ ТЯНИТЕ</span>
     </div>
     <div class="reel__hud">
-      <div class="reel__count"><span id="reelNum">01</span><small>/10</small></div>
+      <div class="reel__count"><span id="reelNum">01</span><small>/11</small></div>
       <div class="reel__info">
-        <div class="reel__name"><span id="reelName">OSMINOG</span></div>
-        <div class="reel__meta" id="reelMeta">Клиент / лендинг веб-студии</div>
+        <div class="reel__name"><span id="reelName">Тёплый бор</span></div>
+        <div class="reel__meta" id="reelMeta">Концепт / 3D-сайт стройкомпании</div>
         <div class="reel__ticks" id="reelTicks"></div>
       </div>
       <div class="reel__btns">
         <button class="btn-ghost" id="reelMore" type="button">ПОДРОБНЕЕ</button>
-        <a class="btn-green" id="reelOpen" href="https://coldinfinity696969-byte.github.io/osminog/" target="_blank" rel="noopener">ОТКРЫТЬ САЙТ <i class="i-arr" aria-hidden="true"></i></a>
+        <a class="btn-green" id="reelOpen" href="https://coldinfinity696969-byte.github.io/dom-3d/" target="_blank" rel="noopener">ОТКРЫТЬ САЙТ <i class="i-arr" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="reel__bar"><i id="reelFill"></i></div>
     <div class="reel__cursor" id="reelCursor">ОТКРЫТЬ</div>
-    <div class="reel__fallback"><div class="reel__strip"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"></div></div>
+    <div class="reel__fallback"><div class="reel__strip"><img src="assets/portfolio/web-dom-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"></div></div>
   </div>
 </section>
 
@@ -1920,12 +1923,24 @@ html, body { overflow-x: clip !important; }
       <h2 class="sec-title">САЙТЫ<br>И ЛЕНДИНГИ</h2>
     </div>
     <div>
-      <p class="sec-desc">10 живых сайтов: для клиентов, для своих проектов и демо. Всё написано кодом, без конструкторов. В карточке видно, как сайт выглядит на компьютере и на телефоне.</p>
+      <p class="sec-desc">11 живых сайтов: для клиентов, для своих проектов и демо. Всё написано кодом, без конструкторов. В карточке видно, как сайт выглядит на компьютере и на телефоне.</p>
       <a href="#contact" class="sec-all">ХОЧУ ТАКОЙ ЖЕ</a>
     </div>
   </div>
 
   <div class="sites-grid" id="sitesGrid">
+    <div class="case-card site-card site-card--full" data-case="w-dom">
+      <div class="case-card__thumb">
+        <div class="case-card__num">КОНЦЕПТ / 3D</div>
+        <img src="assets/portfolio/web-dom-w.webp" alt="Тёплый бор: каркасный дом зимней ночью, в окнах свет" loading="lazy" decoding="async"/>
+      </div>
+      <div class="case-card__body">
+        <h3 class="case-card__title">ТЁПЛЫЙ БОР</h3>
+        <p class="case-card__desc">Концепт сайта строительной компании на Three.js: при прокрутке каркасный дом собирается от свай до света в окнах, стена раскладывается на шесть слоёв, наступает зима.</p>
+        <span class="case-card__tag">THREE.JS / 3D</span>
+      </div>
+    </div>
+
     <div class="case-card site-card site-card--wide" data-case="sites">
       <div class="case-card__thumb">
         <div class="case-card__num">КЛИЕНТ</div>
@@ -2826,6 +2841,13 @@ html, body { overflow-x: clip !important; }
         results: [], tags: ['лендинг','клиент','по макету клиента','адаптив'],
         link: { url: 'https://coldinfinity696969-byte.github.io/phytoclone/', text: 'Открыть сайт' },
         media: [ { t:'img', src:'web-phytoclone-d.webp' }, { t:'img', src:'web-phytoclone-m.webp', fit:'contain', tall:true } ]
+      },
+      'w-dom': {
+        label: 'КОНЦЕПТ / 3D', title: 'Тёплый бор', sub: 'Концепт 3D-сайта / каркасные дома и бани',
+        desc: 'Сайт строительной компании, где дом собирается прямо на экране. При прокрутке в землю вкручиваются сваи: грунт становится прозрачным, видна граница промерзания. Дальше растёт каркас, ложатся кровля и фасад. Стену можно разрезать на шесть слоёв: ползунок утеплителя считает сопротивление теплопередаче и показывает, проходит ли стена норму для Омска. Потом наступает зима, в окнах загорается свет, а в конце дом перестраивается под выбранный проект. Всё на Three.js, дом собран кодом, без готовых 3D-моделей.',
+        results: [], tags: ['3D','Three.js','концепт','дом при скролле','расчёт утеплителя'],
+        link: { url: 'https://coldinfinity696969-byte.github.io/dom-3d/', text: 'Открыть сайт' },
+        media: [ { t:'img', src:'web-dom-d.webp' }, { t:'img', src:'web-dom-d2.webp' }, { t:'img', src:'web-dom-d3.webp' }, { t:'img', src:'web-dom-d4.webp' }, { t:'img', src:'web-dom-m.webp', fit:'contain', tall:true } ]
       },
       'w-kovriki': {
         label: 'ДЕМО / КЛИЕНТ', title: '3D-коврики', sub: 'Демо сайта / 3D-коврик в браузере',

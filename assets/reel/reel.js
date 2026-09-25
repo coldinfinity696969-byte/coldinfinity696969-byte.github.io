@@ -10,6 +10,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.m
 
 const G = 'https://coldinfinity696969-byte.github.io/';
 const SITES = [
+  { key: 'w-dom',     slug: 'dom',     name: 'Тёплый бор',      meta: 'Концепт / 3D-сайт стройкомпании',   path: 'dom-3d' },
   { key: 'sites',     slug: 'osminog', name: 'OSMINOG',         meta: 'Клиент / лендинг веб-студии',       path: 'osminog' },
   { key: 'w-olga',    slug: 'olga',    name: 'Ольга Калинкина', meta: 'Клиент / концертный директор',      path: 'olga-kalinkina' },
   { key: 'w-phyto',   slug: 'phyto',   name: 'PhytoClone',      meta: 'Клиент / лаборатория растений',     path: 'phytoclone' },
