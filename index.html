@@ -1411,6 +1411,9 @@ html, body { overflow-x: clip !important; }
 @media (max-width: 1240px) and (min-width: 901px) {   /* six nav links + CTA: keep one line on laptops/tablets */
   .bar__nav { gap: 20px; font-size: 10px; } .bar__nav a { white-space: nowrap; } .bar__cta { padding: 10px 14px; }
 }
+@media (max-width: 1100px) and (min-width: 901px) {   /* seventh link (AI-ВИДЕО) does not fit: drop ОБО МНЕ on narrow laptops */
+  .bar { gap: 20px; } .bar__nav { gap: 16px; } .bar__nav a[href="#about"] { display: none; } .bar__cta { white-space: nowrap; }
+}
 @media (max-width: 1100px) { .svc-half--viz { height: 250px; padding: 12px; } }
 @media (max-width: 600px) { .svc-half--viz { height: 230px; } }
 @media (prefers-reduced-motion: reduce) { .v-flow { animation: none; } }
@@ -1458,6 +1461,50 @@ html, body { overflow-x: clip !important; }
 /* contact: one button and the handle */
 .contact__btns { align-items: center; }
 .contact__handle { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+/* ============ AI-VIDEO (trend) ============ */
+.aiv{ position:relative; overflow:hidden; }
+.aiv::before{ content:''; position:absolute; right:-10%; top:10%; width:60%; height:80%;
+  background:radial-gradient(closest-side, rgba(192,255,51,.07), transparent); pointer-events:none; }
+.aiv__grid{ position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(40px,6vw,96px); align-items:center; }
+.aiv__title{ margin:0 0 28px; }
+.aiv__title em{ font-style:normal; color:var(--green); }
+.aiv__lead{ font-size:17px; line-height:1.6; color:var(--ink); max-width:520px; margin:0 0 32px; }
+.aiv__steps{ list-style:none; margin:0 0 36px; padding:0; display:grid; gap:0; max-width:520px; border-top:1px solid var(--line); }
+.aiv__steps li{ display:grid; grid-template-columns:44px 1fr; gap:12px; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px; line-height:1.5; color:var(--ink-2); }
+.aiv__steps b{ font-family:var(--mono); font-weight:400; font-size:11px; letter-spacing:.14em; color:var(--green); padding-top:3px; }
+.aiv__steps strong{ color:var(--hi); font-weight:500; }
+.aiv__btns{ display:flex; flex-wrap:wrap; gap:12px; }
+.aiv__stage{ display:flex; flex-direction:column; align-items:center; }
+.aiv__phone{ position:relative; width:min(100%, 420px, calc((100svh - 140px) * 9 / 16)); min-width:min(100%, 280px); border-radius:28px; padding:8px;
+  background:#050505; border:1px solid var(--line-2);
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.03) inset, 0 0 80px -20px var(--green-glow); }
+.aiv__video{ display:block; width:100%; height:auto; aspect-ratio:9/16; object-fit:contain; background:#000; border-radius:21px; cursor:pointer; }
+.aiv__sound{ position:absolute; left:50%; bottom:28px; transform:translateX(-50%);
+  display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border:0; border-radius:40px;
+  background:var(--green); color:#000; font-family:var(--display); font-weight:700; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  cursor:pointer; white-space:nowrap; box-shadow:0 10px 30px rgba(0,0,0,.45); transition:transform .25s var(--ease), background .25s, opacity .25s; }
+.aiv__sound:hover{ transform:translateX(-50%) translateY(-2px); }
+.aiv__sound svg{ width:16px; height:16px; flex:none; }
+.aiv__sound.is-on{ background:rgba(10,10,10,.72); color:var(--hi); border:1px solid rgba(255,255,255,.18); padding:10px 14px; left:auto; right:22px; bottom:22px; transform:none; }
+.aiv__sound.is-on:hover{ transform:translateY(-2px); }
+.aiv__sound .aiv__on{ display:none; } .aiv__sound.is-on .aiv__on{ display:inline; } .aiv__sound.is-on .aiv__off{ display:none; }
+.aiv__sound:not(.is-on){ animation:aivPulse 2.4s var(--ease) infinite; }
+@keyframes aivPulse{ 0%,100%{ box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 0 rgba(192,255,51,.5); } 60%{ box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 14px rgba(192,255,51,0); } }
+.aiv__bar{ position:absolute; left:22px; right:22px; top:20px; height:2px; background:rgba(255,255,255,.18); border-radius:2px; overflow:hidden; pointer-events:none; }
+.aiv__bar i{ display:block; height:100%; width:0; background:var(--hi); }
+.aiv__cap{ margin-top:18px; font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); text-align:center; }
+@media(max-width:900px){
+  .aiv__grid{ grid-template-columns:1fr; gap:0; }
+  .aiv__text{ display:contents; }
+  .aiv .sec-label{ order:1; } .aiv__title{ order:2; margin-bottom:24px; }
+  .aiv__stage{ order:3; flex-direction:column; align-items:center; margin-bottom:36px; }
+  .aiv__lead{ order:4; } .aiv__steps{ order:5; } .aiv__btns{ order:6; }
+  .aiv__phone{ width:min(100%, 340px); border-radius:24px; padding:6px; }
+  .aiv__video{ border-radius:19px; }
+  .aiv__lead{ font-size:16px; }
+  .aiv__btns .btn-green, .aiv__btns .btn-ghost{ flex:1 1 220px; justify-content:center; }
+}
+@media(prefers-reduced-motion:reduce){ .aiv__sound:not(.is-on){ animation:none; } }
 </style>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js" crossorigin>
 </head>
@@ -1482,6 +1529,7 @@ html, body { overflow-x: clip !important; }
     <a href="#about">ОБО МНЕ</a>
     <a href="#services">УСЛУГИ</a>
     <a href="#cases">ПРОЕКТЫ</a>
+    <a href="#aivideo">AI-ВИДЕО</a>
     <a href="#sites">САЙТЫ</a>
     <a href="#process">ПРОЦЕСС</a>
     <a href="#contact">КОНТАКТЫ</a>
@@ -1498,6 +1546,7 @@ html, body { overflow-x: clip !important; }
     <a href="#about">ОБО МНЕ</a>
     <a href="#services">УСЛУГИ</a>
     <a href="#cases">ПРОЕКТЫ</a>
+    <a href="#aivideo">AI-ВИДЕО</a>
     <a href="#sites">САЙТЫ</a>
     <a href="#process">ПРОЦЕСС</a>
     <a href="#contact">КОНТАКТЫ</a>
@@ -1573,6 +1622,58 @@ html, body { overflow-x: clip !important; }
     <div class="reel__cursor" id="reelCursor">ОТКРЫТЬ</div>
     <div class="reel__fallback"><div class="reel__strip"><img src="assets/portfolio/web-dom-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-osminog-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-olga-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-phytoclone-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-kovriki-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-steklo-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-snyato-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-taro-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-sayty-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-zapis-t.webp" alt="" loading="lazy"><img src="assets/portfolio/web-lumora-t.webp" alt="" loading="lazy"></div></div>
   </div>
+</section>
+
+<!-- ============ AI VIDEO ============ -->
+<section class="section aiv" id="aivideo" aria-label="Трендовые AI-видео на заказ">
+  <div class="aiv__grid">
+    <div class="aiv__text">
+      <div class="sec-label">AI-ВИДЕО / ТРЕНДЫ</div>
+      <h2 class="sec-title aiv__title">ТРЕНДОВЫЕ ВИДЕО<br><em>ИЗ ВАШИХ ФОТО</em></h2>
+      <p class="aiv__lead">Ролики для рилс, тиктока и шортс в формате, который сейчас в тренде. Без съёмок и актёров: только ваши фото и нейросети. Пример: «взрослая я встречает маленькую себя». Лица взяты с настоящих фото клиентки, взрослых и детских.</p>
+      <ul class="aiv__steps">
+        <li><b>01</b><span><strong>Присылаете фото.</strong> Несколько своих снимков, для этого тренда ещё и детские.</span></li>
+        <li><b>02</b><span><strong>Собираю кадры.</strong> Сцена, свет, костюмы. Сходство сверяю с вашими фото на каждом кадре.</span></li>
+        <li><b>03</b><span><strong>Оживляю и монтирую.</strong> Движение, музыка, вертикаль 9:16, готово к публикации.</span></li>
+      </ul>
+      <div class="aiv__btns">
+        <a href="#contact" class="btn-green">ХОЧУ ТАКОЕ ВИДЕО <i class="i-arr" aria-hidden="true"></i></a>
+        <a href="#cases" class="btn-ghost">ДРУГИЕ AI-РАБОТЫ</a>
+      </div>
+    </div>
+    <div class="aiv__stage">
+      <div class="aiv__phone">
+        <video class="aiv__video" id="aivVideo" src="assets/portfolio/ai-video-knight.mp4" poster="assets/portfolio/ai-video-knight-poster.webp" muted loop playsinline preload="metadata" aria-label="Пример AI-видео: взрослая я и маленькая я в доспехах"></video>
+        <div class="aiv__bar" aria-hidden="true"><i id="aivFill"></i></div>
+        <button class="aiv__sound" id="aivSound" type="button" aria-label="Смотреть со звуком"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span class="aiv__off">СМОТРЕТЬ СО ЗВУКОМ</span><span class="aiv__on">ВЫКЛ ЗВУК</span></button>
+      </div>
+      <div class="aiv__cap">15 сек / 9:16 / со звуком</div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var v = document.getElementById('aivVideo'), b = document.getElementById('aivSound'), f = document.getElementById('aivFill');
+    if (!v || !b) return;
+    var inView = false, userPaused = false;
+    function setBtn(){ var on = !v.muted; b.classList.toggle('is-on', on); b.setAttribute('aria-label', on ? 'Выключить звук' : 'Смотреть со звуком'); }
+    function soundOn(){ v.muted = false; v.currentTime = 0; userPaused = false; var p = v.play(); if (p && p.catch) p.catch(function(){}); setBtn(); }
+    function soundOff(){ v.muted = true; setBtn(); }
+    b.addEventListener('click', function(e){ e.stopPropagation(); v.muted ? soundOn() : soundOff(); });
+    v.addEventListener('click', function(){
+      if (v.muted) { soundOn(); return; }
+      if (v.paused) { userPaused = false; v.play(); } else { userPaused = true; v.pause(); }
+    });
+    v.addEventListener('timeupdate', function(){ if (f && v.duration) f.style.width = (v.currentTime / v.duration * 100) + '%'; });
+    v.addEventListener('volumechange', setBtn);
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ es.forEach(function(e){
+        inView = e.isIntersecting;
+        if (inView) { v.preload = 'auto'; if (!userPaused) { var p = v.play(); if (p && p.catch) p.catch(function(){}); } }
+        else if (!v.paused) v.pause();
+      }); }, { threshold: 0.35 }).observe(v);
+    } else { v.play(); }
+  })();
+  </script>
 </section>
 
 <!-- ============ MARQUEE ============ -->
